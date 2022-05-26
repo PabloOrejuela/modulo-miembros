@@ -21,9 +21,17 @@ class Miembros extends BaseController{
     }
     
     public function nuevo($data = NULL){
-        $data['title']='Módulo miembros';
+
+        $data['title']='Registrar nuevo miembro';
         $data['main_content']='miembros/frm_nuevo_miembro';
         return view('includes/template', $data);
     }
+
+    public function insert($data = NULL){
+
+       echo 'Insertar nuevo miembro';
+    }
+
+
 
 }

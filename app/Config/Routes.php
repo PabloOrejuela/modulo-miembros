@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Miembros::index');
 $routes->get('nuevo', 'Miembros::nuevo');
+$routes->get('insert', 'Miembros::insert');
 $routes->get('nueva', 'Membresia::nueva');
 
 
