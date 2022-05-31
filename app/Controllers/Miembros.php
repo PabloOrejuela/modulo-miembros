@@ -14,6 +14,11 @@ class Miembros extends BaseController{
 
         $data['result'] = suma(3, 5);
         $data['version'] = $this->CI_VERSION;
+        $newMember = [
+            'name' => "Pablo Orejuela",
+            'titulo' => 'Ingeniero'
+        ];
+        $this->session->set($newMember);
 
         $data['title']='Módulo miembros';
         $data['main_content']='miembros/miembros_view';

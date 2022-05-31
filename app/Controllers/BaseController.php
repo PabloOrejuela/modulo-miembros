@@ -28,6 +28,7 @@ class BaseController extends Controller
      */
     protected $request;
     protected $CI_VERSION = \CodeIgniter\CodeIgniter::CI_VERSION;
+    public $session = null;
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -44,7 +45,7 @@ class BaseController extends Controller
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-        
+        $this->session = \Config\Services::session();
         
         // Preload any models, libraries, etc, here.
 
