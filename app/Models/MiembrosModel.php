@@ -36,5 +36,5 @@ class MiembrosModel extends Model{
             'required' => "Lo sentimos, este campo es obligatorio"
         ],
     ];
-    protected $skipValidation     = false;
+    protected $skipValidation   = false;
 }
