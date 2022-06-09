@@ -1,4 +1,5 @@
-<body>
+<div class="container">
     <div>Membresias</div>
     <?= $titulo ?>
-</body>
+</div>
+    

@@ -51,8 +51,6 @@ class Miembros extends BaseController{
             var_dump($miembrosModel->errors());
         }else{
             return redirect()->to('/');
-        }
-        
+        }  
     }
-
 }

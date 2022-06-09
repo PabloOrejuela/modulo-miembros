@@ -1,5 +1,5 @@
 <div class="container">
-    <div><h3>Lista de miembros</h3></div>
+    <div><h3>Lista de miembros <?= $version ?></h3></div>
     <?php 
         //echo '<pre>'.var_export($miembros, true).'</pre>';
         
