@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MembresiasModel extends Model{
-    protected $table      = 'membresias';
-    protected $primaryKey = 'idmembresias';
+class PaquetesModel extends Model{
+    protected $table      = 'paquetes';
+    protected $primaryKey = 'idpaquete';
 
     protected $useAutoIncrement = true;
 
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['idpaquete', 'idmiembros', 'fecha_inicio', 'fecha_final', 'asistencias', 'saldo'];
+    protected $allowedFields = [];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -23,5 +23,4 @@ class MembresiasModel extends Model{
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
-    
 }

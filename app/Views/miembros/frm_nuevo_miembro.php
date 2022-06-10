@@ -2,7 +2,7 @@
 
     <?= session()->getFlashdata('error') ?>
     <?= service('validation')->listErrors() ?>
-    <form action="<?php echo site_url().'miembros/insert';?>" method="post">
+    <form action="<?php echo site_url().'insert';?>" method="post">
         <?= csrf_field() ?>
         <h2><?= esc($title) ?></h2>
         <div class="mb-3">
@@ -21,8 +21,18 @@
             <label for="email" class="form-label">Email:</label>
             <input type="email" class="form-control" name="email" id="FormControlInput" required placeholder="jdoe@email.com">
         </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Membresías:</label>
+            <select class="form-select" aria-label="Default select example" name="idpaquete">
+                <?php 
+                    foreach ($paquetes as $key => $paquete) {
+                        echo '<option value="'.$paquete->idpaquete.'">'.$paquete->paquete.'</option>';
+                    }
+                ?>
+            </select>
+        </div>
 
 
-        <input type="submit" name="submit" value="Guardar" class="btn btn-light" />
+        <input type="submit" name="submit" value="Guardar" class="btn btn-outline-info" />
     </form>
 </div>

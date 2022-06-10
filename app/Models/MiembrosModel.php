@@ -21,7 +21,7 @@ class MiembrosModel extends Model{
     protected $deletedField  = 'deleted_at';
 
     protected $validationRules    = [
-        'nombre'     => 'required|alpha_numeric_space|min_length[5]',
+        'nombre'     => 'required|min_length[5]',
         'email'        => 'required|valid_email|is_unique[miembros.email]',
         'cedula'        => 'required|is_unique[miembros.cedula]',
     ];

@@ -34,8 +34,9 @@ $routes->setAutoRoute(false);
 
 $routes->get('/', 'Miembros::index');
 $routes->get('nuevo', 'Miembros::nuevo');
-$routes->get('insert', 'Miembros::insert');
+$routes->post('insert', 'Miembros::insert');
 $routes->get('membresia', 'Membresia::index');
+$routes->get('asistencia/(:num)', 'Membresia::registra_asistencia/$1', ['as' => 'asistencia']);
 
 
 

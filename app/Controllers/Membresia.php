@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\MembresiasModel;
+use App\Models\MiembrosModel;
+use App\Models\PaquetesModel;
 
 class Membresia extends BaseController{
 
@@ -9,16 +11,34 @@ class Membresia extends BaseController{
 
         $membresiasModel = new MembresiasModel($db);
 
+        $miembrosModel = new MiembrosModel($db);
+        $data['miembros'] = $miembrosModel->find();
+
+        $paquetesModel = new PaquetesModel($db);
+        $data['paquetes'] = $paquetesModel->find();
+
         
         //echo '<pre>'.var_export($data['miembros'], true).'</pre>';
 
-        $data['result'] = suma(3, 5);
-        $data['version'] = $this->CI_VERSION;
-        $data['titulo'] = $this->session->get('titulo');
+        
+        //$data['version'] = $this->CI_VERSION;
 
-        $data['title']='Módulo miembros';
+        $data['title']='Registro de membresías';
         $data['main_content']='membresias/membresias_view';
         return view('includes/template', $data);
+    }
+
+    /**
+     * undocumented function summary
+     *
+     * Undocumented function long description
+     *
+     * @param Type $var Description
+     * @return type
+     * @throws conditon
+     **/
+    public function registra_asistencia($idmiembros){
+        echo 'HERE'.$idmiembros;
     }
 
 }
