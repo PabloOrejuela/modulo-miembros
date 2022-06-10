@@ -11,7 +11,7 @@
             <th>Editar</th>
         </thead>
     <?php 
-        //echo '<pre>'.var_export($miembros, true).'</pre>';
+        //echo '<pre>'.var_export($membresias, true).'</pre>';
 
         foreach ($membresias as $key => $value) {
             echo '<tr>
@@ -20,8 +20,8 @@
                     <td>'.$value->fecha_inicio.'</td>
                     <td>'.$value->fecha_final.'</td>
                     <td style="text-align:center;">'.$value->saldo.'</td>
-                    <td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmiembros.'" class="registro"></a></td>
-                    <td style="text-align:center;"><a type="button" id="btn-register" href="edit/'.$value->idmiembros.'" class="edit"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" class="registro"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="editar/'.$value->idmembresias.'" class="edit"></a></td>
                 </tr>';
         }
     ?>

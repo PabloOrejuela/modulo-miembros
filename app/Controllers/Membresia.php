@@ -28,17 +28,9 @@ class Membresia extends BaseController{
         return view('includes/template', $data);
     }
 
-    /**
-     * undocumented function summary
-     *
-     * Undocumented function long description
-     *
-     * @param Type $var Description
-     * @return type
-     * @throws conditon
-     **/
-    public function registra_asistencia($idmiembros){
-        echo 'HERE'.$idmiembros;
+    public function edit(){
+        echo "Edita membresia";
     }
+
 
 }

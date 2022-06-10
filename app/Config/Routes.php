@@ -36,9 +36,8 @@ $routes->get('/', 'Miembros::index');
 $routes->get('nuevo', 'Miembros::nuevo');
 $routes->post('insert', 'Miembros::insert');
 $routes->get('membresia', 'Membresia::index');
-$routes->get('asistencia/(:num)', 'Membresia::registra_asistencia/$1', ['as' => 'asistencia']);
-
-
+$routes->get('editar/(:num)', 'Membresia::edit/$1', ['as' => 'editar']);
+$routes->get('asistencia/(:num)', 'Asistencia::insert/$1', ['as' => 'asistencia']);
 
 
 
