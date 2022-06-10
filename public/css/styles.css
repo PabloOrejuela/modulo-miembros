@@ -50,6 +50,23 @@ a {
     padding: 20px;
 }
 
+#btn-register {
+    border: 1px solid rgb(208, 208, 208);
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+}
+
+#btn-register:hover {
+    border: 1px solid rgb(208, 208, 208);
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px darkgray;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+}
+
 #boton {
     width: 80px;
     float: left;
@@ -75,6 +92,18 @@ a {
     background-position: center;
 }
 
+.registro {
+    background-image: url('../images/buttons/check-form.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.edit {
+    background-image: url('../images/buttons/edit.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 #footer {
     position: fixed;
     bottom: 0px;
@@ -93,6 +122,10 @@ a {
 .container {
     margin-left: 50px;
     margin-bottom: 20px;
-    width: 45%;
+    width: 80%;
 
+}
+
+#table-miembros{
+    font-size: 0.8em;
 }

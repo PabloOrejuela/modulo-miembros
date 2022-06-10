@@ -1,6 +1,6 @@
 <div class="container">
     <div><h3>Lista de miembros</h3></div>
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover" id="table-miembros">
         <thead>
             <th>Nombre</th>
             <th>Cédula</th>
@@ -8,6 +8,7 @@
             <th>Fecha Final</th>
             <th>Disponible</th>
             <th>Asistencia</th>
+            <th>Editar</th>
         </thead>
     <?php 
         //echo '<pre>'.var_export($miembros, true).'</pre>';
@@ -18,8 +19,9 @@
                     <td>'.$value->cedula.'</td>
                     <td>'.$value->fecha_inicio.'</td>
                     <td>'.$value->fecha_final.'</td>
-                    <td>'.$value->saldo.'</td>
-                    <td><a href="asistencia/'.$value->idmiembros.'" class="btn btn-outline-info">Asistencia</a></td>
+                    <td style="text-align:center;">'.$value->saldo.'</td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmiembros.'" class="registro"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="edit/'.$value->idmiembros.'" class="edit"></a></td>
                 </tr>';
         }
     ?>

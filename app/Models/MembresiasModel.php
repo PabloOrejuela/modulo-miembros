@@ -24,7 +24,7 @@ class MembresiasModel extends Model{
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-     function _getMembresias($result = NULL){
+    function _getMembresias($result = NULL){
         
         $db = \Config\Database::connect();
         $builder = $db->table('membresias');

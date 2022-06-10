@@ -50,7 +50,7 @@ class Miembros extends BaseController{
             'idpaquete' => $request->getPostGet('idpaquete')
         );
         
-
+//PABLO: Implementar las validaciones
         // if($miembrosModel->save($data) === false){
         //     var_dump($miembrosModel->errors());
         // }else{
