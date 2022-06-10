@@ -12,15 +12,13 @@
     <?php 
         //echo '<pre>'.var_export($miembros, true).'</pre>';
 
-
-        
-        foreach ($miembros as $key => $value) {
+        foreach ($membresias as $key => $value) {
             echo '<tr>
                     <td>'.$value->nombre.'</td>
                     <td>'.$value->cedula.'</td>
-                    <td>Fecha 1</td>
-                    <td>Fecha 2</td>
-                    <td>numero</td>
+                    <td>'.$value->fecha_inicio.'</td>
+                    <td>'.$value->fecha_final.'</td>
+                    <td>'.$value->saldo.'</td>
                     <td><a href="asistencia/'.$value->idmiembros.'" class="btn btn-outline-info">Asistencia</a></td>
                 </tr>';
         }

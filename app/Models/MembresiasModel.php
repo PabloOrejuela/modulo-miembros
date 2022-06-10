@@ -23,5 +23,20 @@ class MembresiasModel extends Model{
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+     function _getMembresias($result = NULL){
+        
+        $db = \Config\Database::connect();
+        $builder = $db->table('membresias');
+        $builder->select('*');
+        $builder->join('miembros', 'miembros.idmiembros = membresias.idmiembros');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
     
 }

@@ -13,9 +13,9 @@ class Miembros extends BaseController{
 
     public function index(){
 
-        $miembrosModel = new MiembrosModel($db);
-        $data['miembros'] = $miembrosModel->find();
-        //echo '<pre>'.var_export($data['miembros'], true).'</pre>';
+        $membresiasModel = new MembresiasModel($db);
+        $data['membresias'] = $membresiasModel->_getMembresias();
+        //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
 
         //$data['result'] = suma(3, 5);
         $data['version'] = $this->CI_VERSION;

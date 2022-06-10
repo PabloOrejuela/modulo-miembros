@@ -37,4 +37,5 @@ class MiembrosModel extends Model{
         ],
     ];
     protected $skipValidation   = false;
+
 }
