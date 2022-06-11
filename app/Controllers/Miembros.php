@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\MiembrosModel;
 use App\Models\PaquetesModel;
 use App\Models\MembresiasModel;
+use App\Models\AsistenciaModel;
 
 class Miembros extends BaseController{
 
@@ -13,8 +14,9 @@ class Miembros extends BaseController{
 
     public function index(){
 
-        $membresiasModel = new MembresiasModel($db);
-        $data['membresias'] = $membresiasModel->_getMembresias();
+        $miembrosModel = new MiembrosModel($db);
+        $data['miembros'] = $miembrosModel->_getMiembros();
+        
         //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
 
         //$data['result'] = suma(3, 5);

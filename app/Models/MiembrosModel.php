@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\AsistenciaModel;
+
 
 class MiembrosModel extends Model{
     protected $table      = 'miembros';
@@ -37,5 +39,22 @@ class MiembrosModel extends Model{
         ],
     ];
     protected $skipValidation   = false;
+
+
+    function _getMiembros($result = NULL){
+        
+        $last = 0;
+        $db = \Config\Database::connect();
+        $builder = $db->table('miembros');
+        $builder->select('*');
+        $builder->join('membresias', 'miembros.idmiembros = membresias.idmiembros');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
 
 }
