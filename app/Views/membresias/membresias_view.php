@@ -1,27 +1,30 @@
 <div class="container">
+    <div><h3>Membresías</h3></div>
+    <table class="table table-bordered table-striped table-hover" id="table-miembros">
+        <thead>
+            <th>Nombre</th>
+            <th>Cédula</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Final</th>
+            <th>Disponible</th>
+            <th>Asistencia</th>
+            <th>Editar membresía</th>
+        </thead>
+    <?php 
+        //echo '<pre>'.var_export($membresias, true).'</pre>';
 
-    <?= session()->getFlashdata('error') ?>
-    <?= service('validation')->listErrors() ?>
-    <form action="<?php echo site_url().'membresias/insert';?>" method="post">
-        <?= csrf_field() ?>
-        <h2><?= esc($title) ?></h2>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Miembro:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Seleccione un miembro</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Seleccione una membresía</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-        <input type="submit" name="submit" value="Guardar" class="btn btn-outline-info" />
-    </form>
+        foreach ($membresias as $key => $value) {
+            echo '<tr>
+                    <td>'.$value->nombre.'</td>
+                    <td>'.$value->cedula.'</td>
+                    <td>'.$value->fecha_inicio.'</td>
+                    <td>'.$value->fecha_final.'</td>
+                    <td style="text-align:center;">'.$value->saldo.'</td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" class="registro"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="editar/'.$value->idmembresias.'" class="edit"></a></td>
+                </tr>';
+        }
+    ?>
+    </table>
 </div>
+

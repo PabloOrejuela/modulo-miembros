@@ -25,7 +25,7 @@ class Miembros extends BaseController{
         return view('includes/template', $data);
     }
     
-    public function nuevo($data = NULL){
+    public function new($data = NULL){
 
         $paquetesModel = new PaquetesModel($db);
         $data['paquetes'] = $paquetesModel->find();
@@ -73,5 +73,9 @@ class Miembros extends BaseController{
             return redirect()->to('/');
         //}  
         
+    }
+
+    public function update($id){
+        echo "editar y actualizar datos del miembro";
     }
 }

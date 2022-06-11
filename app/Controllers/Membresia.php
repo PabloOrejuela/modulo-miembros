@@ -12,13 +12,10 @@ class Membresia extends BaseController{
         $membresiasModel = new MembresiasModel($db);
 
         $miembrosModel = new MiembrosModel($db);
-        $data['miembros'] = $miembrosModel->find();
-
-        $paquetesModel = new PaquetesModel($db);
-        $data['paquetes'] = $paquetesModel->find();
+        $data['membresias'] = $membresiasModel->_getMembresias();
 
         
-        //echo '<pre>'.var_export($data['miembros'], true).'</pre>';
+        //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
 
         
         //$data['version'] = $this->CI_VERSION;
@@ -28,7 +25,7 @@ class Membresia extends BaseController{
         return view('includes/template', $data);
     }
 
-    public function edit(){
+    public function edit($id){
         echo "Edita membresia";
     }
 

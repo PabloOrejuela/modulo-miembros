@@ -4,10 +4,7 @@
         <thead>
             <th>Nombre</th>
             <th>Cédula</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Final</th>
-            <th>Disponible</th>
-            <th>Asistencia</th>
+            <th>Ultima Asistencia</th>
             <th>Editar</th>
         </thead>
     <?php 
@@ -17,11 +14,8 @@
             echo '<tr>
                     <td>'.$value->nombre.'</td>
                     <td>'.$value->cedula.'</td>
-                    <td>'.$value->fecha_inicio.'</td>
                     <td>'.$value->fecha_final.'</td>
-                    <td style="text-align:center;">'.$value->saldo.'</td>
-                    <td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" class="registro"></a></td>
-                    <td style="text-align:center;"><a type="button" id="btn-register" href="editar/'.$value->idmembresias.'" class="edit"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="editar/'.$value->idmiembros.'" class="edit"></a></td>
                 </tr>';
         }
     ?>
