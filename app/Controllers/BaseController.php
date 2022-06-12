@@ -9,6 +9,11 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
+use App\Models\MiembrosModel;
+use App\Models\MembresiasModel;
+use App\Models\PaquetesModel;
+use App\Models\AsistenciaModel;
+
 /**
  * Class BaseController
  *
@@ -44,10 +49,17 @@ class BaseController extends Controller {
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-        $this->session = \Config\Services::session();
+        
+
         
         // Preload any models, libraries, etc, here.
+        
+        $this->miembrosModel = new MiembrosModel($db);
+        $this->membresiasModel = new MembresiasModel($db);
+        $this->paquetesModel = new PaquetesModel($db);
+        $this->asistenciaModel = new AsistenciaModel($db);
 
         // E.g.: $this->session = \Config\Services::session();
+        $this->session = \Config\Services::session();
     }
 }

@@ -1,18 +1,12 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\MembresiasModel;
-use App\Models\MiembrosModel;
-use App\Models\PaquetesModel;
 
 class Membresia extends BaseController{
 
     public function index(){
 
-        $membresiasModel = new MembresiasModel($db);
-
-        $miembrosModel = new MiembrosModel($db);
-        $data['membresias'] = $membresiasModel->_getMembresias();
+        $data['membresias'] = $this->membresiasModel->_getMembresias();
 
         
         //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
