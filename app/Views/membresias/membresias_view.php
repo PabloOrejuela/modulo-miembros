@@ -29,9 +29,4 @@
     ?>
     </table>
 </div>
-<script type="text/javascript">
-    $(document).ready( function () {
-        $('#table-miembros').DataTable();
-    } );
-</script>
 
