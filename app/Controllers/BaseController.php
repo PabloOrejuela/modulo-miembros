@@ -51,7 +51,7 @@ class BaseController extends Controller {
         parent::initController($request, $response, $logger);
         
 
-        
+        $this->db = \Config\Database::connect();
         // Preload any models, libraries, etc, here.
         
         $this->miembrosModel = new MiembrosModel($db);
@@ -61,5 +61,6 @@ class BaseController extends Controller {
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
+        $this->request = \Config\Services::request();
     }
 }

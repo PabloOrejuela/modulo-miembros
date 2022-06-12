@@ -33,11 +33,11 @@ class Miembros extends BaseController{
         $request = \Config\Services::request();
 
         $data = array(
-            'nombre' => $request->getPostGet('nombre'),
-            'cedula' => $request->getPostGet('cedula'),
-            'telefono' => $request->getPostGet('telefono'),
-            'email' => $request->getPostGet('email'),
-            'idpaquete' => $request->getPostGet('idpaquete')
+            'nombre' => $this->request->getPostGet('nombre'),
+            'cedula' => $this->request->getPostGet('cedula'),
+            'telefono' => $this->request->getPostGet('telefono'),
+            'email' => $this->request->getPostGet('email'),
+            'idpaquete' => $this->request->getPostGet('idpaquete')
         );
         
 //PABLO: Implementar las validaciones
@@ -66,12 +66,29 @@ class Miembros extends BaseController{
     }
 
     public function editar($idmiembros){
-
+        
         $data['paquetes'] = $this->paquetesModel->find();
         $data['datos'] = $this->miembrosModel->find($idmiembros);
+        //$data['lastQuery'] = $this->db->getLastQuery();
 
         $data['title']='Editar nuevo miembro';
         $data['main_content']='miembros/frm_edit_miembro';
         return view('includes/template', $data);
     }
+
+    public function update(){        
+//PABLO Implementar la validación
+        $data = [
+            'idmiembros' => $this->request->getPostGet('idmiembros'),
+            'nombre' => $this->request->getPostGet('nombre'),
+            'cedula' => $this->request->getPostGet('cedula'),
+            'telefono' => $this->request->getPostGet('telefono'),
+            'email' => $this->request->getPostGet('email'),
+        ];
+        echo '<pre>'.var_export($data, true).'</pre>';
+        $lastQuery = $this->miembrosModel->_update($data);
+        
+        return redirect()->to('/');
+    }
+
 }

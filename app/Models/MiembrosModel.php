@@ -7,6 +7,7 @@ use App\Models\AsistenciaModel;
 
 
 class MiembrosModel extends Model{
+   
     protected $table      = 'miembros';
     protected $primaryKey = 'idmiembros';
 
@@ -43,9 +44,7 @@ class MiembrosModel extends Model{
 
     function _getMiembros($result = NULL){
         
-        $last = 0;
-        $db = \Config\Database::connect();
-        $builder = $db->table('miembros');
+        $builder = $this->db->table('miembros');
         $builder->select('*');
         $builder->join('membresias', 'miembros.idmiembros = membresias.idmiembros');
         $query = $builder->get();
@@ -54,6 +53,19 @@ class MiembrosModel extends Model{
                 $result[] = $row;
             }
         }
+        return $result;
+    }
+
+    function _update($array){
+        $result = NULL;
+        $builder = $this->db->table('miembros');
+        $builder->set('nombre', $array['nombre']);
+        $builder->set('cedula', $array['cedula']);
+        $builder->set('telefono', $array['telefono']);
+        $builder->set('email', $array['email']);
+        $builder->where('idmiembros', $array['idmiembros']);
+        $builder->update();
+        $result = $this->db->getLastQuery();
         return $result;
     }
 

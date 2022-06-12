@@ -35,6 +35,7 @@ $routes->setAutoRoute(false);
 $routes->get('/', 'Miembros::index');
 $routes->get('nuevo', 'Miembros::new');
 $routes->post('insert', 'Miembros::insert');
+$routes->post('actualizar', 'Miembros::update');
 $routes->get('edita_datos_miembro/(:num)', 'Miembros::editar/$1');
 $routes->get('membresias', 'Membresia::index');
 $routes->get('edit/(:num)', 'Membresia::edit/$1', ['as' => 'editar-membresia']);
