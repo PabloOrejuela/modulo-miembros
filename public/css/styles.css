@@ -135,3 +135,7 @@ a {
 #table-miembros{
     font-size: 0.8em;
 }
+
+#input-busqueda{
+    width: 30%;
+}
