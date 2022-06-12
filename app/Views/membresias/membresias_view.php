@@ -23,7 +23,7 @@
                     <td style="text-align:center;">'.($value->saldo - $value->asistencias).'</td>
                     <td>'.$value->saldo.'</td>
                     <td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" class="registro"></a></td>
-                    <td style="text-align:center;"><a type="button" id="btn-register" href="editar/'.$value->idmembresias.'" class="edit"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit"></a></td>
                 </tr>';
         }
     ?>

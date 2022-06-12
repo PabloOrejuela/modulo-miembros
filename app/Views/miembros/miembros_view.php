@@ -15,7 +15,7 @@
             echo '<tr>
                     <td>'.$value->nombre.'</td>
                     <td>'.$value->cedula.'</td>
-                    <td style="text-align:center;"><a type="button" id="btn-register" href="editar/'.$value->idmiembros.'" class="edit"></a></td>
+                    <td style="text-align:center;"><a type="button" id="btn-register" href="edita_datos_miembro/'.$value->idmiembros.'" class="edit"></a></td>
                 </tr>';
         }
     ?>

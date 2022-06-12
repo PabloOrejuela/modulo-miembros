@@ -77,7 +77,12 @@ class Miembros extends BaseController{
         
     }
 
-    public function update($id){
-        echo "editar y actualizar datos del miembro";
+    public function editar($id){
+        $paquetesModel = new PaquetesModel($db);
+        $data['paquetes'] = $paquetesModel->find();
+
+        $data['title']='Editar nuevo miembro';
+        $data['main_content']='miembros/frm_edit_miembro';
+        return view('includes/template', $data);
     }
 }
