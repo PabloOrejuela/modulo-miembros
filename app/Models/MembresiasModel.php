@@ -54,5 +54,24 @@ class MembresiasModel extends Model{
         }
         return 1;
     }
+
+    /*
+     * Trae toda la información de una memnbresía para la edición 
+     */
+    function _getMembresia($idmembresias){
+        
+        $db = \Config\Database::connect();
+        $builder = $db->table('membresias');
+        $builder->select('*');
+        $builder->join('miembros', 'miembros.idmiembros = membresias.idmiembros');
+        $builder->where('idmembresias', $idmembresias);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
     
 }

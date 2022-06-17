@@ -20,8 +20,13 @@ class Membresia extends BaseController{
         return view('includes/template', $data);
     }
 
-    public function edit($id){
-        echo "Edita membresia";
+    public function edit($idmembresias){
+        $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
+        //echo '<pre>'.var_export($data['membresia'], true).'</pre>';
+
+        $data['title']='Edición de membresías';
+        $data['main_content']='membresias/frm_edit_membresias_view';
+        return view('includes/template', $data);
     }
 
 
