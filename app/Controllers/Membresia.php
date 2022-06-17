@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use CodeIgniter\I18n\Time;
 
 class Membresia extends BaseController{
 
@@ -34,7 +35,25 @@ class Membresia extends BaseController{
      */
 
      public function update_date(){
-        echo "actualiza la fecha final";
+        
+        $data = [
+            'fecha_inicio' => $this->request->getPostGet('fecha_inicio'),
+            'fecha_final' => $this->request->getPostGet('fecha_final'),
+            'idmembresias' => $this->request->getPostGet('idmembresias'),
+            'tipo' => $this->request->getPostGet('tipo'),
+        ];
+
+        $fecha_inicio = Time::parse($data['fecha_inicio']);
+        $fecha_final  = Time::parse($data['fecha_final']);
+
+        $diff = $fecha_inicio->difference($fecha_final);
+        //$data['total']= date("Y-m-d",strtotime($fecha_inicio."+ ".$paquete->dias." days")); 
+        $data['total'] = $diff->getDays();;
+        //echo '<pre>'.var_export($data['total'], true).'</pre>';
+        $lastQuery = $this->membresiasModel->_update_fecha_final_membresia($data);
+        
+        return redirect()->to('membresias');
+        
      }
 
 }

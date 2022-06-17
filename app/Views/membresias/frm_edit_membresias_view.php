@@ -18,13 +18,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Fecha Inicio</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" value="'.$value->fecha_inicio.'" readonly>
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="fecha_inicio" value="'.$value->fecha_inicio.'" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Fecha Final</label>
-                        <input type="date" class="form-control" id="exampleInputEmail1" value="'.$value->fecha_final.'">
+                        <input type="date" class="form-control" id="exampleInputEmail1" name="fecha_final" value="'.$value->fecha_final.'">
                     </div>';
-                
+                    echo form_hidden('idpaquete', $value->idpaquete);
+                    echo form_hidden('total', $value->total);
+                    echo form_hidden('idmembresias', $value->idmembresias);
+                    echo form_hidden('tipo', $value->tipo);
             }
         ?>
         <input type="submit" name="submit" value="Actualizar" class="btn btn-outline-info" />

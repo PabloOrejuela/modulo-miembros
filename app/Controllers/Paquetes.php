@@ -4,6 +4,11 @@ namespace App\Controllers;
 
 class Paquetes extends BaseController{
 
+    protected $tipo_paquete = [
+        '1' => 'normal',
+        '2' => 'multipase'
+    ];
+
 
     public function getPaquete($idpaquetes){
 

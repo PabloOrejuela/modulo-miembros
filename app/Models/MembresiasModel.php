@@ -64,6 +64,7 @@ class MembresiasModel extends Model{
         $builder = $db->table('membresias');
         $builder->select('*');
         $builder->join('miembros', 'miembros.idmiembros = membresias.idmiembros');
+        $builder->join('paquetes', 'paquetes.idpaquete = membresias.idpaquete');
         $builder->where('idmembresias', $idmembresias);
         $query = $builder->get();
         if ($query->getResult() != null) {
@@ -77,8 +78,23 @@ class MembresiasModel extends Model{
     /**
      * Actualiza la cantidad de entradas de una membresía
      */
-    function _update_cantidad_usos_membresia($datos){
+    function _update_cantidad_usos_membresia($data){
         return 1;
+    }
+
+    /**
+     * Actualiza la fecha final de la membresía
+     */
+    function _update_fecha_final_membresia($data){
+        echo '<pre>'.var_export($data, true).'</pre>';
+        $builder = $this->db->table('membresias');
+        $builder->set('status', 1);
+        $builder->set('fecha_final',  $data['fecha_final']);
+        if ($data['tipo'] == 1) {
+            $builder->set('total',  $data['total']);
+        }
+        $builder->where('idmembresias', $data['idmembresias']);
+        $builder->update();
     }
     
 }
