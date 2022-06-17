@@ -88,18 +88,31 @@ class Miembros extends BaseController{
     }
 
     public function update(){        
-//PABLO Implementar la validación
-        $data = [
-            'idmiembros' => $this->request->getPostGet('idmiembros'),
-            'nombre' => $this->request->getPostGet('nombre'),
-            'cedula' => $this->request->getPostGet('cedula'),
-            'telefono' => $this->request->getPostGet('telefono'),
-            'email' => $this->request->getPostGet('email'),
-        ];
-        echo '<pre>'.var_export($data, true).'</pre>';
-        $lastQuery = $this->miembrosModel->_update($data);
+        $validation = service('validation');
+        $validation->setRules([
+            'nombre'     => 'required|min_length[5]',
+            'email'        => 'required|valid_email',
+            'cedula'        => 'required',
+            'telefono'        => 'required',
+        ]);
         
-        return redirect()->to('/');
+        if (!$validation->withRequest($this->request)->run()) {
+            //Depuración
+            //dd($validation->getErrors());
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }else{
+            $data = [
+                'idmiembros' => $this->request->getPostGet('idmiembros'),
+                'nombre' => $this->request->getPostGet('nombre'),
+                'cedula' => $this->request->getPostGet('cedula'),
+                'telefono' => $this->request->getPostGet('telefono'),
+                'email' => $this->request->getPostGet('email'),
+            ];
+            //echo '<pre>'.var_export($data, true).'</pre>';
+            $lastQuery = $this->miembrosModel->save($data);
+            
+            return redirect()->to('/');
+        }
     }
 
 }

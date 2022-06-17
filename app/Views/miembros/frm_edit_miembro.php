@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="width:400px;">
 
     <?= session()->getFlashdata('error') ?>
     <?= service('validation')->listErrors() ?>
