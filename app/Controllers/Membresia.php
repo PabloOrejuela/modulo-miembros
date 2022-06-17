@@ -7,6 +7,7 @@ class Membresia extends BaseController{
     public function index(){
 
         $data['membresias'] = $this->membresiasModel->_getMembresias();
+        $this->membresiasModel->_update_status_all($data['membresias']);
 
         
         //echo '<pre>'.var_export($data['membresias'], true).'</pre>';

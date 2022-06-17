@@ -40,6 +40,22 @@ class Miembros extends BaseController{
             'idpaquete' => $this->request->getPostGet('idpaquete')
         );
         
+        $validation = service('validation');
+        $validation->setRules([
+            'nombre'     => 'required|min_length[5]',
+            'email'        => 'required|valid_email|is_unique[miembros.email]',
+            'cedula'        => 'required|is_unique[miembros.cedula]',
+            'telefono'        => 'required',
+        ]);
+        
+        if (!$validation->withRequest($this->request)->run()) {
+            //Depuración
+            //dd($validation->getErrors());
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }else{
+
+        }
+        exit();
 //PABLO: Implementar las validaciones
         // if($miembrosModel->save($data) === false){
         //     var_dump($miembrosModel->errors());

@@ -38,5 +38,21 @@ class MembresiasModel extends Model{
         }
         return $result;
     }
+    /**
+     * Esta función verifica y actualiza el estado de las membresías por el tiempo de caducidad
+     */
+    function _update_status_all($membresias){
+        //echo '<pre>'.var_export(date('Y-m-d'), true).'</pre>';
+        $builder = $this->db->table('membresias');
+        
+        foreach ($membresias as $row) {
+            if ($row->fecha_final <= date('Y-m-d') || ($row->total - $row->asistencias) == 0) {
+                $builder->set('status', 0);
+                $builder->where('idmembresias', $row->idmembresias);
+                $builder->update();
+            }
+        }
+        return 1;
+    }
     
 }
