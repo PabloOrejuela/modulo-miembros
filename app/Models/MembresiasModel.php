@@ -13,7 +13,7 @@ class MembresiasModel extends Model{
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['idpaquete', 'idmiembros', 'fecha_inicio', 'fecha_final', 'asistencias', 'saldo'];
+    protected $allowedFields = ['idpaquete', 'idmiembros', 'fecha_inicio', 'fecha_final', 'asistencias', 'total','status'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -72,6 +72,13 @@ class MembresiasModel extends Model{
             }
         }
         return $result;
+    }
+
+    /**
+     * Actualiza la cantidad de entradas de una membresía
+     */
+    function _update_cantidad_usos_membresia($datos){
+        return 1;
     }
     
 }

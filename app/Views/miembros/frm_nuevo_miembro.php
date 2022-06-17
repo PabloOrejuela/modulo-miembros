@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="width:400px;">
 
    
     <form action="<?php echo site_url().'insert';?>" method="post">

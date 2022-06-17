@@ -29,5 +29,12 @@ class Membresia extends BaseController{
         return view('includes/template', $data);
     }
 
+    /**
+     * Actualiza la fecha final de una membresía
+     */
+
+     public function update_date(){
+        echo "actualiza la fecha final";
+     }
 
 }

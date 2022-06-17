@@ -46,7 +46,7 @@ class MiembrosModel extends Model{
         
         $builder = $this->db->table('miembros');
         $builder->select('*');
-        $builder->join('membresias', 'miembros.idmiembros = membresias.idmiembros');
+        $builder->orderBy('nombre', 'asc');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

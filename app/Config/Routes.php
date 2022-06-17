@@ -39,6 +39,7 @@ $routes->post('actualizar', 'Miembros::update');
 $routes->get('edita_datos_miembro/(:num)', 'Miembros::editar/$1');
 $routes->get('membresias', 'Membresia::index');
 $routes->get('edit/(:num)', 'Membresia::edit/$1', ['as' => 'editar-membresia']);
+$routes->post('update_date', 'Membresia::update_date');
 $routes->get('asistencia/(:num)', 'Asistencia::insert/$1', ['as' => 'asistencia']);
 
 

@@ -10,7 +10,6 @@ class Miembros extends BaseController{
         $data['miembros'] = $this->miembrosModel->_getMiembros();
         
         //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
-
         //$data['result'] = suma(3, 5);
         $data['version'] = $this->CI_VERSION;
 
@@ -53,31 +52,27 @@ class Miembros extends BaseController{
             //dd($validation->getErrors());
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }else{
-
-        }
-        exit();
-//PABLO: Implementar las validaciones
-        // if($miembrosModel->save($data) === false){
-        //     var_dump($miembrosModel->errors());
-        // }else{
-            $this->miembrosModel->save($data);
-            $idmiembros = $db->insertID();
-            
+    
             $paquete = $this->paquetesModel->find($data['idpaquete']);
-
+    
+            //echo '<pre>Hola'.var_export($paquete->entradas, true).'</pre>';
             $fecha_inicio = date("Y-m-d"); 
             $fecha_final = date("Y-m-d",strtotime($fecha_inicio."+ ".$paquete->dias." days")); 
 
+            $this->miembrosModel->save($data);
+            $idmiembros = $this->db->insertID();
             $membresia = array(
                 'idpaquete' => $data['idpaquete'],
                 'idmiembros' => $idmiembros,
                 'fecha_inicio' => date("Y-m-d"),
                 'fecha_final' => $fecha_final,
-                'saldo' => $paquete->entradas,
+                'asistencias' => 0,
+                'total' => $paquete->entradas,
+                'status' => 1
             );
             $this->membresiasModel->save($membresia);
             return redirect()->to('/');
-        //}  
+        }  
         
     }
 
