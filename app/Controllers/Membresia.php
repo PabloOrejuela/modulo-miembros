@@ -16,7 +16,7 @@ class Membresia extends BaseController{
         
         //$data['version'] = $this->CI_VERSION;
 
-        $data['title']='Registro de membresías';
+        $data['title']='Lista de membresías';
         $data['main_content']='membresias/membresias_view';
         return view('includes/template', $data);
     }
@@ -56,4 +56,52 @@ class Membresia extends BaseController{
         
      }
 
+     /**
+      * Form para seleccionar la membresía que se desea transferir
+      */
+     public function frm_select_transfer(){
+        $data['membresias'] = $this->membresiasModel->_getMembresias();
+        $this->membresiasModel->_update_status_all($data['membresias']);
+
+        //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
+
+        $data['title']='Tranferir membresías';
+        $data['main_content']='membresias/frm_transfer_membresias_view';
+        return view('includes/template', $data);
+     }
+
+     /**
+      * Frm para selecccionar el miembro al que se le desea transferir la membresía
+      */
+      public function fr_select_member_transfer_membership($idmembresias){
+
+        $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
+        $data['miembros'] = $this->miembrosModel->_getMiembros();
+        //echo '<pre>'.var_export($data['total'], true).'</pre>';
+        $data['title']='Tranferir membresía';
+        $data['main_content']='membresias/frm_transfiere_membresia';
+        return view('includes/template', $data);
+        
+     }
+
+     /**
+      * Transfiere le membresía al usuario
+      */
+      public function transfer_membership($idmembresias, $idmiembros){
+
+        //echo '<pre>'.var_export($idmiembros, true).'</pre>';
+        $data = [
+            'idmembresias' => $idmembresias,
+            'idmiembros' => $idmiembros
+        ];
+
+        //LLamo a la funcion del modelo que transfiere la membresía
+        $result = $this->membresiasModel->_transfiere_membresia($data);
+        if ($result == NULL) {
+            echo $lastQuery;
+        }else{
+            return redirect()->to('membresias');
+        }
+    }
+     
 }

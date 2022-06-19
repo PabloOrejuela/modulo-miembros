@@ -1,5 +1,5 @@
 <div class="container">
-    <h4><?= esc($title) ?></h4>
+    <h4><?= esc($title); ?></h4>
     <table class="table table-bordered table-striped table-hover" id="table-miembros">
         <thead>
             <th>Nombre</th>
@@ -9,8 +9,7 @@
             <th>Disponible</th>
             <th>Total</th>
             <th>Estado</th>
-            <th>Registrar Asistencia</th>
-            <th>Editar membresía</th>
+            <th>Transferir</th>
         </thead>
     <?php 
         //echo '<pre>'.var_export($membresias, true).'</pre>';
@@ -37,11 +36,9 @@
                     }
                     
                     if ($value->status == 1) {
-                        echo '<td style="text-align:center;"><a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" class="registro"></a></td>
-                        <td style="text-align:center;"><a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit"></a></td>';
+                        echo '<td style="text-align:center;"><a type="button" id="btn-register" href="select-transfer-membership/'.$value->idmembresias.'" class="transfer"></a></td>';
                     }else{
-                        echo '<td style="text-align:center;">CADUCADA</td>
-                        <td style="text-align:center;"><a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit"></a></td>';
+                        echo '<td style="text-align:center;">CADUCADA</td>';
                     }
             
             echo  '</tr>';

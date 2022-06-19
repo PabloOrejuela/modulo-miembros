@@ -110,6 +110,18 @@ a {
     background-position: center;
 }
 
+.transfer {
+    background-image: url('../images/buttons/transfer.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.transfer-membership {
+    background-image: url('../images/buttons/transfer-membership.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 #footer {
     position: fixed;
     bottom: 0px;
@@ -127,9 +139,8 @@ a {
 
 .container {
     margin-left: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     width: 80%;
-
 }
 
 #table-miembros{

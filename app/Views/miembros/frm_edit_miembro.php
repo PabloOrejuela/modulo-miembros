@@ -4,7 +4,7 @@
     <?= service('validation')->listErrors() ?>
     <form action="<?php echo site_url().'actualizar';?>" method="post">
         <?= csrf_field() ?>
-        <h2><?= esc($title) ?></h2>
+        <h4><?= esc($title); ?></h4>
 
         <?php
         

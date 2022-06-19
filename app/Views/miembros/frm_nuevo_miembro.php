@@ -1,9 +1,7 @@
 <div class="container" style="width:400px;">
-
-   
     <form action="<?php echo site_url().'insert';?>" method="post">
         <?= csrf_field() ?>
-        <h2><?= esc($title) ?></h2>
+        <h4><?= esc($title); ?></h4>
         <div class="mb-3">
             <label for="nombre" class="form-label">Nombre:</label>
             <input type="text" class="form-control" name="nombre" id="FormControlInput" value="<?= old('nombre'); ?>"  placeholder="nombre">

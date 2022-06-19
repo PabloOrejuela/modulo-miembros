@@ -33,13 +33,17 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Miembros::index');
-$routes->get('nuevo', 'Miembros::new');
+$routes->get('nuevo', 'Miembros::nuevo');
 $routes->post('insert', 'Miembros::insert');
 $routes->post('actualizar', 'Miembros::update');
 $routes->get('edita_datos_miembro/(:num)', 'Miembros::editar/$1');
 $routes->get('membresias', 'Membresia::index');
 $routes->get('edit/(:num)', 'Membresia::edit/$1', ['as' => 'editar-membresia']);
 $routes->post('update_date', 'Membresia::update_date');
+$routes->post('miembros_select', 'Membresia::miembros_select');
+$routes->get('transfer', 'Membresia::frm_select_transfer');
+$routes->get('select-transfer-membership/(:num)', 'Membresia::fr_select_member_transfer_membership/$1', ['as' => 'select-transfer_membership']);
+$routes->get('membership/(:num)/newmember(:num)', 'Membresia::transfer_membership/$1/$2',['as' => 'transfer_membership']);
 $routes->get('asistencia/(:num)', 'Asistencia::insert/$1', ['as' => 'asistencia']);
 
 

@@ -13,12 +13,12 @@ class Miembros extends BaseController{
         //$data['result'] = suma(3, 5);
         $data['version'] = $this->CI_VERSION;
 
-        $data['title']='Módulo miembros';
+        $data['title']='Lista de miembros';
         $data['main_content']='miembros/miembros_view';
         return view('includes/template', $data);
     }
     
-    public function new($data = NULL){
+    public function nuevo($data = NULL){
 
         $data['paquetes'] = $this->paquetesModel->find();
 
@@ -28,8 +28,6 @@ class Miembros extends BaseController{
     }
 
     public function insert($data = NULL){
-        
-        $request = \Config\Services::request();
 
         $data = array(
             'nombre' => $this->request->getPostGet('nombre'),
@@ -39,18 +37,17 @@ class Miembros extends BaseController{
             'idpaquete' => $this->request->getPostGet('idpaquete')
         );
         
-        $validation = service('validation');
-        $validation->setRules([
+        $this->validation->setRules([
             'nombre'     => 'required|min_length[5]',
             'email'        => 'required|valid_email|is_unique[miembros.email]',
             'cedula'        => 'required|is_unique[miembros.cedula]',
             'telefono'        => 'required',
         ]);
         
-        if (!$validation->withRequest($this->request)->run()) {
+        if (!$this->validation->withRequest($this->request)->run()) {
             //Depuración
             //dd($validation->getErrors());
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+            return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
         }else{
     
             $paquete = $this->paquetesModel->find($data['idpaquete']);

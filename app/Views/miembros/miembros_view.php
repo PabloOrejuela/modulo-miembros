@@ -1,5 +1,5 @@
 <div class="container">
-    <div><h3>Lista de miembros</h3></div>
+    <h4><?= esc($title); ?></h4>
     <table class="table table-bordered table-striped table-hover" id="table-miembros">
         <thead>
             <th>Nombre</th>

@@ -21,6 +21,7 @@ $(document).ready( function () {
                 sortAscending:  ": activar para ordenar la columna de manera ascendente",
                 sortDescending: ": activar para ordenar la columna de manera descendente"
             }
-        }
+        },
+        "lengthMenu": [ 5, 10, 15, 20 ]
     });
 } );

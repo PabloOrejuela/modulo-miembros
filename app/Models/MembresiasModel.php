@@ -24,6 +24,7 @@ class MembresiasModel extends Model{
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
+    
     function _getMembresias($result = NULL){
         
         $db = \Config\Database::connect();
@@ -59,9 +60,8 @@ class MembresiasModel extends Model{
      * Trae toda la información de una memnbresía para la edición 
      */
     function _getMembresia($idmembresias){
-        
-        $db = \Config\Database::connect();
-        $builder = $db->table('membresias');
+        $result = null;
+        $builder = $this->db->table('membresias');
         $builder->select('*');
         $builder->join('miembros', 'miembros.idmiembros = membresias.idmiembros');
         $builder->join('paquetes', 'paquetes.idpaquete = membresias.idpaquete');
@@ -69,8 +69,9 @@ class MembresiasModel extends Model{
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
-                $result[] = $row;
+                $result = $row;
             }
+
         }
         return $result;
     }
@@ -86,7 +87,7 @@ class MembresiasModel extends Model{
      * Actualiza la fecha final de la membresía
      */
     function _update_fecha_final_membresia($data){
-        echo '<pre>'.var_export($data, true).'</pre>';
+        //echo '<pre>'.var_export($data, true).'</pre>';
         $builder = $this->db->table('membresias');
         $builder->set('status', 1);
         $builder->set('fecha_final',  $data['fecha_final']);
@@ -95,6 +96,39 @@ class MembresiasModel extends Model{
         }
         $builder->where('idmembresias', $data['idmembresias']);
         $builder->update();
+    }
+
+    function _obtenCiudad($provincia){
+        $this->db->select('*');
+        $this->db->where('id_provincia', $provincia);
+        $this->db->order_by('ciudad', 'ASC');
+        $q = $this->db->get('ciudad');
+        if ($q->num_rows() > 0) {
+            foreach ($q->result_array() as $r) {
+                $ciudades[] = $r;
+            }
+            return $ciudades;
+        }else{
+                return 0;
+        }
+    }
+
+    /**
+     * Actualiza la membresía con el nuevo miembro
+     */
+    function _transfiere_membresia($data){
+        //echo '<pre>'.var_export($data, true).'</pre>';exit;
+        $this->db->transStart();
+        $builder = $this->db->table('membresias');
+        $builder->set('idmiembros', $data['idmiembros']);
+        $builder->where('idmembresias', $data['idmembresias']);
+        $builder->update();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }else{
+            return 1;
+        }
     }
     
 }
