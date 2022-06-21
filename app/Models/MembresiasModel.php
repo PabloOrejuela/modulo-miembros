@@ -80,7 +80,45 @@ class MembresiasModel extends Model{
      * Actualiza la cantidad de entradas de una membresía
      */
     function _update_cantidad_usos_membresia($data){
-        return 1;
+        
+        foreach ($data as $key => $value) {
+            $value->num_asistencias = $this->_get_total_asistencias($value);
+            $this->_update_asistencias_membresia($value);
+        }
+
+        
+        //echo '<pre>'.var_export($data, true).'</pre>';
+    }
+
+    /**
+     * Trae las asistencias de una membresía dentro de un rango de fechas
+    */
+    function _get_total_asistencias($object){
+        //echo '<pre>'.var_export($object, true).'</pre>';
+        $result = 0;
+        $builder = $this->db->table('asistencia');
+        $builder->selectSum('num_asistencias', 'total');
+        $builder->where('idmembresias', $object->idmembresias);
+        $builder->where('updated_at >=', $object->fecha_inicio)->where('updated_at <=', $object->fecha_final);
+        //$builder->join('membresias', 'membresias.idmembresias=asistencia.idmembresias');
+        $q = $builder->get();
+        if ($q->getResult() != null) {
+            foreach ($q->getResult() as $row) {
+                $result = $row->total;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Actualiza las asistencias de una membresía
+     */
+    function _update_asistencias_membresia($data){
+        //echo '<pre>'.var_export($data, true).'</pre>';
+        $builder = $this->db->table('membresias');
+        $builder->set('asistencias', $data->num_asistencias);
+        $builder->where('idmembresias', $data->idmembresias);
+        $builder->update();
     }
 
     /**

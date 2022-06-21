@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2022 a las 15:48:37
+-- Tiempo de generación: 21-06-2022 a las 18:12:23
 -- Versión del servidor: 8.0.29-0ubuntu0.20.04.3
 -- Versión de PHP: 7.4.30
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `asistencia` (
   `idasistencia` int UNSIGNED NOT NULL,
   `idmembresias` int UNSIGNED NOT NULL,
+  `num_asistencias` smallint UNSIGNED NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -38,9 +39,26 @@ CREATE TABLE `asistencia` (
 -- Volcado de datos para la tabla `asistencia`
 --
 
-INSERT INTO `asistencia` (`idasistencia`, `idmembresias`, `created_at`, `updated_at`) VALUES
-(1, 2, '2022-06-11 23:10:11', '2022-06-11 23:10:11'),
-(2, 1, '2022-06-17 00:58:11', '2022-06-17 00:58:11');
+INSERT INTO `asistencia` (`idasistencia`, `idmembresias`, `num_asistencias`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '2022-06-11 23:10:11', '2022-06-11 23:10:11'),
+(2, 1, 1, '2022-06-17 00:58:11', '2022-06-17 00:58:11'),
+(3, 4, 1, '2022-06-21 04:49:43', '2022-06-21 04:49:43'),
+(4, 4, 3, '2022-06-21 04:53:55', '2022-06-21 04:53:55'),
+(5, 4, 2, '2022-06-21 04:57:37', '2022-06-21 04:57:37'),
+(6, 4, 2, '2022-06-21 05:01:08', '2022-06-21 05:01:08'),
+(7, 4, 2, '2022-06-21 05:01:22', '2022-06-21 05:01:22'),
+(8, 4, 1, '2022-06-21 05:02:42', '2022-06-21 05:02:42'),
+(9, 2, 7, '2022-06-21 05:03:07', '2022-06-21 05:03:07'),
+(10, 4, 1, '2022-06-21 05:03:54', '2022-06-21 05:03:54'),
+(11, 4, 8, '2022-06-21 05:04:55', '2022-06-21 05:04:55'),
+(12, 1, 15, '2022-06-21 05:06:25', '2022-06-21 05:06:25'),
+(13, 4, 1, '2022-06-21 16:26:38', '2022-06-21 16:26:38'),
+(14, 4, 1, '2022-06-21 16:29:32', '2022-06-21 16:29:32'),
+(15, 4, 1, '2022-06-21 16:30:01', '2022-06-21 16:30:01'),
+(16, 4, 1, '2022-06-21 16:30:29', '2022-06-21 16:30:29'),
+(17, 4, 1, '2022-06-21 16:31:01', '2022-06-21 16:31:01'),
+(18, 4, 1, '2022-06-21 16:34:44', '2022-06-21 16:34:44'),
+(19, 4, 1, '2022-06-21 16:35:01', '2022-06-21 16:35:01');
 
 -- --------------------------------------------------------
 
@@ -68,8 +86,8 @@ CREATE TABLE `membresias` (
 INSERT INTO `membresias` (`idmembresias`, `idpaquete`, `idmiembros`, `fecha_inicio`, `fecha_final`, `asistencias`, `total`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 3, '2022-06-10', '2022-07-10', 1, 30, 1, '2022-06-10 05:17:30', '2022-06-17 00:58:11'),
 (2, 2, 2, '2022-06-10', '2022-09-08', 1, 90, 1, '2022-06-10 05:17:30', '2022-06-11 23:10:11'),
-(3, 10, 4, '2022-06-17', '2022-07-17', 0, 12, 1, '2022-06-17 21:17:21', '2022-06-17 21:17:21'),
-(4, 10, 1, '2022-06-17', '2022-07-17', 0, 12, 1, '2022-06-17 21:17:21', '2022-06-17 21:17:21');
+(3, 10, 1, '2022-06-17', '2022-07-17', 0, 12, 1, '2022-06-17 21:17:21', '2022-06-17 21:17:21'),
+(4, 10, 4, '2022-06-17', '2022-07-17', 0, 12, 1, '2022-06-17 21:17:21', '2022-06-17 21:17:21');
 
 -- --------------------------------------------------------
 
@@ -189,7 +207,7 @@ ALTER TABLE `paquetes`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `idasistencia` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idasistencia` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `membresias`
