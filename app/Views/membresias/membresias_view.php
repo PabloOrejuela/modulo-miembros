@@ -84,7 +84,7 @@
     };
     
     function ActualizaAsistencias(){
-        //event.preventDefault();
+        event.preventDefault();
         
         var formData = new FormData($("#form-asistencia")[0]);
         //$('#asistenciaModal').hide();
@@ -96,7 +96,9 @@
             contentType: false,
             processData: false,
             type: 'POST',
-            beforeSend: function(){$('#asistenciaModal').modal('hide');},
+            beforeSend: function(){
+                $('#asistenciaModal').modal('hide');
+            },
             success: function(response){
                 
                 if (response == 1) {
