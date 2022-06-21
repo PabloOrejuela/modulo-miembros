@@ -1,25 +1,29 @@
-<div class="container" style="width:400px;">
+<style>
+    
+    label{
+        margin-right: 10px;
+    }
+</style>
+<div class="container" style="width:500px;">
         
-    <form action="<?php echo site_url().'transfer-membership';?>" method="post">
-        <?= csrf_field() ?>
-        <h4><?= esc($title) ?></h4>
-        <?php 
-            //echo '<pre>'.var_export($membresia, true).'</pre>';
-            echo '<div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" value="'.$membresia->nombre.'" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" value="'.$membresia->cedula.'" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Paquete</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="fecha_inicio" value="'.$membresia->fecha_inicio.'" readonly>
-                </div>
-                <br/>';
-                echo form_hidden('idmembresias', $membresia->idmembresias);
-        ?>
+    <?= csrf_field(); ?>
+    <h4><?= esc($title) ?></h4>
+    <?php 
+        //echo '<pre>'.var_export($membresia, true).'</pre>';
+        
+        echo '<div class="input-group mb-3">
+                <label for="nombre" class="form-label">Nombre: </label>
+                <input type="text" class="form-control" aria-label="nombre" value="'.$membresia->nombre.'" readonly>
+                <label for="cedula" class="form-label" style="margin-left: 20px;">Cedula: </label>
+                <input type="text" class="form-control" value="'.$membresia->cedula.'" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="paquete" class="form-label">Paquete</label>
+                <input type="text" class="form-control" id="paquete" name="fecha_inicio" value="'.$membresia->paquete.'" readonly>
+            </div>
+            <br/>';
+            echo form_hidden('idmembresias', $membresia->idmembresias);
+    ?>
 </div>
 <div class="container" style="width:600px;">
         <table class="table table-bordered table-striped table-hover" id="table-transfer" style="width:480px;">
@@ -45,7 +49,6 @@
             
         </table>
         <p><td><?= session('errors.idmiembros');?></td></p>
-        <input type="submit" name="submit" value="Transferir" class="btn btn-outline-info" />
     </form>
 </div>
 <script>

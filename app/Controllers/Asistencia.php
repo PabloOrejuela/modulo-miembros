@@ -12,30 +12,20 @@ class Asistencia extends BaseController{
      * @return type
      * @throws conditon
      **/
-    public function insert($idmembresias){
+    public function insert(){
         
-
         //Insertar asistencia de la membresía en asistencia
-
         $data = [
-            'idmembresias' => $idmembresias,
+            'idmembresias' => $this->request->getPostGet('idmembresias'),
+            'num_asistencias' => $this->request->getPostGet('num_asistencias')
         ];
 
-        $this->asistenciaModel->save($data);
+        echo '<pre>'.var_export($data, true).'</pre>';
+        
 
-        //actualizar Disponible en membresia
-        $asistencias = $this->asistenciaModel->_get_all_attend($idmembresias); 
-        //echo '<pre>'.var_export(count($asistencias), true).'</pre>';
-
-        //Actualizo las asistencias de esa membresía
-        $data = array(
-            'idmembresias' => $idmembresias,
-            'asistencias' => count($asistencias)
-        );
-        $this->membresiasModel->save($data);
+        $this->asistenciaModel->_insert_asistencia($data);
         
         return redirect()->to('/membresias');
-    
     }
 
 

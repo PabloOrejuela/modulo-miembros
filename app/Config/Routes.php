@@ -44,7 +44,7 @@ $routes->post('miembros_select', 'Membresia::miembros_select');
 $routes->get('transfer', 'Membresia::frm_select_transfer');
 $routes->get('select-transfer-membership/(:num)', 'Membresia::fr_select_member_transfer_membership/$1', ['as' => 'select-transfer_membership']);
 $routes->get('membership/(:num)/newmember(:num)', 'Membresia::transfer_membership/$1/$2',['as' => 'transfer_membership']);
-$routes->get('asistencia/(:num)', 'Asistencia::insert/$1', ['as' => 'asistencia']);
+$routes->post('asistencia', 'Asistencia::insert', ['as' => 'asistencia']);
 
 
 

@@ -28,26 +28,26 @@ a {
 
 .botonera {
     /*border: 1px solid #000;*/
-    height: 100px;
+    height: 80px;
     padding: 0px;
     border-bottom: 1px solid rgb(234, 234, 234);
 }
 
 #button {
     border: 1px solid rgb(208, 208, 208);
-    border-radius: 8px;
-    width: 60px;
-    height: 60px;
-    padding: 20px;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    padding: 0px 10px;
 }
 
 #button:hover {
     border: 1px solid rgb(208, 208, 208);
-    border-radius: 8px;
+    border-radius: 4px;
     box-shadow: 3px 3px 5px darkgray;
-    width: 60px;
-    height: 60px;
-    padding: 20px;
+    width: 50px;
+    height: 50px;
+    padding: 0px 10px;
 }
 
 #btn-register {
@@ -68,10 +68,10 @@ a {
 }
 
 #boton {
-    width: 80px;
+    width: 60px;
     float: left;
     margin-left: 0px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-top: 20px;;
 }
 
@@ -80,46 +80,52 @@ a {
 }
 
 .new-member {
-    background-image: url('../images/buttons/new-member.png');
+    background-image: url('../images/buttons/new-member.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:auto;
+    background-size:90%;
 }
 
 .gym {
-    background-image: url('../images/buttons/gym.png');
+    background-image: url('../images/buttons/gym.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size:90%;
 }
 
 .registro {
-    background-image: url('../images/buttons/check-form.png');
+    background-image: url('../images/buttons/check-form.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size:90%;
 }
 
 .edit {
-    background-image: url('../images/buttons/edit.png');
+    background-image: url('../images/buttons/edit.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size:90%;
 }
 
 .membership {
-    background-image: url('../images/buttons/membresia.png');
+    background-image: url('../images/buttons/miembros.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size:90%;;
 }
 
 .transfer {
-    background-image: url('../images/buttons/transfer.png');
+    background-image: url('../images/buttons/transfer.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size:90%;
 }
 
 .transfer-membership {
-    background-image: url('../images/buttons/transfer-membership.png');
+    background-image: url('../images/buttons/transfer-membership.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size:90%;
 }
 
 #footer {

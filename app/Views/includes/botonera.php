@@ -1,7 +1,7 @@
 <div class="container">
     <div class="botonera">
         <div id="boton">
-            <a type="button" class="gym" id="button" href="<?= site_url(); ?>/membresias" ></a>
+            <a type="button" class="gym" id="button" href="<?= site_url(); ?>membresias" ></a>
         </div>
         <div id="boton">
             <a type="button" class="new-member" id="button" href="<?= site_url(); ?>/nuevo" ></a>

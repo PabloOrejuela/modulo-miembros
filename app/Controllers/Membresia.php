@@ -9,11 +9,7 @@ class Membresia extends BaseController{
 
         $data['membresias'] = $this->membresiasModel->_getMembresias();
         $this->membresiasModel->_update_status_all($data['membresias']);
-
-        
         //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
-
-        
         //$data['version'] = $this->CI_VERSION;
 
         $data['title']='Lista de membresías';

@@ -41,5 +41,19 @@ class AsistenciaModel extends Model{
         }
      
         return $result;
-    }    
+    }   
+    
+    public function _insert_asistencia($data){
+        $this->db->transStart();
+        $builder = $this->db->table('asistencia');
+        $builder->set('idmembresias', $data['idmembresias']);
+        $builder->set('num_asistencias', $data['num_asistencias']);
+        $builder->insert();
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            return 0;
+        }else{
+            return 1;
+        }
+    }
 }
