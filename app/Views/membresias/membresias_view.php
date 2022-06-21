@@ -74,7 +74,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Número de asistencias:</label>
-                    <input type="text" class="form-control" id="num_asistencias" name="num_asistencias" value="1">
+                    <input type="text" class="form-control" id="num_asistencias" name="num_asistencias" value="1" onChange="verificaMaximo();">
                 </div>
             </form>
         </div>
@@ -89,7 +89,14 @@
     function pasaIdmembresia(idmembresias, saldo){
         $('#idmembresias').val(idmembresias);
         $('#disponible').val(saldo);
-        
+    };
+
+    function verificaMaximo(){
+        var disponible = $('#disponible').val();
+        if ($('#num_asistencias').val() > disponible) {
+            alert("Cantidad máxima erronea, máximo permitdo: " + disponible);
+            $('#num_asistencias').val(disponible);
+        }
     };
     
     function ActualizaAsistencias(){
