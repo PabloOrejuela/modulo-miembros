@@ -84,7 +84,7 @@
     };
     
     function ActualizaAsistencias(){
-        event.preventDefault();
+        //event.preventDefault();
         
         var formData = new FormData($("#form-asistencia")[0]);
         //$('#asistenciaModal').hide();
@@ -103,7 +103,7 @@
                 
                 if (response == 1) {
                     
-                    console.log("Insertado");
+                    location.reload();
                     
                 }else{
                     console.log("Hubo un problema");

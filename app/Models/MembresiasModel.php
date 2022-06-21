@@ -43,12 +43,16 @@ class MembresiasModel extends Model{
      * Esta función verifica y actualiza el estado de las membresías por el tiempo de caducidad
      */
     function _update_status_all($membresias){
-        //echo '<pre>'.var_export(date('Y-m-d'), true).'</pre>';
+        //echo '<pre>'.var_export($membresias, true).'</pre>';
         $builder = $this->db->table('membresias');
         
         foreach ($membresias as $row) {
-            if ($row->fecha_final <= date('Y-m-d') || ($row->total - $row->asistencias) == 0) {
+            if ($row->fecha_final <= date('Y-m-d') || $row->asistencias >= $row->total) {
                 $builder->set('status', 0);
+                $builder->where('idmembresias', $row->idmembresias);
+                $builder->update();
+            }else{
+                $builder->set('status', 1);
                 $builder->where('idmembresias', $row->idmembresias);
                 $builder->update();
             }
@@ -136,20 +140,6 @@ class MembresiasModel extends Model{
         $builder->update();
     }
 
-    function _obtenCiudad($provincia){
-        $this->db->select('*');
-        $this->db->where('id_provincia', $provincia);
-        $this->db->order_by('ciudad', 'ASC');
-        $q = $this->db->get('ciudad');
-        if ($q->num_rows() > 0) {
-            foreach ($q->result_array() as $r) {
-                $ciudades[] = $r;
-            }
-            return $ciudades;
-        }else{
-                return 0;
-        }
-    }
 
     /**
      * Actualiza la membresía con el nuevo miembro
