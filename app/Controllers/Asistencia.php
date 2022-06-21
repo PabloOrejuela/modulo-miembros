@@ -20,7 +20,7 @@ class Asistencia extends BaseController{
             'num_asistencias' => $this->request->getPostGet('num_asistencias')
         ];
 
-        echo '<pre>'.var_export($data, true).'</pre>';
+        //echo '<pre>'.var_export($data, true).'</pre>';
         
 
         $this->asistenciaModel->_insert_asistencia($data);

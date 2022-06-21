@@ -39,7 +39,10 @@
                     
                     if ($value->status == 1) {
                         echo '<td style="text-align:center;">
-                            <a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" class="registro" data-bs-toggle="modal" data-bs-target="#asistenciaModal" onClick="pasaIdmembresia('.$value->idmembresias.');"></a>
+                                <a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" 
+                                    class="registro" data-bs-toggle="modal" data-bs-target="#asistenciaModal" 
+                                    onClick="pasaIdmembresia('.$value->idmembresias.','. $saldo.');">
+                                </a>
                             </td>
                         <td style="text-align:center;"><a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit"></a></td>';
                     }else{
@@ -66,6 +69,10 @@
                 <?= csrf_field(); ?>
                 <input type="hidden" id="idmembresias" name="idmembresias">
                 <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Disponible:</label>
+                    <input type="text" class="form-control" id="disponible" name="num_asistencias" readonly>
+                </div>
+                <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Número de asistencias:</label>
                     <input type="text" class="form-control" id="num_asistencias" name="num_asistencias" value="1">
                 </div>
@@ -79,8 +86,10 @@
   </div>
 </div>
 <script>
-    function pasaIdmembresia(idmembresias){
+    function pasaIdmembresia(idmembresias, saldo){
         $('#idmembresias').val(idmembresias);
+        $('#disponible').val(saldo);
+        
     };
     
     function ActualizaAsistencias(){
