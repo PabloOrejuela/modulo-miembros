@@ -69,10 +69,10 @@ a {
 
 #boton {
     width: 60px;
-    float: left;
     margin-left: 0px;
     margin-right: 5px;
-    margin-top: 20px;;
+    margin-top: 20px;
+    display: inline-block;
 }
 
 .clear-fix {
@@ -123,6 +123,13 @@ a {
 
 .transfer-membership {
     background-image: url('../images/buttons/transfer-membership.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:90%;
+}
+
+.reports {
+    background-image: url('../images/buttons/analytics.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size:90%;

@@ -12,7 +12,7 @@ class Membresia extends BaseController{
         $this->membresiasModel->_update_cantidad_usos_membresia($data['membresias']);
         $data['membresias'] = $this->membresiasModel->_getMembresias();
         //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
-        //$data['version'] = $this->CI_VERSION;
+        $data['version'] = $this->CI_VERSION;
 
         $data['title']='Lista de membresías';
         $data['main_content']='membresias/membresias_view';

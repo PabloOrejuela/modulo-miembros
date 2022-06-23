@@ -54,10 +54,10 @@ class BaseController extends Controller {
         $this->db = \Config\Database::connect();
         // Preload any models, libraries, etc, here.
         
-        $this->miembrosModel = new MiembrosModel($db);
-        $this->membresiasModel = new MembresiasModel($db);
-        $this->paquetesModel = new PaquetesModel($db);
-        $this->asistenciaModel = new AsistenciaModel($db);
+        $this->miembrosModel = new MiembrosModel($this->db);
+        $this->membresiasModel = new MembresiasModel($this->db);
+        $this->paquetesModel = new PaquetesModel($this->db);
+        $this->asistenciaModel = new AsistenciaModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

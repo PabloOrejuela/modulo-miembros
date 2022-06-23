@@ -89,8 +89,6 @@ class MembresiasModel extends Model{
             $value->num_asistencias = $this->_get_total_asistencias($value);
             $this->_update_asistencias_membresia($value);
         }
-
-        
         //echo '<pre>'.var_export($data, true).'</pre>';
     }
 

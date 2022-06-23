@@ -12,6 +12,9 @@
         <div id="boton">
             <a type="button" class="transfer-membership" id="button" href="<?= site_url(); ?>transfer"  ></a>
         </div>
+        <div id="boton">
+            <a type="button" class="reports" id="button" href="<?= site_url(); ?>reportes"  ></a>
+        </div>
     </div>
 </div>
 <div class="clear-fix"></div>
