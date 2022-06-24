@@ -47,6 +47,7 @@ $routes->get('select-transfer-membership/(:num)', 'Membresia::fr_select_member_t
 $routes->get('membership/(:num)/newmember(:num)', 'Membresia::transfer_membership/$1/$2',['as' => 'transfer_membership']);
 $routes->post('asistencia', 'Asistencia::insert', ['as' => 'asistencia']);
 $routes->get('reportes', 'Reportes::index');
+$routes->get('pruebaPDF', 'Reportes::pruebaPDF');
 
 
 

@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 use CodeIgniter\I18n\Time;
+use App\Libraries\PdfLibrary;
 
 class Reportes extends BaseController{
+
 
     public function index(){
         
@@ -13,15 +15,15 @@ class Reportes extends BaseController{
     }
 
     public function pruebaPDF(){
-        $this->pdf = new TCPDF("L", "mm", "A4", true, 'UTF-8', false);
+        $this->pdf = new PdfLibrary("L", "mm", "A4", true, 'UTF-8', false);
         $this->pdf->setPrintHeader(false);
         $this->pdf->setPrintFooter(false);
         //Información referente al PDF
         $this->pdf->SetCreator('PDF_CREATOR');
         $this->pdf->SetAuthor('Pablo Orejuela');
-        $this->pdf->SetTitle('Reporte Actividad');
+        $this->pdf->SetTitle('Lista de miembros activos');
         $this->pdf->SetSubject('Reportes GTK Admin');
-        $this->pdf->SetKeywords('TCPDF, PDF, reportes, Gtk-ecuador');
+        $this->pdf->SetKeywords('TCPDF, PDF, reportes');
 
         $this->pdf->SetFont('Helvetica', 'C', 10);
         $this->pdf->SetMargins(12, 12, 12, true);
@@ -31,7 +33,7 @@ class Reportes extends BaseController{
         $this->pdf->SetLineStyle(array('width' => 0.01, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(10, 0, 0)));
 
         // Saltos de página automáticos.
-        //$this->pdf->SetAutoPageBreak(TRUE, 'PDF_MARGIN_BOTTOM');
+        $this->pdf->SetAutoPageBreak(TRUE, 20);
 
 
         // Establecer el ratio para las imagenes que se puedan utilizar
@@ -41,22 +43,20 @@ class Reportes extends BaseController{
         $this->pdf->SetFont('Helvetica', 'P', 11);
         $this->pdf->SetMargins(12, 12);
 
-        $fecha = date('Y-m-d');
-        
         // Añadir página
         $this->pdf->AddPage();
 
         $this->pdf->SetFont('helvetica', 'B', 12);
-        $this->pdf->Cell(214, 0, 'REPORTE DE SOCIOS ACTIVOS GTK ECUADOR', 'tbrl', 0, 'C', false);
+        $this->pdf->Cell(180, 0, 'Hola mundo', 'tbrl', 0, 'C', false);
         
 
         $this->pdf->ln(12);
         $this->pdf->SetFont('helvetica', 'B', 10);
         $this->pdf->Cell(18, 0, 'FECHA: ', '', 0, 'L', false);
 
-
+        ob_end_clean();
         //Cerramos y damos salida al fichero PDF
-        $this->pdf->Output('reporte_pagos.pdf', 'I');
+        $this->pdf->Output('reporte.pdf', 'I');
     }
 }
 
