@@ -44,7 +44,7 @@ class Autoload extends AutoloadConfig
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
         "App" => APPPATH,
-	    "TCPDF" => "ThirdParty/tcpdf"
+	    "TCPDF" => "../../vendor/tecnickcom"
     ];
 
     /**
@@ -67,7 +67,7 @@ class Autoload extends AutoloadConfig
      * @var array<string, string>
      */
     public $classmap = [
-        "TCPDF" => APPPATH . "ThirdParty/tcpdf/tcpdf.php"
+        "TCPDF" => APPPATH . "vendor/tecnickom/tcpdf.php"
     ];
 
     /**

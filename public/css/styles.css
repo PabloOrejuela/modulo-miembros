@@ -67,6 +67,14 @@ a {
     padding: 10px;
 }
 
+#btn-reporte{
+    border: 1px solid rgb(238, 237, 237);
+    padding:3px;
+    margin-left: 10px;
+    text-align: center;
+    align-items: center;
+}
+
 #boton {
     width: 60px;
     margin-left: 0px;

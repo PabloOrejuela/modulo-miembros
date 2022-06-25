@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 use CodeIgniter\I18n\Time;
-use App\Libraries\PdfLibrary;
+use TCPDF;
 
 class Reportes extends BaseController{
 
@@ -14,49 +14,15 @@ class Reportes extends BaseController{
         return view('includes/template', $data);
     }
 
-    public function pruebaPDF(){
-        $this->pdf = new PdfLibrary("L", "mm", "A4", true, 'UTF-8', false);
-        $this->pdf->setPrintHeader(false);
-        $this->pdf->setPrintFooter(false);
-        //Información referente al PDF
-        $this->pdf->SetCreator('PDF_CREATOR');
-        $this->pdf->SetAuthor('Pablo Orejuela');
-        $this->pdf->SetTitle('Lista de miembros activos');
-        $this->pdf->SetSubject('Reportes GTK Admin');
-        $this->pdf->SetKeywords('TCPDF, PDF, reportes');
-
-        $this->pdf->SetFont('Helvetica', 'C', 10);
-        $this->pdf->SetMargins(12, 12, 12, true);
-        $this->pdf->SetFillColor(247,246,228);
-        $this->pdf->SetLineWidth(0.01);
-        $this->pdf->setCellPaddings(1, 1, 1, 1);
-        $this->pdf->SetLineStyle(array('width' => 0.01, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(10, 0, 0)));
-
-        // Saltos de página automáticos.
-        $this->pdf->SetAutoPageBreak(TRUE, 20);
-
-
-        // Establecer el ratio para las imagenes que se puedan utilizar
-        //$this->pdf->setImageScale('PDF_IMAGE_SCALE_RATIO');
-
-        // Establecer la fuente
-        $this->pdf->SetFont('Helvetica', 'P', 11);
-        $this->pdf->SetMargins(12, 12);
-
-        // Añadir página
-        $this->pdf->AddPage();
-
-        $this->pdf->SetFont('helvetica', 'B', 12);
-        $this->pdf->Cell(180, 0, 'Hola mundo', 'tbrl', 0, 'C', false);
+    public function listaMiembrosPDF(){
+       
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
+        $this->response->setHeader('Content-Type', 'application/pdf');                // create TCPDF object with default constructor args
+        $pdf->AddPage();                    // pretty self-explanatory
+        $pdf->Write(1, 'Hola Nadia guapita');      // 1 is line height
+        $pdf->Output('hello_world.pdf', 'I');    // send the file inline to the browser (default).
+        //exit();
         
-
-        $this->pdf->ln(12);
-        $this->pdf->SetFont('helvetica', 'B', 10);
-        $this->pdf->Cell(18, 0, 'FECHA: ', '', 0, 'L', false);
-
-        ob_end_clean();
-        //Cerramos y damos salida al fichero PDF
-        $this->pdf->Output('reporte.pdf', 'I');
     }
 }
 
