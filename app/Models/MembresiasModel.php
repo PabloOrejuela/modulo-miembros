@@ -31,6 +31,7 @@ class MembresiasModel extends Model{
         $builder = $db->table('membresias');
         $builder->select('*');
         $builder->join('miembros', 'miembros.idmiembros = membresias.idmiembros');
+        $builder->join('paquetes', 'paquetes.idpaquete = membresias.idmiembros');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

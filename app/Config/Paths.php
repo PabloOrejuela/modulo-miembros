@@ -84,4 +84,6 @@ class Paths
     public $viewDirectory = __DIR__ . '/../Views';
 
     public $vendorDir = __DIR__ ."../vendor";
+
+    public $publicDir = __DIR__ ."../public";
 }

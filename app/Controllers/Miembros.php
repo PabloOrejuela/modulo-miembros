@@ -58,6 +58,8 @@ class Miembros extends BaseController{
 
             $this->miembrosModel->save($data);
             $idmiembros = $this->db->insertID();
+
+            //PABLO Si elige paquete se inserta la membresía
             $membresia = array(
                 'idpaquete' => $data['idpaquete'],
                 'idmiembros' => $idmiembros,

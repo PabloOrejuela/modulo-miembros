@@ -23,7 +23,7 @@
                 href="<?php echo site_url(); ?>listaMembresiasPDF" 
                 class="btn" 
                 target="_blank"
-                ><img src="<?php echo site_url(); ?>public/images/buttons/report.svg" alt="You-logo" id="logo" />PDF</a>
+                ><img src="<?php echo site_url(); ?>public/images/buttons/report.svg" alt="report-logo" id="logo" />PDF</a>
             </td>
         </tr>
     </table>

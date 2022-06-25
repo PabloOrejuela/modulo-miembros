@@ -48,6 +48,7 @@ $routes->get('membership/(:num)/newmember(:num)', 'Membresia::transfer_membershi
 $routes->post('asistencia', 'Asistencia::insert', ['as' => 'asistencia']);
 $routes->get('reportes', 'Reportes::index');
 $routes->get('listaMiembrosPDF', 'Reportes::listaMiembrosPDF');
+$routes->get('listaMembresiasPDF', 'Reportes::listaMembresiasPDF');
 
 
 
