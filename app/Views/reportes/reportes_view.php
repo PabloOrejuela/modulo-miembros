@@ -8,7 +8,7 @@
                 <a 
                 type="button" 
                 id="btn-reporte" 
-                href="<?php echo site_url(); ?>listaMiembrosPDF" 
+                href="<?php echo site_url(); ?>reportes/lista-miembros" 
                 class="btn" 
                 target="_blank"
                 ><img src="<?php echo site_url(); ?>public/images/buttons/report.svg" alt="You-logo" id="logo" />PDF</a>
@@ -20,7 +20,7 @@
                 <a 
                 type="button" 
                 id="btn-reporte" 
-                href="<?php echo site_url(); ?>listaMembresiasPDF" 
+                href="<?php echo site_url(); ?>reportes/lista-membresias" 
                 class="btn" 
                 target="_blank"
                 ><img src="<?php echo site_url(); ?>public/images/buttons/report.svg" alt="report-logo" id="logo" />PDF</a>

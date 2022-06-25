@@ -58,7 +58,7 @@ class Reportes extends BaseController{
             $n++;
         }
         //$pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output('hello_world.pdf', 'I'); 
+        $pdf->Output('reporte-lista-miembros.pdf', 'I'); 
         //exit();
     }
 
@@ -119,7 +119,7 @@ class Reportes extends BaseController{
             $n++;
         }
         //$pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output('hello_world.pdf', 'I'); 
+        $pdf->Output('reporte-lista-memebresias.pdf', 'I'); 
         //exit();
     }
 }
