@@ -23,22 +23,8 @@ class MiembrosModel extends Model{
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
-    protected $validationRules    = [
-        'nombre'     => 'required|min_length[5]',
-        'email'        => 'required|valid_email|is_unique[miembros.email]',
-        'cedula'        => 'required|is_unique[miembros.cedula]',
-    ];
-    protected $validationMessages = [
-        'nombre'     => [
-            'required' => "Lo sentimos, este campo es obligatorio"
-        ],
-        'email'        => [
-            'required' => "Lo sentimos, este campo es obligatorio"
-        ],
-        'cedula'        => [
-            'required' => "Lo sentimos, este campo es obligatorio"
-        ],
-    ];
+    protected $validationRules    = [];
+    protected $validationMessages = [];
     protected $skipValidation   = false;
 
 

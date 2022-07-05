@@ -37,12 +37,7 @@ class Miembros extends BaseController{
             'idpaquete' => $this->request->getPostGet('idpaquete')
         );
         
-        $this->validation->setRules([
-            'nombre'     => 'required|min_length[5]',
-            'email'        => 'required|valid_email|is_unique[miembros.email]',
-            'cedula'        => 'required|is_unique[miembros.cedula]',
-            'telefono'        => 'required',
-        ]);
+        $this->validation->setRuleGroup('newMember');
         
         if (!$this->validation->withRequest($this->request)->run()) {
             //Depuración
