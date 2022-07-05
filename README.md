@@ -1,1 +1,2 @@
--Creada la vista del Form de nuevo miembro
+- Creada la vista del Form de nuevo miembro
+- Ya se puede registrar un miembro sin tener que elegir un paquete

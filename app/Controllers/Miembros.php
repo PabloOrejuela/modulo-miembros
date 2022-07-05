@@ -43,28 +43,28 @@ class Miembros extends BaseController{
             //Depuración
             //dd($validation->getErrors());
             return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
-        }else{
-    
-            $paquete = $this->paquetesModel->find($data['idpaquete']);
-    
-            //echo '<pre>Hola'.var_export($paquete->entradas, true).'</pre>';
-            $fecha_inicio = date("Y-m-d"); 
-            $fecha_final = date("Y-m-d",strtotime($fecha_inicio."+ ".$paquete->dias." days")); 
+        }else{ 
 
             $this->miembrosModel->save($data);
             $idmiembros = $this->db->insertID();
+            
+            if ($data['idpaquete'] != 0 && $data['idpaquete'] != '0') {
 
-            //PABLO Si elige paquete se inserta la membresía
-            $membresia = array(
-                'idpaquete' => $data['idpaquete'],
-                'idmiembros' => $idmiembros,
-                'fecha_inicio' => date("Y-m-d"),
-                'fecha_final' => $fecha_final,
-                'asistencias' => 0,
-                'total' => $paquete->entradas,
-                'status' => 1
-            );
-            $this->membresiasModel->save($membresia);
+                $paquete = $this->paquetesModel->find($data['idpaquete']);
+                $fecha_inicio = date("Y-m-d"); 
+                $fecha_final = date("Y-m-d",strtotime($fecha_inicio."+ ".$paquete->dias." days"));
+                
+                $membresia = array(
+                    'idpaquete' => $data['idpaquete'],
+                    'idmiembros' => $idmiembros,
+                    'fecha_inicio' => date("Y-m-d"),
+                    'fecha_final' => $fecha_final,
+                    'asistencias' => 0,
+                    'total' => $paquete->entradas,
+                    'status' => 1
+                );
+                $this->membresiasModel->save($membresia);
+            }
             return redirect()->to('/');
         }  
         

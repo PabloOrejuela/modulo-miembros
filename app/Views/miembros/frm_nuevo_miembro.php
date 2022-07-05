@@ -9,22 +9,23 @@
         <p><?= session('errors.nombre');?> </p>
         <div class="mb-3">
             <label for="cedula" class="form-label">Cédula:</label>
-            <input type="text" class="form-control" name="cedula" id="FormControlInput" value="<?= old('cedula'); ?>" placeholder="CI">
+            <input type="text" class="form-control" name="cedula" maxlength="10" id="cedula" value="<?= old('cedula'); ?>" placeholder="CI">
         </div>
         <p><?= session('errors.cedula');?> </p>
         <div class="mb-3">
             <label for="telefono" class="form-label">Teléfono:</label>
-            <input type="text" class="form-control" name="telefono" id="FormControlInput" value="<?= old('telefono'); ?>" placeholder="teléfono">
+            <input type="text" class="form-control" name="telefono" maxlength="10" id="telefono" value="<?= old('telefono'); ?>" placeholder="teléfono">
         </div>
         <p><?= session('errors.telefono');?> </p>
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" name="email" id="FormControlInput" value="<?= old('email'); ?>"  placeholder="jdoe@email.com">
+            <input type="email" class="form-control" name="email" id="email" value="<?= old('email'); ?>"  placeholder="jdoe@email.com">
         </div>
         <p><?= session('errors.email');?> </p>
         <div class="mb-3">
             <label for="email" class="form-label">Membresías:</label>
             <select class="form-select" aria-label="Default select example" name="idpaquete">
+                <option value="0">Elija un paquete</option>
                 <?php 
                     foreach ($paquetes as $key => $paquete) {
                         echo '<option value="'.$paquete->idpaquete.'">'.$paquete->paquete.'</option>';
@@ -37,3 +38,10 @@
         <input type="submit" name="submit" value="Guardar" class="btn btn-outline-info" />
     </form>
 </div>
+
+<script type="text/javascript">
+    $('document').ready(function(){
+        $("#telefono").ForceNumericOnly();
+    });
+
+</script>
