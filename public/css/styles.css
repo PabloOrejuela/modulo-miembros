@@ -34,17 +34,17 @@ a {
 }
 
 .botonera {
-    /*border: 1px solid #000;*/
-    height: 80px;
+
+    height: 100px;
     padding: 0px;
-    border-bottom: 1px solid rgb(234, 234, 234);
+    /*border-bottom: 1px solid rgb(234, 234, 234);*/
 }
 
 #button {
     border: 1px solid rgb(208, 208, 208);
     border-radius: 4px;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     padding: 0px 10px;
 }
 
@@ -52,8 +52,8 @@ a {
     border: 1px solid rgb(208, 208, 208);
     border-radius: 4px;
     box-shadow: 3px 3px 5px darkgray;
-    width: 50px;
-    height: 50px;
+    width: 53px;
+    height: 53px;
     padding: 0px 10px;
 }
 
@@ -62,7 +62,7 @@ a {
     border-radius: 8px;
     width: 30px;
     height: 30px;
-    padding: 10px;
+    padding: 5px;
 }
 
 #btn-register:hover {
@@ -71,7 +71,7 @@ a {
     box-shadow: 3px 3px 5px darkgray;
     width: 30px;
     height: 30px;
-    padding: 10px;
+    padding: 5px;
 }
 
 #btn-reporte{
@@ -85,7 +85,7 @@ a {
 #boton {
     width: 60px;
     margin-left: 0px;
-    margin-right: 5px;
+    margin-right: 0px;
     margin-top: 20px;
     display: inline-block;
 }
@@ -98,56 +98,56 @@ a {
     background-image: url('../images/buttons/new-member.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 .gym {
     background-image: url('../images/buttons/gym.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 .registro {
     background-image: url('../images/buttons/check-form.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 .edit {
     background-image: url('../images/buttons/edit.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 .membership {
     background-image: url('../images/buttons/miembros.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;;
+    background-size:80%;;
 }
 
 .transfer {
     background-image: url('../images/buttons/transfer.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 .transfer-membership {
     background-image: url('../images/buttons/transfer-membership.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 .reports {
     background-image: url('../images/buttons/analytics.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size:90%;
+    background-size:80%;
 }
 
 #footer {
@@ -182,4 +182,9 @@ a {
 .form-label{
     margin-bottom: 0px;
     padding-bottom: 0px;
+}
+
+#text-menu {
+    font-size: 0.5em;
+    text-align: center;
 }
