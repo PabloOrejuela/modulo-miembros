@@ -16,10 +16,10 @@
                             <th>Editar</th>
                         </thead>
                     <?php 
-                        //echo '<pre>'.var_export($membresias, true).'</pre>';
+                        
                         
 
-                        foreach ($miembros as $key => $value) {
+                        foreach ($miembrosList as $key => $value) {
                             //$last = $miembrosModel->_get_last_attend($idmembresias);
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>

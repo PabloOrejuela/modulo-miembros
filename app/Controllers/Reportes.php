@@ -8,10 +8,24 @@ class Reportes extends BaseController{
 
 
     public function index(){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
         
-        $data['title']='Reportes';
-        $data['main_content']='reportes/reportes_view';
-        return view('includes/template', $data);
+        if ($data['logged_in'] == 1) {
+
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['title']='Reportes';
+            $data['main_content']='reportes/reportes_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
     }
 
     public function listaMiembrosPDF(){

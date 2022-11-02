@@ -66,4 +66,28 @@ class Validation
             'required' => 'El campo {field} es obligatorio'
         ],
     ];
+
+    public $login = [
+        'user'  => 'required',
+        'password'   => 'required',
+    ];
+
+    public $login_errors = [
+        'user' => [
+            'required' => 'El campo "Usuario" es obligatorio',
+        ],
+        'password' => [
+            'required' => 'El campo "Contraseña" es obligatorio',
+        ]
+    ];
+
+    public $asistenciaInstructor = [
+        'cedula'  => 'required'
+    ];
+
+    public $asistenciaInstructor_errors = [
+        'cedula' => [
+            'required' => 'El campo "Cédula" es obligatorio',
+        ]
+    ];
 }

@@ -11705,3 +11705,14 @@ body {
   width: 30px;
   margin-right: 3px;
 }
+
+.login{
+  margin-left: 30px;
+}
+
+#reloj{
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: right;
+  width: 50%;
+}

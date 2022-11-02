@@ -11,7 +11,7 @@
         <link href="<?= site_url(); ?>public/css/styles.css" rel="stylesheet" />
         <script src="<?= site_url(); ?>public/js/font-awesome.js"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body class="sb-nav-fixed" onload="mueveReloj()" >
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="<?= site_url(); ?>"><img src="<?= site_url(); ?>public/img/icono-64.png" alt="logo" id="img-logo">YouShop</a>
@@ -29,10 +29,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" href="#!">Editar</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Salir</a></li>
+                        <li><a class="dropdown-item" href="<?= site_url(); ?>salir">Salir</a></li>
                     </ul>
                 </li>
             </ul>
@@ -44,52 +43,91 @@
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menú</div>
                             <!-- Menu Item -->
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthMembresias" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Membresías
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuthMembresias" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="<?= site_url(); ?>membresias">Lista Membresías</a>
-                                        <a class="nav-link" href="<?= site_url(); ?>transfer">Transferencias</a>
-                                    </nav>
-                                </div>
-                            </nav>
+                            <?php 
+                                if (isset($admin) && $admin == 1) {
+                                echo '
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthMembresias" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Membresías
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuthMembresias" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="'.site_url().'membresias">Lista Membresías</a>
+                                            <a class="nav-link" href="'.site_url().'transfer">Transferencias</a>
+                                        </nav>
+                                    </div>
+                                </nav>';
+                                }
+                            ?>
+                                <!-- END Menú Item -->
+                                <!-- Menu Item -->
+                            <?php
+                                if (isset($miembros) && $miembros == 1) {
+                                echo'    
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthMiembros" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Miembros
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuthMiembros" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="'.site_url().'miembros">Lista de miembros</a>
+                                            <a class="nav-link" href="'.site_url().'nuevo">Nuevo Miembro</a>
+                                        </nav>
+                                    </div>
+                                </nav>';
+                                }
+                            ?>
+                                <!-- END Menú Item -->
+                                
+                            <!-- Menu Item -->
+                            <?php 
+                            
+                                if (isset($instructor) && $instructor == 1) {
+                                echo '
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthInstructores" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Asistencias Instructores
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuthInstructores" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="'.site_url().'registra-asistencia-instructor">Registrar ingreso a clase</a>
+                                        </nav>
+                                    </div>
+                                </nav>';
+                                
+                                }      
+                            ?>
                             <!-- END Menú Item -->
                             <!-- Menu Item -->
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthMiembros" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Miembros
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuthMiembros" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="<?= site_url(); ?>">Lista de miembros</a>
-                                        <a class="nav-link" href="<?= site_url(); ?>nuevo">Nuevo Miembro</a>
-                                    </nav>
-                                </div>
-                            </nav>
-                            <!-- END Menú Item -->
-                            <!-- Menu Item -->
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthReportes" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                    Reportes
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuthReportes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="<?= site_url(); ?>reportes/lista-miembros" target="_blank">Reporte lista de miembros</a>
-                                        <a class="nav-link" href="<?= site_url(); ?>reportes/lista-membresias" target="_blank">Reporte lista de membresías</a>
-                                    </nav>
-                                </div>
-                            </nav>
+                            <?php 
+                            
+                                if (isset($admin) && $admin == 1) {
+                                echo '
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthReportes" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Reportes
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuthReportes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="'.site_url().'reportes/lista-miembros" target="_blank">Reporte lista de miembros</a>
+                                            <a class="nav-link" href="'.site_url().'reportes/lista-membresias" target="_blank">Reporte lista de membresías</a>
+                                            <a class="nav-link" href="'.site_url().'reportes/clases-instructor" target="_blank">Reporte clases por instructor</a>
+                                        </nav>
+                                    </div>
+                                </nav>';
+                                }
+                            ?>
                             <!-- END Menú Item -->
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <div class="small">Loggeado como:</div>
+                        <?= $nombre; ?>
                     </div>
                 </nav>
             </div>
+            

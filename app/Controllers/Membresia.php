@@ -7,25 +7,53 @@ class Membresia extends BaseController{
 
     public function index(){
 
-        $data['membresias'] = $this->membresiasModel->_getMembresias();
-        $this->membresiasModel->_update_status_all($data['membresias']);
-        $this->membresiasModel->_update_cantidad_usos_membresia($data['membresias']);
-        $data['membresias'] = $this->membresiasModel->_getMembresias();
-        //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
-        $data['version'] = $this->CI_VERSION;
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
 
-        $data['title']='Lista de membresías';
-        $data['main_content']='membresias/membresias_view';
-        return view('includes/template', $data);
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['membresias'] = $this->membresiasModel->_getMembresias();
+            $this->membresiasModel->_update_status_all($data['membresias']);
+            $this->membresiasModel->_update_cantidad_usos_membresia($data['membresias']);
+            $data['membresias'] = $this->membresiasModel->_getMembresias();
+            //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
+            $data['version'] = $this->CI_VERSION;
+
+            $data['title']='Lista de membresías';
+            $data['main_content']='membresias/membresias_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
     }
 
     public function edit($idmembresias){
-        $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
-        //echo '<pre>'.var_export($data['membresia'], true).'</pre>';
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+            $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
+            //echo '<pre>'.var_export($data['membresia'], true).'</pre>';
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
 
-        $data['title']='Edición de membresías';
-        $data['main_content']='membresias/frm_edit_membresias_view';
-        return view('includes/template', $data);
+            $data['title']='Edición de membresías';
+            $data['main_content']='membresias/frm_edit_membresias_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
     }
 
     /**
@@ -58,27 +86,57 @@ class Membresia extends BaseController{
       * Form para seleccionar la membresía que se desea transferir
       */
      public function frm_select_transfer(){
-        $data['membresias'] = $this->membresiasModel->_getMembresias();
-        $this->membresiasModel->_update_status_all($data['membresias']);
 
-        //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
 
-        $data['title']='Tranferir membresías';
-        $data['main_content']='membresias/frm_transfer_membresias_view';
-        return view('includes/template', $data);
+            $data['membresias'] = $this->membresiasModel->_getMembresias();
+            $this->membresiasModel->_update_status_all($data['membresias']);
+
+            //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['title']='Tranferir membresías';
+            $data['main_content']='membresias/frm_transfer_membresias_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
      }
 
      /**
       * Frm para selecccionar el miembro al que se le desea transferir la membresía
       */
       public function fr_select_member_transfer_membership($idmembresias){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+            
+            $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
+            $data['miembros'] = $this->miembrosModel->_getMiembros();
+            //echo '<pre>'.var_export($data['total'], true).'</pre>';
 
-        $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
-        $data['miembros'] = $this->miembrosModel->_getMiembros();
-        //echo '<pre>'.var_export($data['total'], true).'</pre>';
-        $data['title']='Tranferir membresía';
-        $data['main_content']='membresias/frm_transfiere_membresia';
-        return view('includes/template', $data);
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['title']='Tranferir membresía';
+            $data['main_content']='membresias/frm_transfiere_membresia';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
         
      }
 

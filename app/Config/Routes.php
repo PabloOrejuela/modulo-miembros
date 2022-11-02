@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Miembros');
+$routes->setDefaultController('Usuarios');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,7 +32,13 @@ $routes->setAutoRoute(false);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Miembros::index');
+$routes->get('/', 'Usuarios::index');
+$routes->post('validate', 'Usuarios::validate_credentials');
+
+$routes->get('inicio', 'Usuarios::inicio');
+$routes->get('salir', 'Usuarios::salir');
+
+$routes->get('miembros', 'Miembros::index');
 $routes->get('nuevo', 'Miembros::nuevo');
 $routes->post('insert', 'Miembros::insert');
 $routes->post('actualizar', 'Miembros::update');
@@ -56,7 +62,8 @@ $routes->group('reportes', static function ($routes) {
 // $routes->get('lista-miembros', 'Reportes::listaMiembrosPDF');
 // $routes->get('lista-membresias', 'Reportes::listaMembresiasPDF');
 
-
+$routes->get('registra-asistencia-instructor', 'Asistencia::FrmRegistraAsistenciaInstructor');
+$routes->post('registra_aistencia_instructor', 'Asistencia::registraAsistenciaInstructor');
 
 /*
  * --------------------------------------------------------------------
