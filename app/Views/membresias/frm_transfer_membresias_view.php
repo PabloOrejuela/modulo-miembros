@@ -15,8 +15,9 @@
                             <th>Cédula</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Final</th>
-                            <th>Disponible</th>
+                            <th>Fecha Actual</th>
                             <th>Total</th>
+                            <th>Disponible</th>
                             <th>Estado</th>
                             <th>Transferir</th>
                         </thead>
@@ -24,20 +25,40 @@
                         //echo '<pre>'.var_export($membresias, true).'</pre>';
 
                         foreach ($membresias as $key => $value) {
-                            $saldo = $value->total - $value->asistencias;
+                            if ($value->tipo == 1) {
+                                $fechaActual = date("Y-m-d");
+                                $fecha_final = $value->fecha_final;
+
+                                $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
+                                $diferenciaDias = $diferenciaSegundos / 86400;
+                                
+                                //echo '<pre>'.var_export($diferenciaDias, true).'</pre>';
+                                if ($diferenciaDias <= 0) {
+                                    //se ha superado la fecha límite de uso
+                                    $saldo = 0;
+                                }else{
+                                    $saldo = $diferenciaDias;
+                                }
+                                //echo date("Y-m-d").' : '.$value->fecha_inicio.' : '.$diff->days;
+                                
+                                
+                            }else{
+                                $saldo = $value->dias - $value->asistencias;
+                            }
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
                                     <td>'.$value->cedula.'</td>
                                     <td>'.$value->fecha_inicio.'</td>
-                                    <td>'.$value->fecha_final.'</td>';
-                                    if ($saldo <= ($value->total /3) ){
+                                    <td>'.$value->fecha_final.'</td>
+                                    <td>'.date("Y-m-d").'</td>';
+                            echo '<td style="text-align:center;">'.$value->dias.'</td>';
+                                    if ($saldo <= ($saldo /3) ){
                                         echo '<td style="text-align:center;color:red;">'.$saldo.'</td>';
                                     }else{
                                         echo '<td style="text-align:center;">'.$saldo.'</td>';
                                     }
                                     
                                     
-                            echo '<td>'.$value->total.'</td>';
                                     if ($value->status == 1) {
                                         echo '<td>ACTIVA</td>';
                                     }else{

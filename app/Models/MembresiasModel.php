@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use DateTime;
 
 class MembresiasModel extends Model{
     protected $table      = 'membresias';
@@ -48,16 +49,43 @@ class MembresiasModel extends Model{
         $builder = $this->db->table('membresias');
         
         foreach ($membresias as $row) {
-            if ($row->fecha_final <= date('Y-m-d') || $row->asistencias >= $row->total) {
-                $builder->set('status', 0);
+            if ($row->tipo == 1) {
+                $fechaActual = date("Y-m-d");
+                $fecha_final = $row->fecha_final;
+
+                $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
+                $diferenciaDias = $diferenciaSegundos / 86400;
+                
+                //echo '<pre>'.var_export($diferenciaDias, true).'</pre>';
+                if ($diferenciaDias <= 0) {
+                    //se ha superado la fecha límite de uso
+                    $builder->set('status', 0);
+                    $builder->set('total', 0);
+                }else{
+                    $builder->set('status', 1);
+                }
                 $builder->where('idmembresias', $row->idmembresias);
                 $builder->update();
             }else{
-                $builder->set('status', 1);
+                $fechaActual = date("Y-m-d");
+                $fecha_final = $row->fecha_final;
+
+                $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
+                $diferenciaDias = $diferenciaSegundos / 86400;
+
+                if ($diferenciaDias <= 0 || $row->asistencias >= $row->total) {
+                    //se ha superado la fecha límite de uso
+                    $builder->set('status', 0);
+                    $builder->set('total', 0);
+                }else{
+                    $builder->set('status', 1);
+                }
                 $builder->where('idmembresias', $row->idmembresias);
                 $builder->update();
             }
+            
         }
+        
         return 1;
     }
 
@@ -128,15 +156,34 @@ class MembresiasModel extends Model{
      * Actualiza la fecha final de la membresía
      */
     function _update_fecha_final_membresia($data){
+        $this->db->transStart();
         //echo '<pre>'.var_export($data, true).'</pre>';
         $builder = $this->db->table('membresias');
         $builder->set('status', 1);
         $builder->set('fecha_final',  $data['fecha_final']);
-        if ($data['tipo'] == 1) {
-            $builder->set('total',  $data['total']);
-        }
+
         $builder->where('idmembresias', $data['idmembresias']);
         $builder->update();
+
+        $this->_insert_movimiento($data);
+
+        $this->db->transComplete();
+        if ($this->db->transStatus() === false) {
+            $this->db->transRollback();
+        }else {
+            $this->db->transCommit();
+        }
+    }
+
+    function _insert_movimiento($data){
+        $builder = $this->db->table('movimientos');
+        $builder->set('idtipomovimiento', $data['idtipomovimiento']);
+        $builder->set('observacion', $data['observacion']);
+        $builder->set('idmiembros', $data['idmiembros']);
+        $builder->set('idmembresias', $data['idmembresias']);
+        $builder->set('idusuarios', $data['idusuarios']);
+
+        $builder->insert();
     }
 
 

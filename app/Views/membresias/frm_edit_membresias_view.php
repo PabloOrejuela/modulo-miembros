@@ -3,7 +3,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4"><?= esc($title); ?></h1>
                         
-            <div class="card mb-4">
+            <div class="card mb-4 col-md-6">
                 <div class="card-header">
                     <i class="fa-solid fa-users"></i>
                     <?= esc($title); ?>
@@ -32,11 +32,16 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Fecha Final</label>
                                     <input type="date" class="form-control" id="exampleInputEmail1" name="fecha_final" value="'.$membresia->fecha_final.'">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Observaciones:</label>
+                                    <textarea class="form-control" name="observacion" placeholder="Escriba una observación aquí" ></textarea>
                                 </div>';
-                                echo form_hidden('idpaquete', $membresia->idpaquete);
-                                echo form_hidden('total', $membresia->total);
+                                //echo form_hidden('idpaquete', $membresia->idpaquete);
+                                //echo form_hidden('total', $membresia->total);
                                 echo form_hidden('idmembresias', $membresia->idmembresias);
-                                echo form_hidden('tipo', $membresia->tipo);
+                                echo form_hidden('idmiembros', $membresia->idmiembros);
+                                echo form_hidden('idtipomovimiento', 1);
                             
                         ?>
                         <input type="submit" name="submit" value="Actualizar" class="btn btn-outline-info" />

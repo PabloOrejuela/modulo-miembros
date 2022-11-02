@@ -15,6 +15,7 @@
                             <th>Cédula</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Final</th>
+                            <th>Fecha Actual</th>
                             <th>Total</th>
                             <th>Disponible</th>
                             <th>Estado</th>
@@ -25,47 +26,71 @@
                         //echo '<pre>'.var_export($membresias, true).'</pre>';
 
                         foreach ($membresias as $key => $value) {
-                            $saldo = $value->total - $value->asistencias;
+                            
+                            if ($value->tipo == 1) {
+                                $fechaActual = date("Y-m-d");
+                                $fecha_final = $value->fecha_final;
+
+                                $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
+                                $diferenciaDias = $diferenciaSegundos / 86400;
+                                
+                                //echo '<pre>'.var_export($diferenciaDias, true).'</pre>';
+                                if ($diferenciaDias <= 0) {
+                                    //se ha superado la fecha límite de uso
+                                    $saldo = 0;
+                                }else{
+                                    $saldo = $diferenciaDias;
+                                }
+                                //echo date("Y-m-d").' : '.$value->fecha_inicio.' : '.$diff->days;
+                                
+                                
+                            }else{
+                                $saldo = $value->dias - $value->asistencias;
+                            }
+                            //$saldo = $value->total - $value->asistencias;
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
                                     <td>'.$value->cedula.'</td>
                                     <td>'.$value->fecha_inicio.'</td>
-                                    <td>'.$value->fecha_final.'</td>';
-                                    echo '<td style="text-align:center;">'.$value->total.'</td>';
-                                    if ($saldo <= ($value->total /3) ){
-                                        echo '<td style="text-align:center;color:red;">'.$saldo.'</td>';
-                                    }else{
-                                        echo '<td style="text-align:center;">'.$saldo.'</td>';
-                                    }
+                                    <td>'.$value->fecha_final.'</td>
+                                    <td>'.date("Y-m-d").'</td>';
+                            echo '<td style="text-align:center;">'.$value->dias.'</td>';
+                                    //echo $value->tipo;
+                                    
+                            if ($saldo <= ($value->asistencias /3) ){
+                                echo '<td style="text-align:center;color:red;">'.$saldo.'</td>';
+                            }else{
+                                echo '<td style="text-align:center;">'.$saldo.'</td>';
+                            }
                                     
                                     
                             
-                                    if ($value->status == 1) {
-                                        echo '<td>ACTIVA</td>';
-                                    }else{
-                                        echo'<td>INACTIVA</td>';
-                                    }
-                                    
-                                    if ($value->status == 1) {
-                                        echo '<td style="text-align:center;">
-                                                <a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" 
-                                                    class="registro" data-bs-toggle="modal" data-bs-target="#asistenciaModal" 
-                                                    onClick="pasaIdmembresia('.$value->idmembresias.','. $saldo.');">
-                                                </a>
-                                            </td>
-                                        <td style="text-align:center;">
-                                            <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
-                                                <img src="'.site_url().'public/img/buttons/edit.png" >
+                                if ($value->status == 1) {
+                                    echo '<td>ACTIVA</td>';
+                                }else{
+                                    echo'<td>INACTIVA</td>';
+                                }
+                                
+                                if ($value->status == 1) {
+                                    echo '<td style="text-align:center;">
+                                            <a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" 
+                                                class="registro" data-bs-toggle="modal" data-bs-target="#asistenciaModal" 
+                                                onClick="pasaIdmembresia('.$value->idmembresias.','. $saldo.');">Asistencia
                                             </a>
-                                        </td>';
-                                    }else{
-                                        echo '<td style="text-align:center;">CADUCADA</td>
-                                        <td style="text-align:center;">
-                                            <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
-                                                <img src="'.site_url().'public/img/buttons/edit.png" >
-                                            </a>
-                                        </td>';
-                                    }
+                                        </td>
+                                    <td style="text-align:center;">
+                                        <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
+                                            <img src="'.site_url().'public/img/buttons/edit.png" >
+                                        </a>
+                                    </td>';
+                                }else{
+                                    echo '<td style="text-align:center;">CADUCADA</td>
+                                    <td style="text-align:center;">
+                                        <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
+                                            <img src="'.site_url().'public/img/buttons/edit.png" >
+                                        </a>
+                                    </td>';
+                                }
                             
                             echo  '</tr>';
                         }

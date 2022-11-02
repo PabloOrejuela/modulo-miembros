@@ -22,6 +22,7 @@ class Membresia extends BaseController{
             $data['membresias'] = $this->membresiasModel->_getMembresias();
             $this->membresiasModel->_update_status_all($data['membresias']);
             $this->membresiasModel->_update_cantidad_usos_membresia($data['membresias']);
+            
             $data['membresias'] = $this->membresiasModel->_getMembresias();
             //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
             $data['version'] = $this->CI_VERSION;
@@ -63,18 +64,20 @@ class Membresia extends BaseController{
      public function update_date(){
         
         $data = [
-            'fecha_inicio' => $this->request->getPostGet('fecha_inicio'),
             'fecha_final' => $this->request->getPostGet('fecha_final'),
             'idmembresias' => $this->request->getPostGet('idmembresias'),
-            'tipo' => $this->request->getPostGet('tipo'),
+            'idmiembros' => $this->request->getPostGet('idmiembros'),
+            'observacion' => $this->request->getPostGet('observacion'),
+            'idtipomovimiento' => $this->request->getPostGet('idtipomovimiento'),
+            'idusuarios' => $this->session->idusuario
         ];
 
-        $fecha_inicio = Time::parse($data['fecha_inicio']);
+        //$fecha_inicio = Time::parse($data['fecha_inicio']);
         $fecha_final  = Time::parse($data['fecha_final']);
 
-        $diff = $fecha_inicio->difference($fecha_final);
+        //$diff = $fecha_inicio->difference($fecha_final);
         //$data['total']= date("Y-m-d",strtotime($fecha_inicio."+ ".$paquete->dias." days")); 
-        $data['total'] = $diff->getDays();;
+        
         //echo '<pre>'.var_export($data['total'], true).'</pre>';
         $lastQuery = $this->membresiasModel->_update_fecha_final_membresia($data);
         

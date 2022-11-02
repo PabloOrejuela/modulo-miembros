@@ -61,7 +61,7 @@ class BaseController extends Controller {
         $this->paquetesModel = new PaquetesModel($this->db);
         $this->asistenciaModel = new AsistenciaModel($this->db);
         $this->usuarioModel = new UsuarioModel($this->db);
-        $this->asistenciaInstructorModel = new AsistenciaInstructorModel($this->db);
+        $this->asistenciaInstructorModel = new AsistenciaInstructorModel($this->db);    
 
 
         // E.g.: $this->session = \Config\Services::session();
