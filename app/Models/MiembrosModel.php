@@ -43,6 +43,7 @@ class MiembrosModel extends Model{
     }
 
     function _update($array){
+        
         $result = NULL;
         $builder = $this->db->table('miembros');
         $builder->set('nombre', $array['nombre']);

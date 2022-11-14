@@ -32,20 +32,23 @@ class MembresiasModel extends Model{
         $builder = $db->table('membresias');
         $builder->select('*');
         $builder->join('miembros', 'miembros.idmiembros = membresias.idmiembros');
-        $builder->join('paquetes', 'paquetes.idpaquete = membresias.idmiembros');
+        $builder->join('paquetes', 'paquetes.idpaquete = membresias.idpaquete');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
                 $result[] = $row;
             }
         }
+        //echo $this->db->getLastQuery();exit;
+        //echo '<pre>'.var_export($result, true).'</pre>'; exit;
         return $result;
     }
+
     /**
-     * Esta función verifica y actualiza el estado de las membresías por el tiempo de caducidad
+     * Esta función verifica y actualiza el estado de las membresías por el tiempo de caducidad o la cantidad de asistencias
      */
     function _update_status_all($membresias){
-        //echo '<pre>'.var_export($membresias, true).'</pre>';
+        //echo '<pre>'.var_export($membresias, true).'</pre>'; exit;
         $builder = $this->db->table('membresias');
         
         foreach ($membresias as $row) {
@@ -60,7 +63,6 @@ class MembresiasModel extends Model{
                 if ($diferenciaDias <= 0) {
                     //se ha superado la fecha límite de uso
                     $builder->set('status', 0);
-                    $builder->set('total', 0);
                 }else{
                     $builder->set('status', 1);
                 }
@@ -73,10 +75,9 @@ class MembresiasModel extends Model{
                 $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
                 $diferenciaDias = $diferenciaSegundos / 86400;
 
-                if ($diferenciaDias <= 0 || $row->asistencias >= $row->total) {
+                if ($diferenciaDias <= 0 || $row->asistencias >= $row->dias) {echo 78;exit;
                     //se ha superado la fecha límite de uso
                     $builder->set('status', 0);
-                    $builder->set('total', 0);
                 }else{
                     $builder->set('status', 1);
                 }
@@ -114,7 +115,7 @@ class MembresiasModel extends Model{
      */
     function _update_cantidad_usos_membresia($data){
         
-        foreach ($data as $key => $value) {
+        foreach ($data as $value) {
             $value->num_asistencias = $this->_get_total_asistencias($value);
             $this->_update_asistencias_membresia($value);
         }
@@ -197,10 +198,13 @@ class MembresiasModel extends Model{
         $builder->set('idmiembros', $data['idmiembros']);
         $builder->where('idmembresias', $data['idmembresias']);
         $builder->update();
+        $this->_insert_movimiento($data);
         $this->db->transComplete();
         if ($this->db->transStatus() === false) {
+            $this->db->transRollback();
             return 0;
         }else{
+            $this->db->transCommit();
             return 1;
         }
     }

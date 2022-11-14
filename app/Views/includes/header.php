@@ -55,6 +55,7 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="'.site_url().'membresias">Lista Membresías</a>
                                             <a class="nav-link" href="'.site_url().'transfer">Transferencias</a>
+                                            <a class="nav-link" href="'.site_url().'frm_asigna_membresia_miembro">Asigna membresía</a>
                                         </nav>
                                     </div>
                                 </nav>';
@@ -74,6 +75,7 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="'.site_url().'miembros">Lista de miembros</a>
                                             <a class="nav-link" href="'.site_url().'nuevo">Nuevo Miembro</a>
+                                            
                                         </nav>
                                     </div>
                                 </nav>';

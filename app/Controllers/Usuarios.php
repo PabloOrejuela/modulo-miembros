@@ -76,6 +76,8 @@ class Usuarios extends BaseController {
             $data['miembros'] = $this->session->miembros;
             $data['admin'] = $this->session->admin;
 
+            $data['version'] = $this->version;
+
             $data['title']='Inicio';
             $data['main_content']='home/inicio_view';
             return view('includes/template', $data);

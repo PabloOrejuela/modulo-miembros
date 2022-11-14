@@ -3,21 +3,19 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4"><?= esc($title); ?></h1>
                         
-            <div class="card mb-4">
+            <div class="card mb-4 col-md-6">
                 <div class="card-header">
                     <i class="fa-solid fa-users"></i>
-                    <?= esc($title); ?>
                 </div>
                 <div class="card-body">               
-                <style>
-                    
-                    label{
-                        margin-right: 10px;
-                    }
-                </style>
+                    <style>
                         
+                        label{
+                            margin-right: 10px;
+                        }
+                    </style>
+                <form action="<?php echo site_url().'transfer_membership';?>" method="post">
                     <?= csrf_field(); ?>
-                    <h4><?= esc($title) ?></h4>
                     <?php 
                         //echo '<pre>'.var_export($membresia, true).'</pre>';
                         
@@ -31,9 +29,13 @@
                                 <label for="paquete" class="form-label">Paquete</label>
                                 <input type="text" class="form-control" id="paquete" name="fecha_inicio" value="'.$membresia->paquete.'" readonly>
                             </div>
+                            <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Observaciones:</label>
+                                    <textarea class="form-control" name="observacion" placeholder="Escriba una observación aquí" ></textarea>
+                                </div>
                             <br/>';
                             echo form_hidden('idmembresias', $membresia->idmembresias);
-                    ?>
+                        ?>
                         <table class="table table-bordered table-striped table-hover" id="table-transfer">
                             <thead>
                                 <th>Nombre</th>
@@ -41,24 +43,25 @@
                                 <th>Transferir</th>
                             </thead>
                             <?php
-                                foreach ($miembros as $key => $value) {
+                                
+                                foreach ($miembrosList as $key => $value) {
                                     //echo '<pre>'.var_export($value->idmiembros, true).'</pre>';
                                     //$last = $miembrosModel->_get_last_attend($idmembresias);
                                     echo '<tr>
                                             <td>'.$value->nombre.'</td>
                                             <td>'.$value->cedula.'</td>
                                             <td style="text-align:center;">
-                                                <a type="button" id="btn-register" href="'.site_url().'membership/'.$membresia->idmembresias.'/newmember'.$value->idmiembros.'" class="transfer">
-                                                    <img src="'.site_url().'public/img/buttons/transfer.png" >
-                                                </a>
+                                                <input type="image" id="btn-register" src="'.site_url().'public/img/buttons/transfer.png" >
+                                                </input>
                                             </td>
                                         </tr>';
                                 }
+                                echo form_hidden('idmiembros', $value->idmiembros);
+                                echo form_hidden('idtipomovimiento', 2);
                                 
                             ?>
                             
                         </table>
-                        <p><td><?= session('errors.idmiembros');?></td></p>
                     </form>
                 </div>
             </div>

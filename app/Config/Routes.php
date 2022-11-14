@@ -39,6 +39,9 @@ $routes->get('inicio', 'Usuarios::inicio');
 $routes->get('salir', 'Usuarios::salir');
 
 $routes->get('miembros', 'Miembros::index');
+$routes->get('frm_asigna_membresia_miembro', 'Membresia::frm_asigna_membresia_miembro');
+$routes->get('asigna_membresia_miembro/(:num)', 'Membresia::asigna_membresia_miembro/$1');
+$routes->post('asign_membresia', 'Membresia::asign_membresia');
 $routes->get('nuevo', 'Miembros::nuevo');
 $routes->post('insert', 'Miembros::insert');
 $routes->post('actualizar', 'Miembros::update');
@@ -50,7 +53,7 @@ $routes->post('update_date', 'Membresia::update_date');
 $routes->post('miembros_select', 'Membresia::miembros_select');
 $routes->get('transfer', 'Membresia::frm_select_transfer');
 $routes->get('select-transfer-membership/(:num)', 'Membresia::fr_select_member_transfer_membership/$1', ['as' => 'select-transfer_membership']);
-$routes->get('membership/(:num)/newmember(:num)', 'Membresia::transfer_membership/$1/$2',['as' => 'transfer_membership']);
+$routes->post('transfer_membership', 'Membresia::transfer_membership',['as' => 'transfer_membership']);
 $routes->post('asistencia', 'Asistencia::insert', ['as' => 'asistencia']);
 
 $routes->group('reportes', static function ($routes) {

@@ -20,12 +20,15 @@ class Membresia extends BaseController{
             $data['admin'] = $this->session->admin;
 
             $data['membresias'] = $this->membresiasModel->_getMembresias();
+
+            //Actualizo el status de las membresías
+
             $this->membresiasModel->_update_status_all($data['membresias']);
             $this->membresiasModel->_update_cantidad_usos_membresia($data['membresias']);
             
             $data['membresias'] = $this->membresiasModel->_getMembresias();
             //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
-            $data['version'] = $this->CI_VERSION;
+            //$data['version'] = $this->version;
 
             $data['title']='Lista de membresías';
             $data['main_content']='membresias/membresias_view';
@@ -125,8 +128,8 @@ class Membresia extends BaseController{
         if ($data['logged_in'] == 1) {
             
             $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
-            $data['miembros'] = $this->miembrosModel->_getMiembros();
-            //echo '<pre>'.var_export($data['total'], true).'</pre>';
+            $data['miembrosList'] = $this->miembrosModel->_getMiembros();
+            //echo '<pre>'.var_export($data['miembros'], true).'</pre>';
 
             //Permisos
             $data['nombre'] = $this->session->nombre;
@@ -134,7 +137,7 @@ class Membresia extends BaseController{
             $data['miembros'] = $this->session->miembros;
             $data['admin'] = $this->session->admin;
 
-            $data['title']='Tranferir membresía';
+            $data['title']='Transferir membresía';
             $data['main_content']='membresias/frm_transfiere_membresia';
             return view('includes/template', $data);
         }else{
@@ -146,19 +149,109 @@ class Membresia extends BaseController{
      /**
       * Transfiere le membresía al usuario
       */
-      public function transfer_membership($idmembresias, $idmiembros){
+      public function transfer_membership(){
 
-        //echo '<pre>'.var_export($idmiembros, true).'</pre>';
+        //echo '<pre>'.var_export($idmiembros, true).'</pre>';exit;
         $data = [
-            'idmembresias' => $idmembresias,
-            'idmiembros' => $idmiembros
+            'idmembresias' => $this->request->getPostGet('idmembresias'),
+            'idmiembros' => $this->request->getPostGet('idmiembros'),
+            'observacion' => $this->request->getPostGet('observacion'),
+            'idtipomovimiento' => $this->request->getPostGet('idtipomovimiento'),
+            'idusuarios' => $this->session->idusuario
         ];
 
         //LLamo a la funcion del modelo que transfiere la membresía
         $result = $this->membresiasModel->_transfiere_membresia($data);
         if ($result == NULL) {
-            echo $lastQuery;
+            //echo $lastQuery;
         }else{
+            return redirect()->to('membresias');
+        }
+    }
+
+    public function frm_asigna_membresia_miembro(){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+            
+            $data['miembrosList'] = $this->miembrosModel->_getMiembros();
+            //$data['lastQuery'] = $this->db->getLastQuery();
+
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['title']='Asignar una membresía a un miembro ya registrado';
+            $data['main_content']='membresias/frm_asigna_membresia_miembro';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
+    }
+
+    public function asigna_membresia_miembro($idmiembros){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+            
+            $data['paquetes'] = $this->paquetesModel->find();
+            $data['datos'] = $this->miembrosModel->find($idmiembros);
+            //$data['lastQuery'] = $this->db->getLastQuery();
+
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['title']='Asignar una membresía a un miembro ya registrado';
+            $data['main_content']='membresias/asigna_membresia_miembro';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
+    }
+
+    public function asign_membresia(){        
+
+        $data = [
+            'idpaquete' => $this->request->getPostGet('idpaquete'),
+            'idmiembros' => $this->request->getPostGet('idmiembros')
+        ];
+        $this->validation->setRuleGroup('asigna_membresia');
+        
+        if (!$this->validation->withRequest($this->request)->run()) {
+            //Depuración
+            //dd($validation->getErrors());
+            return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+        }else{
+       
+            //object
+            $paquete = $this->paquetesModel->find($data['idpaquete']);
+            if ($data['idpaquete'] != 0 && $data['idpaquete'] != '0') {
+                $fecha_inicio = date("Y-m-d"); 
+                if($paquete->idcategoria == 3){
+
+                }
+                $fecha_final = date("Y-m-d",strtotime($fecha_inicio."+ ".$paquete->dias." days"));
+                $membresia = array(
+                    'idpaquete' => $data['idpaquete'],
+                    'idmiembros' => $data['idmiembros'],
+                    'fecha_inicio' => date("Y-m-d"),
+                    'fecha_final' => $fecha_final,
+                    'asistencias' => $paquete->entradas,    
+                    'status' => 1
+                );
+                //echo '<pre>'.var_export($data, true).'</pre>';
+                $this->membresiasModel->save($membresia);
+                
+            }
             return redirect()->to('membresias');
         }
     }

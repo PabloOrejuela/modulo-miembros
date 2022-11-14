@@ -24,6 +24,7 @@ class Asistencia extends BaseController{
         
 
         $this->asistenciaModel->_insert_asistencia($data);
+        $this->membresiasModel->_update_status_all($data['membresias']);
         
         return redirect()->to('/membresias');
     }

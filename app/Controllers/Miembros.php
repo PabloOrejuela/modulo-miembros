@@ -85,7 +85,6 @@ class Miembros extends BaseController{
                     'fecha_inicio' => date("Y-m-d"),
                     'fecha_final' => $fecha_final,
                     'asistencias' => 0,
-                    'total' => $paquete->entradas,
                     'status' => 1
                 );
                 $this->membresiasModel->save($membresia);
@@ -94,6 +93,8 @@ class Miembros extends BaseController{
         }  
         
     }
+
+    
 
     public function editar($idmiembros){
         $data['idroles'] = $this->session->idroles;

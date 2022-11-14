@@ -90,4 +90,19 @@ class Validation
             'required' => 'El campo "Cédula" es obligatorio',
         ]
     ];
+
+    public $asigna_membresia = [
+        'idpaquete'     => 'required|greater_than[0]',
+        'idmiembros'     => 'required',
+    ];
+
+    public $asigna_membresia_errors = [
+        'idpaquete' => [
+            'required' => 'El campo "Paquete" es obligatorio',
+            'greater_than' => 'El campo "Paquete" es obligatorio',
+        ],
+        'idmiembros' => [
+            'required' => 'El campo "Miembro" es obligatorio',
+        ]
+    ];
 }

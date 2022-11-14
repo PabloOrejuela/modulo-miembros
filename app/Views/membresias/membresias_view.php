@@ -13,11 +13,14 @@
                         <thead>
                             <th>Nombre</th>
                             <th>Cédula</th>
+                            <th>Paquete</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Final</th>
                             <th>Fecha Actual</th>
-                            <th>Total</th>
-                            <th>Disponible</th>
+                            <th>Días</th>
+                            <th>Disponible(Días)</th>
+                            <th>Entradas</th>
+                            <th>Entradas disponibles</th>
                             <th>Estado</th>
                             <th>Registrar Asistencia</th>
                             <th>Editar membresía</th>
@@ -26,6 +29,9 @@
                         //echo '<pre>'.var_export($membresias, true).'</pre>';
 
                         foreach ($membresias as $key => $value) {
+                            echo $value->tipo;
+
+                            $entradas_disponibles = $value->entradas - $value->asistencias;
                             
                             if ($value->tipo == 1) {
                                 $fechaActual = date("Y-m-d");
@@ -45,37 +51,35 @@
                                 
                                 
                             }else{
-                                $saldo = $value->dias - $value->asistencias;
+                                $saldo = $value->entradas - $value->asistencias;
                             }
                             //$saldo = $value->total - $value->asistencias;
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
                                     <td>'.$value->cedula.'</td>
+                                    <td>'.$value->idpaquete.'</td>
                                     <td>'.$value->fecha_inicio.'</td>
                                     <td>'.$value->fecha_final.'</td>
                                     <td>'.date("Y-m-d").'</td>';
                             echo '<td style="text-align:center;">'.$value->dias.'</td>';
                                     //echo $value->tipo;
-                                    
+                            
                             if ($saldo <= ($value->asistencias /3) ){
                                 echo '<td style="text-align:center;color:red;">'.$saldo.'</td>';
                             }else{
                                 echo '<td style="text-align:center;">'.$saldo.'</td>';
                             }
                                     
-                                    
+                            echo '<td style="text-align:center;">'.$value->entradas.'</td>';
+                            echo '<td style="text-align:center;">'.$saldo.'</td>';          
                             
-                                if ($value->status == 1) {
-                                    echo '<td>ACTIVA</td>';
-                                }else{
-                                    echo'<td>INACTIVA</td>';
-                                }
                                 
-                                if ($value->status == 1) {
+                                if ($value->status == 1 && $saldo > 0) {
+                                    echo '<td>ACTIVA</td>';
                                     echo '<td style="text-align:center;">
                                             <a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" 
                                                 class="registro" data-bs-toggle="modal" data-bs-target="#asistenciaModal" 
-                                                onClick="pasaIdmembresia('.$value->idmembresias.','. $saldo.');">Asistencia
+                                                onClick="pasaIdmembresia('.$value->idmembresias.','. $value->entradas.');">Asistencia
                                             </a>
                                         </td>
                                     <td style="text-align:center;">
@@ -84,7 +88,7 @@
                                         </a>
                                     </td>';
                                 }else{
-                                    echo '<td style="text-align:center;">CADUCADA</td>
+                                    echo '<td style="text-align:center;">CADUCADA</td><td></td>
                                     <td style="text-align:center;">
                                         <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
                                             <img src="'.site_url().'public/img/buttons/edit.png" >
@@ -131,9 +135,9 @@
   </div>
 </div>
 <script>
-    function pasaIdmembresia(idmembresias, saldo){
+    function pasaIdmembresia(idmembresias, entradas){
         $('#idmembresias').val(idmembresias);
-        $('#disponible').val(saldo);
+        $('#disponible').val(entradas);
     };
 
     function verificaMaximo(){
@@ -148,7 +152,7 @@
         //event.preventDefault();
         verificaMaximo();
         var formData = new FormData($("#form-asistencia")[0]);
-        //$('#asistenciaModal').hide();
+        $('#asistenciaModal').hide();
         $.ajax({
             data: formData,
             url:  'asistencia',
@@ -159,16 +163,10 @@
             type: 'POST',
             beforeSend: function(){
                 $('#asistenciaModal').modal('hide');
+                //location.reload();
             },
-            success: function(response){
-                
-                if (response == 1) {
-                    
-                    location.reload();
-                    
-                }else{
-                    console.log("Hubo un problema");
-                }
+            success: function (data) {
+                //location.reload();
             }
         });
     }
