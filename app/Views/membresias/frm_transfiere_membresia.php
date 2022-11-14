@@ -34,7 +34,7 @@
                                     <textarea class="form-control" name="observacion" placeholder="Escriba una observación aquí" ></textarea>
                                 </div>
                             <br/>';
-                            echo form_hidden('idmembresias', $membresia->idmembresias);
+                            
                         ?>
                         <table class="table table-bordered table-striped table-hover" id="table-transfer">
                             <thead>
@@ -51,13 +51,13 @@
                                             <td>'.$value->nombre.'</td>
                                             <td>'.$value->cedula.'</td>
                                             <td style="text-align:center;">
-                                                <input type="image" id="btn-register" src="'.site_url().'public/img/buttons/transfer.png" >
-                                                </input>
+                                                <a type="button" id="btn-register" href="'.site_url().'transfer_membership/'.$value->idmiembros.'/'.$membresia->idmembresias.'" class="transfer">
+                                                    <img src="'.site_url().'public/img/buttons/transfer.png" >
+                                                </a>
                                             </td>
                                         </tr>';
+                                        
                                 }
-                                echo form_hidden('idmiembros', $value->idmiembros);
-                                echo form_hidden('idtipomovimiento', 2);
                                 
                             ?>
                             

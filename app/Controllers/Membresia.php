@@ -149,17 +149,17 @@ class Membresia extends BaseController{
      /**
       * Transfiere le membresía al usuario
       */
-      public function transfer_membership(){
+      public function transfer_membership($idmiembros, $idmembresias){
 
-        //echo '<pre>'.var_export($idmiembros, true).'</pre>';exit;
+        
         $data = [
-            'idmembresias' => $this->request->getPostGet('idmembresias'),
-            'idmiembros' => $this->request->getPostGet('idmiembros'),
+            'idmembresias' => $idmembresias,
+            'idmiembros' => $idmiembros,
             'observacion' => $this->request->getPostGet('observacion'),
-            'idtipomovimiento' => $this->request->getPostGet('idtipomovimiento'),
+            'idtipomovimiento' => 1, //TRANSFERENCIA
             'idusuarios' => $this->session->idusuario
         ];
-
+        //echo '<pre>'.var_export($data, true).'</pre>';exit;
         //LLamo a la funcion del modelo que transfiere la membresía
         $result = $this->membresiasModel->_transfiere_membresia($data);
         if ($result == NULL) {

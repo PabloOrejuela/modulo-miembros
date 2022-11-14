@@ -177,6 +177,7 @@ class MembresiasModel extends Model{
     }
 
     function _insert_movimiento($data){
+        echo '<pre>'.var_export($data, true).'</pre>';exit;
         $builder = $this->db->table('movimientos');
         $builder->set('idtipomovimiento', $data['idtipomovimiento']);
         $builder->set('observacion', $data['observacion']);
@@ -203,7 +204,7 @@ class MembresiasModel extends Model{
         if ($this->db->transStatus() === false) {
             $this->db->transRollback();
             return 0;
-        }else{
+        }else{echo 206;
             $this->db->transCommit();
             return 1;
         }
