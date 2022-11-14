@@ -9,7 +9,7 @@
                     <?= esc($title); ?>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped table-hover" id="table-miembros">
+                    <table class="table table-bordered table-striped table-hover" id="datatablesSimple">
                         <thead>
                             <th>Nombre</th>
                             <th>Cédula</th>

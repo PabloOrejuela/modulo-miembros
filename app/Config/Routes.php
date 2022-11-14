@@ -53,13 +53,15 @@ $routes->post('update_date', 'Membresia::update_date');
 $routes->post('miembros_select', 'Membresia::miembros_select');
 $routes->get('transfer', 'Membresia::frm_select_transfer');
 $routes->get('select-transfer-membership/(:num)', 'Membresia::fr_select_member_transfer_membership/$1', ['as' => 'select-transfer_membership']);
-$routes->post('transfer_membership/(:num)/(:num)', 'Membresia::transfer_membership/$1/$2',['as' => 'transfer_membership']);
+$routes->post('transfer_membership', 'Membresia::transfer_membership',['as' => 'transfer_membership']);
 $routes->post('asistencia', 'Asistencia::insert', ['as' => 'asistencia']);
 
 $routes->group('reportes', static function ($routes) {
     $routes->get('index', 'Reportes::index');
     $routes->get('lista-miembros', 'Reportes::listaMiembrosPDF');
     $routes->get('lista-membresias', 'Reportes::listaMembresiasPDF');
+
+    $routes->get('reporte-movimientos', 'Reportes::lista_movimientos');
 });
 // $routes->get('reportes', 'Reportes::index');
 // $routes->get('lista-miembros', 'Reportes::listaMiembrosPDF');

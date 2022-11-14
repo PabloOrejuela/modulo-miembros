@@ -105,4 +105,19 @@ class Validation
             'required' => 'El campo "Miembro" es obligatorio',
         ]
     ];
+
+    public $transfiere_membresia = [
+        'idmiembros'     => 'required|greater_than[0]',
+        'idmembresias'     => 'required',
+    ];
+
+    public $transfiere_membresia_errors = [
+        'idmiembros' => [
+            'required' => 'Debe elegir un miembro para transferir la membresía',
+            'greater_than' => 'Debe elegir un miembro para transferir la membresía',
+        ],
+        'idmembresias' => [
+            'required' => 'Hubo un error comuniquese con el administrador del sistema',
+        ]
+    ];
 }

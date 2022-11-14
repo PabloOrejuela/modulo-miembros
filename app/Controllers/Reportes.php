@@ -28,6 +28,29 @@ class Reportes extends BaseController{
         }
     }
 
+    public function lista_movimientos(){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['movimientos'] = $this->movimientoModel->_get_all_movements();
+
+            $data['title']='Reportes - Movimientos';
+            $data['main_content']='reportes/lista_movimientos_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
+    }
+
     public function listaMiembrosPDF(){
 
         $miembros = $this->miembrosModel->_getMiembros();

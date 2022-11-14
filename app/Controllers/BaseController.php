@@ -15,6 +15,7 @@ use App\Models\PaquetesModel;
 use App\Models\AsistenciaModel;
 use App\Models\UsuarioModel;
 use App\Models\AsistenciaInstructorModel;
+use App\Models\MovimientoModel;
 
 /**
  * Class BaseController
@@ -61,7 +62,8 @@ class BaseController extends Controller {
         $this->paquetesModel = new PaquetesModel($this->db);
         $this->asistenciaModel = new AsistenciaModel($this->db);
         $this->usuarioModel = new UsuarioModel($this->db);
-        $this->asistenciaInstructorModel = new AsistenciaInstructorModel($this->db);    
+        $this->asistenciaInstructorModel = new AsistenciaInstructorModel($this->db); 
+        $this->movimientoModel = new MovimientoModel($this->db);   
 
 
         // E.g.: $this->session = \Config\Services::session();

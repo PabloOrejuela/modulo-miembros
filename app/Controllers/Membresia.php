@@ -149,23 +149,30 @@ class Membresia extends BaseController{
      /**
       * Transfiere le membresía al usuario
       */
-      public function transfer_membership($idmiembros, $idmembresias){
+      public function transfer_membership(){
 
         
         $data = [
-            'idmembresias' => $idmembresias,
-            'idmiembros' => $idmiembros,
+            'idmembresias' => $this->request->getPostGet('idmembresias'),
+            'idmiembros' => $this->request->getPostGet('idmiembros'),
             'observacion' => $this->request->getPostGet('observacion'),
             'idtipomovimiento' => 1, //TRANSFERENCIA
             'idusuarios' => $this->session->idusuario
         ];
-        //echo '<pre>'.var_export($data, true).'</pre>';exit;
-        //LLamo a la funcion del modelo que transfiere la membresía
-        $result = $this->membresiasModel->_transfiere_membresia($data);
-        if ($result == NULL) {
-            //echo $lastQuery;
+        $this->validation->setRuleGroup('transfiere_membresia');
+        if (!$this->validation->withRequest($this->request)->run()) {
+            //Depuración
+            //dd($validation->getErrors());
+            return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
         }else{
-            return redirect()->to('membresias');
+            //echo '<pre>'.var_export($data, true).'</pre>';exit;
+            //LLamo a la funcion del modelo que transfiere la membresía
+            $result = $this->membresiasModel->_transfiere_membresia($data);
+            if ($result == NULL) {
+                //echo $lastQuery;
+            }else{
+                return redirect()->to('membresias');
+            }
         }
     }
 

@@ -118,6 +118,7 @@
                                             <a class="nav-link" href="'.site_url().'reportes/lista-miembros" target="_blank">Reporte lista de miembros</a>
                                             <a class="nav-link" href="'.site_url().'reportes/lista-membresias" target="_blank">Reporte lista de membresías</a>
                                             <a class="nav-link" href="'.site_url().'reportes/clases-instructor" target="_blank">Reporte clases por instructor</a>
+                                            <a class="nav-link" href="'.site_url().'reportes/reporte-movimientos" target="_blank">Reporte de movimientos</a>
                                         </nav>
                                     </div>
                                 </nav>';
