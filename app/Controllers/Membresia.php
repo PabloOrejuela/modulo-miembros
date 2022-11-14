@@ -185,7 +185,7 @@ class Membresia extends BaseController{
             $data['miembros'] = $this->session->miembros;
             $data['admin'] = $this->session->admin;
 
-            $data['title']='Asignar una membresía a un miembro ya registrado';
+            $data['title']='Asignar una membresía a un miembro';
             $data['main_content']='membresias/frm_asigna_membresia_miembro';
             return view('includes/template', $data);
         }else{
@@ -210,7 +210,7 @@ class Membresia extends BaseController{
             $data['miembros'] = $this->session->miembros;
             $data['admin'] = $this->session->admin;
 
-            $data['title']='Asignar una membresía a un miembro ya registrado';
+            $data['title']='Asignar una membresía a un miembro';
             $data['main_content']='membresias/asigna_membresia_miembro';
             return view('includes/template', $data);
         }else{

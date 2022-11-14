@@ -7,7 +7,7 @@
                     <i class="fa-solid fa-users"></i>
                     <?= esc($title); ?>
                 </div>
-                <div class="card-body">
+                <div class="card-body tabla-membresias">
                     <?= csrf_field(); ?>
                     <table class="table table-bordered table-striped table-hover" id="table-miembros">
                         <thead>
@@ -27,32 +27,20 @@
                         </thead>
                     <?php 
                         //echo '<pre>'.var_export($membresias, true).'</pre>';
-
+                        
                         foreach ($membresias as $key => $value) {
                             echo $value->tipo;
 
                             $entradas_disponibles = $value->entradas - $value->asistencias;
-                            
-                            if ($value->tipo == 1) {
-                                $fechaActual = date("Y-m-d");
-                                $fecha_final = $value->fecha_final;
+                            $fechaActual = date("Y-m-d");
+                            $fecha_final = $value->fecha_final;
 
-                                $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
-                                $diferenciaDias = $diferenciaSegundos / 86400;
-                                
-                                //echo '<pre>'.var_export($diferenciaDias, true).'</pre>';
-                                if ($diferenciaDias <= 0) {
-                                    //se ha superado la fecha límite de uso
-                                    $saldo = 0;
-                                }else{
-                                    $saldo = $diferenciaDias;
-                                }
-                                //echo date("Y-m-d").' : '.$value->fecha_inicio.' : '.$diff->days;
-                                
-                                
-                            }else{
-                                $saldo = $value->entradas - $value->asistencias;
-                            }
+                            $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
+                            $diferenciaDias = $diferenciaSegundos / 86400;
+                            
+                            $dias_disponibles = $value->dias - $diferenciaDias;
+
+                            
                             //$saldo = $value->total - $value->asistencias;
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
@@ -61,19 +49,49 @@
                                     <td>'.$value->fecha_inicio.'</td>
                                     <td>'.$value->fecha_final.'</td>
                                     <td>'.date("Y-m-d").'</td>';
+
+                            //DIAS
                             echo '<td style="text-align:center;">'.$value->dias.'</td>';
                                     //echo $value->tipo;
-                            
-                            if ($saldo <= ($value->asistencias /3) ){
-                                echo '<td style="text-align:center;color:red;">'.$saldo.'</td>';
-                            }else{
-                                echo '<td style="text-align:center;">'.$saldo.'</td>';
-                            }
-                                    
-                            echo '<td style="text-align:center;">'.$value->entradas.'</td>';
-                            echo '<td style="text-align:center;">'.$saldo.'</td>';          
-                            
+                            if ($value->tipo == 1) {
+                                $saldo = $diferenciaDias;
+                                if ($saldo <= ($value->asistencias /3) ){
+                                    echo '<td style="text-align:center;color:red;">'.$diferenciaDias.'</td>';
+                                }else{
+                                    echo '<td style="text-align:center;">'.$diferenciaDias.'</td>';
+                                }
+                                //ENTRADAS
+                                echo '<td style="text-align:center;">'.$value->entradas.'</td>'; 
+                                //Dias disponibles
+                                echo '<td style="text-align:center;">'.$saldo.'</td>'; 
                                 
+                                if ($value->status == 1 && $saldo > 0) {
+                                    echo '<td>ACTIVA</td><td></td>
+                                        <td style="text-align:center;">
+                                        <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
+                                            <img src="'.site_url().'public/img/buttons/edit.png" >
+                                        </a>
+                                    </td>';
+                                }else{
+                                    echo '<td>CADUCADA</td>
+                                        <td style="text-align:center;">
+                                        <a type="button" id="btn-register" href="edit/'.$value->idmembresias.'" class="edit">
+                                            <img src="'.site_url().'public/img/buttons/edit.png" >
+                                        </a>
+                                    </td>';
+                                }
+                                
+                            }else{
+                                $saldo = $value->entradas - $value->asistencias;
+                                if ($saldo <= ($value->asistencias /3) ){
+                                    echo '<td style="text-align:center;color:red;">'.$diferenciaDias.'</td>';
+                                }else{
+                                    echo '<td style="text-align:center;">'.$diferenciaDias.'</td>';
+                                }
+                                //ENTRADAS
+                                echo '<td style="text-align:center;">'.$value->entradas.'</td>'; 
+                                //Dias disponibles
+                                echo '<td style="text-align:center;">'.$saldo.'</td>';
                                 if ($value->status == 1 && $saldo > 0) {
                                     echo '<td>ACTIVA</td>';
                                     echo '<td style="text-align:center;">
@@ -95,7 +113,9 @@
                                         </a>
                                     </td>';
                                 }
+                            }
                             
+                        
                             echo  '</tr>';
                         }
                     ?>
@@ -166,9 +186,16 @@
                 //location.reload();
             },
             success: function (data) {
-                //location.reload();
+                //actualizar();
             }
         });
     }
 </script>
+<script type="text/javascript">
+    function actualizar(){
+        location.reload(true);}
+    //Función para actualizar cada 5 segundos(5000 milisegundos)
+    setInterval("actualizar()",5000);
+</script>
+
 

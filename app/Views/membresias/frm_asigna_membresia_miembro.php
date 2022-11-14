@@ -6,6 +6,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-users"></i>
+                    <h5>Asigna una membresía a un miembro ya registrado</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped table-hover" id="datatablesSimple" >

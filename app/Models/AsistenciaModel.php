@@ -25,7 +25,7 @@ class AsistenciaModel extends Model{
     protected $skipValidation     = false;
 
     private function _get_last_attend($idmembresias){
-        $last = $builder->where('idmembresias', $idmembresias)->orderBy('idasistencia', 'DESC')->limit(1);
+        $last = $this->builder->where('idmembresias', $idmembresias)->orderBy('idasistencia', 'DESC')->limit(1);
         echo $last;
     }
 

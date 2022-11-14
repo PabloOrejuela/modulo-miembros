@@ -6,6 +6,7 @@
             <div class="card mb-4 col-md-6">
                 <div class="card-header">
                     <i class="fa-solid fa-users"></i>
+                    <h5>Asigna una membresía a un miembro ya registrado</h5>
                 </div>
                 <div class="card-body">
                     <form action="<?php echo site_url().'asign_membresia';?>" method="post">
