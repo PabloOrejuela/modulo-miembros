@@ -62,7 +62,7 @@
                            
                         </table>
                         
-                        <input type="submit" class="btn btn-primary" value="Transferir">
+                        <input type="submit" class="btn btn-outline-info" value="Transferir">
                     </form>
                 </div>
             </div>

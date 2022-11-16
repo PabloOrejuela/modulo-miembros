@@ -60,5 +60,17 @@ class MovimientoModel extends Model {
         }
      
         return $result;
-    }  
+    } 
+
+    function _insert_movimiento($data){
+        //echo '<pre>'.var_export($data, true).'</pre>';exit;
+        $builder = $this->db->table('movimientos');
+        $builder->set('idtipomovimiento', $data['idtipomovimiento']);
+        $builder->set('observacion', $data['observacion']);
+        $builder->set('idmiembros', $data['idmiembros']);
+        $builder->set('idmembresias', $data['idmembresias']);
+        $builder->set('idusuarios', $data['idusuarios']);
+
+        $builder->insert();
+    }
 }

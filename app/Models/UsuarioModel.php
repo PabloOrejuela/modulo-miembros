@@ -56,4 +56,37 @@ class UsuarioModel extends Model{
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    function _getUsuarioInstructor($result = NULL){
+        $result = NULL;
+        $builder = $this->db->table('usuarios');
+        $builder->select('idusuarios, nombre, cedula, usuarios.idroles as rol');
+        $builder->where('usuarios.idroles', 2);
+        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    function _getUsuarioCedula($cedula){
+        $result = NULL;
+        $builder = $this->db->table('usuarios');
+        $builder->select('idusuarios');
+        $builder->where('cedula', $cedula);
+        $builder->where('usuarios.idroles', 2);
+        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->idusuarios;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

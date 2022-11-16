@@ -52,13 +52,20 @@ class Asistencia extends BaseController{
     }
 
     public function registraAsistenciaInstructor(){
+        $cedula = $this->request->getPostGet('cedula');
+
+        $idusuario = $this->usuarioModel->_getUsuarioCedula($cedula);
+
         $data = [
-            'idusuario' => $this->request->getPostGet('idusuarios'),
-            'cedula' => $this->request->getPostGet('cedula'),
+            'cedula' => $cedula,
+            'idusuario' => $idusuario,
             'fechaClase' => date('Y-m-d H:m:s'),
             'observaciones' => $this->request->getPostGet('observaciones')
         ];
 
+
+
+        //echo '<pre>'.var_export($data, true).'</pre>';exit;
         $this->validation->setRuleGroup('asistenciaInstructor');
         
         if (!$this->validation->withRequest($this->request)->run()) {

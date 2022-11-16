@@ -51,6 +51,49 @@ class Reportes extends BaseController{
         }
     }
 
+    public function frm_selecciona_instructor(){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+
+            //Permisos
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['instructores'] = $this->usuarioModel->_getUsuarioInstructor();
+            //echo '<pre>'.var_export($data['instructores'], true).'</pre>';exit;
+            $data['title']='Reportes - Asistencia instructor';
+            $data['main_content']='usuarios/lista_instructores_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
+    }
+
+    public function genera_reporte_asistencia_instructor(){
+
+        $data = [
+            'idusuarios' => $this->request->getPostGet('idusuarios'),
+            'fecha_desde' => $this->request->getPostGet('fecha_desde'),
+            'fecha_hasta' => $this->request->getPostGet('fecha_hasta'),
+        ];
+        //echo '<pre>'.var_export($publicDir, true).'</pre>';exit;
+        $this->validation->setRuleGroup('ReporteAsistenciaInstructores');
+        
+        if (!$this->validation->withRequest($this->request)->run()) {
+            //Depuración
+            //dd($validation->getErrors());
+            return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+        }else{ 
+            $this->ReporteAsistenciaInstructorPDF($data); 
+            //return redirect()->to('reportes/selecciona-instructor'); 
+        }
+    }
+
     public function listaMiembrosPDF(){
 
         $miembros = $this->miembrosModel->_getMiembros();
@@ -99,9 +142,64 @@ class Reportes extends BaseController{
         //exit();
     }
 
+    public function ReporteAsistenciaInstructorPDF($data){
+
+        $asistencias = $this->asistenciaInstructorModel->_getAsistenciasInstructor($data['idusuarios']);
+        $instructor = $this->usuarioModel->find($data['idusuarios']);
+        //echo '<pre>'.var_export($instructor, true).'</pre>';exit;
+        $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+        $pdf->setFooterData(array(0,64,0), array(0,64,128));
+        $this->response->setHeader('Content-Type', 'application/pdf'); 
+        $pdf->SetMargins(15, 10, 15); 
+        $pdf->SetLineWidth(0.01);
+        $pdf->setCellPaddings(0.8, 0.8, 0.8, 0.8);
+        $pdf->SetFillColor(0,200,250);
+        
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->AddPage(); 
+        $html = '<img src="'.site_url().'public/images/logo-youshop.jpg" alt="You-logo" id="logo-report"  width="75" />';
+        //$pdf->image(PDF_HEADER_LOGO, 15, 12, 20, 15, 'jpg', $link = '', $align = '', false, 50, '', false, false, 1, false, false, false);
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $pdf->ln(0);
+        $pdf->SetFont('helvetica', 'B', 14);
+        $pdf->Cell(190, 0, 'Clases impartidas por el instructor:  '.$instructor->nombre , '', 0, 'C', false);
+        $pdf->Cell(190, 0, 'DESDE:  '.$data['fecha_desde'] , '', 0, 'C', false);
+        $pdf->Cell(190, 0, 'HASTA:  '.$data['fecha_hasta'] , '', 0, 'C', false);
+        
+        $pdf->ln(15);
+        $pdf->SetFont('helvetica', 'B', 9);
+        $pdf->Cell(7, 0, '#', 'TLRB', 0, 'L', true);
+        $pdf->Cell(40, 0, 'Fecha clase', 'TLRB', 0, 'L', true);
+        $pdf->Cell(130, 0, 'Observaciones', 'TLRB', 0, 'L', true);
+
+        $n=1;
+        if ($asistencias != null) {
+            foreach ($asistencias as $value) {
+                $pdf->ln();
+                $pdf->SetFont('helvetica', 'P', 9);
+                $pdf->Cell(7, 0, $n, 'TLRB', 0, 'L', false);
+                $pdf->Cell(40, 0, $value->fechaClase, 'TLRB', 0, 'L', false);
+                $pdf->Cell(130, 0, $value->observaciones, 'TLRB', 0, 'L', false);
+                $n++;
+            }
+        }else{
+            $pdf->ln();
+            $pdf->SetFont('helvetica', 'B', 9);
+            $pdf->Cell(177, 0, 'NO HAY AISTENCIAS REGISTRADAS PARA ESTE INSTRUCTOR EN ESTE LAPSO DE TIEMPO', 'TLRB', 0, 'L', FALSE);
+        }
+        
+        //$pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->Output('reporte-lista-miembros.pdf', 'I'); 
+        //exit();
+    }
+
     public function listaMembresiasPDF(){
 
         $membresias = $this->membresiasModel->_getMembresias();
+        
         //echo '<pre>'.var_export($publicDir, true).'</pre>';exit;
         $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING, array(0,64,255), array(0,64,128));

@@ -17,7 +17,7 @@
 
                         <div class="mb-3">
                             <label for="cedula" class="form-label">Cedula:</label>
-                            <input type="text" class="form-control" name="cedula" id="FormControlInput" value="<?= old('cedula'); ?>"  placeholder="cedula">
+                            <input type="text" class="form-control" name="cedula" id="FormControlInput" value="<?= old('cedula'); ?>"  placeholder="cedula" autocomplete="false">
                         </div>
                         <p><?= session('errors.cedula');?> </p>
                         <div class="mb-3">
@@ -25,7 +25,7 @@
                         </div>
 
                         <input type="submit" name="submit" value="Registrar" class="btn btn-outline-info" />
-                        <?= form_hidden('idusuarios', $idusuarios); ?>
+                        
                     </form>
                 </div>
             </div>

@@ -120,4 +120,25 @@ class Validation
             'required' => 'Hubo un error comuniquese con el administrador del sistema',
         ]
     ];
+
+    public $ReporteAsistenciaInstructores = [
+        'fecha_desde'     => 'required|valid_date',
+        'fecha_hasta'     => 'required|valid_date',
+        'idusuarios'     => 'required|integer',
+    ];
+
+    public $ReporteAsistenciaInstructores_errors = [
+        'fecha_desde' => [
+            'required' => 'Debe elegir una fecha inicial para el reporte',
+            'valid_date' => 'La fecha "Desde" no tiene un formato correcto',
+        ],
+        'fecha_hasta' => [
+            'required' => 'Debe elegir una fecha final para el reporte',
+            'valid_date' => 'La fecha "Hasta" no tiene un formato correcto',
+        ],
+        'idusuarios' => [
+            'required' => 'Es obligatorio elegir un instructor para generar el reporte',
+            'integer' => 'Hay un error al elegir un usuario, contacte al administrador del sistema',
+        ],
+    ];
 }

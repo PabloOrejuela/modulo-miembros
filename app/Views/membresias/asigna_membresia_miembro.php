@@ -30,6 +30,10 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
                                     <input type="email" class="form-control" name="email" id="FormControlInput" value="'.$datos->email.'" required placeholder="jdoe@email.com" readonly>
+                                </div>
+                                <div class="form-floating mb-4">
+                                    <textarea class="form-control" placeholder="Observaciones" id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea">Observaciones</label>
                                 </div>';
                             }
                             echo form_hidden('idmiembros', $datos->idmiembros);

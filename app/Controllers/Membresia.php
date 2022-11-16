@@ -229,7 +229,8 @@ class Membresia extends BaseController{
 
         $data = [
             'idpaquete' => $this->request->getPostGet('idpaquete'),
-            'idmiembros' => $this->request->getPostGet('idmiembros')
+            'idmiembros' => $this->request->getPostGet('idmiembros'),
+            'observacion' => $this->request->getPostGet('observacion'),
         ];
         $this->validation->setRuleGroup('asigna_membresia');
         
@@ -241,6 +242,7 @@ class Membresia extends BaseController{
        
             //object
             $paquete = $this->paquetesModel->find($data['idpaquete']);
+
             if ($data['idpaquete'] != 0 && $data['idpaquete'] != '0') {
                 $fecha_inicio = date("Y-m-d"); 
                 if($paquete->idcategoria == 3){
@@ -257,7 +259,19 @@ class Membresia extends BaseController{
                 );
                 //echo '<pre>'.var_export($data, true).'</pre>';
                 $this->membresiasModel->save($membresia);
-                
+                $idmembresias = $this->db->insertID();
+                //echo '<pre>'.var_export($data, true).'</pre>';
+                if ($idmembresias) {
+                    $movimiento = [
+                        'idmembresias' => $idmembresias,
+                        'idmiembros' => $this->request->getPostGet('idmiembros'),
+                        'observacion' => $this->request->getPostGet('observacion'),
+                        'idtipomovimiento' => 1, //TRANSFERENCIA
+                        'idusuarios' => $this->session->idusuario
+                    ];
+
+                    $this->movimientoModel->_insert_movimiento($movimiento);
+                }
             }
             return redirect()->to('membresias');
         }

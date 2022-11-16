@@ -41,4 +41,20 @@ class AsistenciaInstructorModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function _getAsistenciasInstructor($idusuarios){
+        $result = NULL;
+        $builder = $this->db->table('asistenciainstructor');
+        $builder->select('idusuarios, nombre, cedula, usuarios.idroles as rol, fechaClase, observaciones');
+        $builder->where('asistenciainstructor.idusuario', $idusuarios);
+        $builder->join('usuarios', 'usuarios.idusuarios=asistenciainstructor.idusuario');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

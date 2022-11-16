@@ -62,10 +62,13 @@ $routes->group('reportes', static function ($routes) {
     $routes->get('lista-membresias', 'Reportes::listaMembresiasPDF');
 
     $routes->get('reporte-movimientos', 'Reportes::lista_movimientos');
+    $routes->get('selecciona-instructor', 'Reportes::frm_selecciona_instructor');
+    $routes->post('genera_reporte_asistencia_instructor', 'Reportes::genera_reporte_asistencia_instructor');
 });
 // $routes->get('reportes', 'Reportes::index');
 // $routes->get('lista-miembros', 'Reportes::listaMiembrosPDF');
 // $routes->get('lista-membresias', 'Reportes::listaMembresiasPDF');
+$routes->post('genera_reporte_asistencia_instructor', 'Reportes::genera_reporte_asistencia_instructor');
 
 $routes->get('registra-asistencia-instructor', 'Asistencia::FrmRegistraAsistenciaInstructor');
 $routes->post('registra_aistencia_instructor', 'Asistencia::registraAsistenciaInstructor');
