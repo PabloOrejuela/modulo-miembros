@@ -7,24 +7,36 @@
                     <i class="fa-solid fa-users"></i>
                 </div>
                 <div class="card-body">
-                    <?= csrf_field(); ?>
+                    
                     <form action="<?php echo site_url().'registra_aistencia_instructor';?>" method="post" name="form_registro" >
                         <?= csrf_field() ?>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Hora de inicio:</label>
                             <input type="text" class="form-control" name="hora_inicio" id="reloj" readonly  placeholder="<?= date('Y-m-d H:m:s'); ?>">
                         </div>
+                        <div class="mb-3">
+                            <label for="cedula" class="form-label">Instructor:</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre"  autocomplete="false" disabled>
+                            <select id="nombre" name="nombre" class="form-control" required="required"></select>
+                        </div>
+                        <div id="imagen" class="mb-3">
+                        </div>
 
                         <div class="mb-3">
                             <label for="cedula" class="form-label">Cedula:</label>
-                            <input type="text" class="form-control" name="cedula" id="FormControlInput" value="<?= old('cedula'); ?>"  placeholder="cedula" autocomplete="false">
+                            <input type="text" class="form-control" name="cedula" id="cedula" value="<?= old('cedula'); ?>"  placeholder="cedula" autocomplete="false">
                         </div>
                         <p><?= session('errors.cedula');?> </p>
                         <div class="mb-3">
                             <textarea name="observaciones" class="form-control" placeholder="Observaciones"></textarea>
                         </div>
-
-                        <input type="submit" name="submit" value="Registrar" class="btn btn-outline-info" />
+                        <?php
+                            $url = base_url();
+                            echo '<script languaje="JavaScript">
+                                    var varjs="'.$url.'";
+                                    </script>';
+                         ?> 
+                        <input type="submit" name="submit" value="Registrar" class="btn btn-outline-info" disabled />
                         
                     </form>
                 </div>

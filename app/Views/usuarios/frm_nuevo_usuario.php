@@ -9,7 +9,7 @@
                     <?= esc($title); ?>
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo site_url().'insert';?>" method="post">
+                    <form action="<?php echo site_url().'usuario-insert';?>" method="post">
                         <?= csrf_field() ?>
                         <h4><?= esc($title); ?></h4>
                         <div class="mb-3">
@@ -23,13 +23,18 @@
                         </div>
                         <p><?= session('errors.cedula');?> </p>
                         <div class="mb-3 col-md-8">
-                            <label for="cedula" class="form-label">Fecha Nacimiento:</label>
-                            <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="<?= old('fecha_nacimiento'); ?>" placeholder="Fecha de Nacimiento">
-                        </div>
-                        <p><?= session('errors.fecha_nacimiento');?> </p>
-                        <div class="mb-3 col-md-8">
                             <label for="telefono" class="form-label">Teléfono:</label>
                             <input type="text" class="form-control" name="telefono" maxlength="10" id="telefono" value="<?= old('telefono'); ?>" placeholder="teléfono">
+                        </div>
+                        <p><?= session('errors.telefono');?> </p>
+                        <div class="mb-3 col-md-8">
+                            <label for="cedula" class="form-label">Usuario:</label>
+                            <input type="text" class="form-control" name="user" id="user" value="<?= old('user'); ?>" placeholder="Usuario">
+                        </div>
+                        <p><?= session('errors.cedula');?> </p>
+                        <div class="mb-3 col-md-8">
+                            <label for="telefono" class="form-label">Password:</label>
+                            <input type="text" class="form-control" name="password" id="user" value="<?= old('password'); ?>" placeholder="password">
                         </div>
                         <p><?= session('errors.telefono');?> </p>
                         <div class="mb-3">
@@ -38,17 +43,17 @@
                         </div>
                         <p><?= session('errors.email');?> </p>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Membresías:</label>
-                            <select class="form-select" aria-label="Default select example" name="idpaquete">
-                                <option value="0">Elija un paquete</option>
+                            <label for="email" class="form-label">Rol del usuario:</label>
+                            <select class="form-select" aria-label="Default select example" name="idroles">
+                                <option value="0">Elija un rol</option>
                                 <?php 
-                                    foreach ($paquetes as $key => $paquete) {
-                                        echo '<option value="'.$paquete->idpaquete.'">'.$paquete->paquete.'</option>';
+                                    foreach ($roles as $key => $rol) {
+                                        echo '<option value="'.$rol->idroles.'">'.$rol->rol.'</option>';
                                     }
                                 ?>
                             </select>
                         </div>
-                        <p><?= session('errors.idpaquete');?> </p>
+                        <p><?= session('errors.idroles');?> </p>
 
                         <input type="submit" name="submit" value="Guardar" class="btn btn-outline-info" />
                     </form>

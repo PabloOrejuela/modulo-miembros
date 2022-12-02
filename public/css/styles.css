@@ -11725,3 +11725,8 @@ body {
 #error-text{
   color: red;
 }
+
+#codigos_multipases{
+  color: #06357a;
+  font-weight: bold;
+}

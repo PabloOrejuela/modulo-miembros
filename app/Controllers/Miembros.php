@@ -59,7 +59,8 @@ class Miembros extends BaseController{
             'cedula' => $this->request->getPostGet('cedula'),
             'telefono' => $this->request->getPostGet('telefono'),
             'email' => $this->request->getPostGet('email'),
-            'idpaquete' => $this->request->getPostGet('idpaquete')
+            'idpaquete' => $this->request->getPostGet('idpaquete'),
+            'fecha_nacimiento' => $this->request->getPostGet('fecha_nacimiento')
         );
         
         $this->validation->setRuleGroup('newMember');
@@ -89,7 +90,7 @@ class Miembros extends BaseController{
                 );
                 $this->membresiasModel->save($membresia);
             }
-            return redirect()->to('/');
+            return redirect()->to('miembros');
         }  
         
     }
@@ -113,7 +114,7 @@ class Miembros extends BaseController{
             $data['miembros'] = $this->session->miembros;
             $data['admin'] = $this->session->admin;
 
-            $data['title']='Editar nuevo miembro';
+            $data['title']='Editar miembro';
             $data['main_content']='miembros/frm_edit_miembro';
             return view('includes/template', $data);
         }else{
@@ -128,6 +129,7 @@ class Miembros extends BaseController{
             'email'        => 'required|valid_email',
             'cedula'        => 'required',
             'telefono'        => 'required',
+            'fecha_nacimiento' => 'required|valid_date'
         ]);
         
         if (!$validation->withRequest($this->request)->run()) {
@@ -141,10 +143,11 @@ class Miembros extends BaseController{
                 'cedula' => $this->request->getPostGet('cedula'),
                 'telefono' => $this->request->getPostGet('telefono'),
                 'email' => $this->request->getPostGet('email'),
+                'fecha_nacimiento' => $this->request->getPostGet('fecha_nacimiento')
             ];
             //echo '<pre>'.var_export($data, true).'</pre>';
             $lastQuery = $this->miembrosModel->save($data);
-            
+            return redirect()->to('miembros');
             
         }
     }

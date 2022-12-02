@@ -34,6 +34,12 @@ $routes->setAutoRoute(false);
 
 $routes->get('/', 'Usuarios::index');
 $routes->post('validate', 'Usuarios::validate_credentials');
+$routes->get('nuevo-usuario', 'Usuarios::nuevo');
+$routes->post('usuario-insert', 'Usuarios::insert');
+$routes->get('usuarios', 'Usuarios::showUsuarios');
+$routes->get('edita_datos_usuario/(:num)', 'Usuarios::editar/$1');
+$routes->post('actualizar-user', 'Usuarios::update');
+$routes->post('getNameCedula', 'Usuarios::usuarios_select');
 
 $routes->get('inicio', 'Usuarios::inicio');
 $routes->get('salir', 'Usuarios::salir');

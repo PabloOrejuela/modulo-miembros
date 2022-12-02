@@ -13,6 +13,7 @@
                         <thead>
                             <th>Nombre</th>
                             <th>Cédula</th>
+                            <th>Teléfono</th>
                             <th>Editar</th>
                         </thead>
                     <?php 
@@ -24,6 +25,7 @@
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
                                     <td>'.$value->cedula.'</td>
+                                    <td>'.$value->telefono.'</td>
                                     <td style="text-align:center;">
                                         <a type="button" id="btn-register" href="edita_datos_miembro/'.$value->idmiembros.'">
                                             <i class="fa-solid fa-user-pen"></i>   

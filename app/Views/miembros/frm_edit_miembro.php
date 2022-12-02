@@ -3,7 +3,7 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4"><?= esc($title); ?></h1>
                         
-            <div class="card mb-4">
+            <div class="card mb-4 col-md-6">
                 <div class="card-header">
                     <i class="fa-solid fa-user-pen"></i>
                     <?= esc($title); ?>
@@ -23,9 +23,13 @@
                                     <label for="nombre" class="form-label">Nombre:</label>
                                     <input type="text" class="form-control" name="nombre" id="FormControlInput" value="'.$datos->nombre.'" required placeholder="nombre">
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3 col-md-8">
                                     <label for="cedula" class="form-label">Cédula:</label>
                                     <input type="text" class="form-control" name="cedula" id="FormControlInput" value="'.$datos->cedula.'" required placeholder="CI">
+                                </div>
+                                <div class="mb-3 col-md-8">
+                                    <label for="cedula" class="form-label">Fecha Nacimiento:</label>
+                                    <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="'.$datos->fecha_nacimiento.'" placeholder="Fecha de Nacimiento">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Teléfono:</label>

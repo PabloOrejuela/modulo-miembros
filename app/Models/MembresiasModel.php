@@ -75,7 +75,7 @@ class MembresiasModel extends Model{
                 $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
                 $diferenciaDias = $diferenciaSegundos / 86400;
 
-                if ($diferenciaDias <= 0 || $row->asistencias >= $row->dias) {echo 78;exit;
+                if ($diferenciaDias <= 0 || $row->asistencias >= $row->dias) {
                     //se ha superado la fecha límite de uso
                     $builder->set('status', 0);
                 }else{

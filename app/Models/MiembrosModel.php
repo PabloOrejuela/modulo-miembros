@@ -16,7 +16,7 @@ class MiembrosModel extends Model{
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'cedula', 'telefono', 'email'];
+    protected $allowedFields = ['nombre', 'cedula', 'telefono', 'email', 'fecha_nacimiento'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';

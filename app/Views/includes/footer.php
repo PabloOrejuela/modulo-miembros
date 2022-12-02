@@ -12,10 +12,5 @@
                 </footer>
             </div>
         </div>
-        <script src="<?= site_url(); ?>public/js/jquery-3.6.0.min.js" ></script>
-        <script src="<?= site_url(); ?>public/js/bootstrap.bundle.min.js" ></script>
-        <script src="<?= site_url(); ?>public/js/scripts.js"></script>
-        <script src="<?= site_url(); ?>public/js/simple-datatables@latest.js" crossorigin="anonymous"></script>
-        <script src="<?= site_url(); ?>public/js/datatables-simple-demo.js"></script>
     </body>
 </html>

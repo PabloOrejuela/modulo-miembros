@@ -15,7 +15,7 @@ class UsuarioModel extends Model{
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nombre', 'telefono', 'email', 'direccion', 'password', 'cedula', 'idrol','logged'
+        'nombre', 'telefono', 'email', 'direccion', 'password', 'cedula', 'idroles','logged', 'user'
     ];
 
     // Dates
@@ -84,6 +84,23 @@ class UsuarioModel extends Model{
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
                 $result = $row->idusuarios;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    function _getNameUserCedula($cedula){
+        $result = NULL;
+        $builder = $this->db->table('usuarios');
+        $builder->select('nombre');
+        $builder->where('cedula', $cedula);
+        //$builder->where('usuarios.idroles', 2);
+        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->nombre;
             }
         }
         //echo $this->db->getLastQuery();

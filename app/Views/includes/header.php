@@ -10,6 +10,12 @@
         <link href="<?= site_url(); ?>public/css/datatables.css" rel="stylesheet" />
         <link href="<?= site_url(); ?>public/css/styles.css" rel="stylesheet" />
         <script src="<?= site_url(); ?>public/js/font-awesome.js"></script>
+        <script src="<?= site_url(); ?>public/js/jquery-3.6.0.min.js" ></script>
+        <script src="<?= site_url(); ?>public/js/bootstrap.bundle.min.js" ></script>
+        <script src="<?= site_url(); ?>public/js/scripts.js"></script>
+        <script src="<?= site_url(); ?>public/js/simple-datatables@latest.js" crossorigin="anonymous"></script>
+        <script src="<?= site_url(); ?>public/js/datatables-simple-demo.js"></script>
+        <script src="<?= site_url(); ?>public/js/ajax.js"></script>
     </head>
     <body class="sb-nav-fixed" onload="mueveReloj()" >
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -56,6 +62,24 @@
                                             <a class="nav-link" href="'.site_url().'membresias">Lista Membresías</a>
                                             <a class="nav-link" href="'.site_url().'transfer">Transferencias</a>
                                             <a class="nav-link" href="'.site_url().'frm_asigna_membresia_miembro">Asigna membresía</a>
+                                        </nav>
+                                    </div>
+                                </nav>';
+                                }
+                            ?>
+                            <!-- Menu Item -->
+                            <?php 
+                                if (isset($admin) && $admin == 1) {
+                                echo '
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthUsuarios" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Usuarios
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuthUsuarios" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="'.site_url().'usuarios">Lista de usuarios</a>
+                                            <a class="nav-link" href="'.site_url().'nuevo-usuario">Nuevo Usuario</a>
                                         </nav>
                                     </div>
                                 </nav>';

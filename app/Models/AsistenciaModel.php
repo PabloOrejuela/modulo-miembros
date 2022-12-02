@@ -13,7 +13,9 @@ class AsistenciaModel extends Model{
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['idmembresias'];
+    protected $allowedFields = [
+        'idmembresias', 'num_asistencias', 'codigos_multipases'
+    ];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -48,6 +50,7 @@ class AsistenciaModel extends Model{
         $builder = $this->db->table('asistencia');
         $builder->set('idmembresias', $data['idmembresias']);
         $builder->set('num_asistencias', $data['num_asistencias']);
+        $builder->set('codigos_multipases', $data['codigos_multipases']);
         $builder->insert();
         $this->db->transComplete();
         if ($this->db->transStatus() === false) {

@@ -17,16 +17,37 @@ class Asistencia extends BaseController{
         //Insertar asistencia de la membresía en asistencia
         $data = [
             'idmembresias' => $this->request->getPostGet('idmembresias'),
-            'num_asistencias' => $this->request->getPostGet('num_asistencias')
+            'num_asistencias' => $this->request->getPostGet('num_asistencias'),
+            'codigos_multipases' => $this->request->getPostGet('codigos_multipases')
         ];
 
         //echo '<pre>'.var_export($data, true).'</pre>';
         
 
         $this->asistenciaModel->_insert_asistencia($data);
-        $this->membresiasModel->_update_status_all($data['membresias']);
+        //$this->membresiasModel->_update_status_all($data['membresias']);
         
-        return redirect()->to('/membresias');
+        return redirect()->to('exitoAsistencia');
+    }
+
+    public function exitoAsistencia(){
+        $data['idroles'] = $this->session->idroles;
+        $data['idusuarios'] = $this->session->idusuario;
+        $data['logged_in'] = $this->session->logged_in;
+        
+        if ($data['logged_in'] == 1) {
+
+            $data['nombre'] = $this->session->nombre;
+            $data['instructor'] = $this->session->instructor;
+            $data['miembros'] = $this->session->miembros;
+            $data['admin'] = $this->session->admin;
+
+            $data['title']='Registra asistencia';
+            $data['main_content']='asistencias/exito_asistencia_view';
+            return view('includes/template', $data);
+        }else{
+            return redirect()->to('salir');
+        }
     }
 
     public function FrmRegistraAsistenciaInstructor(){

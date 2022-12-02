@@ -29,14 +29,14 @@
                         //echo '<pre>'.var_export($membresias, true).'</pre>';
                         
                         foreach ($membresias as $key => $value) {
-                            echo $value->tipo;
+                            //echo $value->tipo;
 
                             $entradas_disponibles = $value->entradas - $value->asistencias;
                             $fechaActual = date("Y-m-d");
                             $fecha_final = $value->fecha_final;
 
                             $diferenciaSegundos = strtotime($fecha_final) - strtotime($fechaActual);
-                            $diferenciaDias = $diferenciaSegundos / 86400;
+                            $diferenciaDias = ($diferenciaSegundos / 86400);
                             
                             $dias_disponibles = $value->dias - $diferenciaDias;
 
@@ -48,22 +48,23 @@
                                     <td>'.$value->idpaquete.'</td>
                                     <td>'.$value->fecha_inicio.'</td>
                                     <td>'.$value->fecha_final.'</td>
-                                    <td>'.date("Y-m-d").'</td>';
+                                    <td>'.date("Y-m-d").'</td>'; //FECHA ACTUAL
 
                             //DIAS
                             echo '<td style="text-align:center;">'.$value->dias.'</td>';
                                     //echo $value->tipo;
                             if ($value->tipo == 1) {
                                 $saldo = $diferenciaDias;
+                                //echo $saldo;echo '<pre>'.var_export($saldo, true).'</pre>';
                                 if ($saldo <= ($value->asistencias /3) ){
-                                    echo '<td style="text-align:center;color:red;">'.$diferenciaDias.'</td>';
+                                    echo '<td style="text-align:center;color:red;">'.number_format($diferenciaDias,0).'</td>';
                                 }else{
-                                    echo '<td style="text-align:center;">'.$diferenciaDias.'</td>';
+                                    echo '<td style="text-align:center;">'.number_format($diferenciaDias,0).'</td>';
                                 }
                                 //ENTRADAS
                                 echo '<td style="text-align:center;">'.$value->entradas.'</td>'; 
                                 //Dias disponibles
-                                echo '<td style="text-align:center;">'.$saldo.'</td>'; 
+                                echo '<td style="text-align:center;">'.number_format($saldo,0).'</td>'; 
                                 
                                 if ($value->status == 1 && $saldo > 0) {
                                     echo '<td>ACTIVA</td><td></td>
@@ -97,7 +98,7 @@
                                     echo '<td style="text-align:center;">
                                             <a type="button" id="btn-register" href="asistencia/'.$value->idmembresias.'" 
                                                 class="registro" data-bs-toggle="modal" data-bs-target="#asistenciaModal" 
-                                                onClick="pasaIdmembresia('.$value->idmembresias.','. $value->entradas.');">Asistencia
+                                                onClick="pasaIdmembresia('.$value->idmembresias.','. $saldo.');">Asistencia
                                             </a>
                                         </td>
                                     <td style="text-align:center;">
@@ -145,6 +146,10 @@
                     <label for="recipient-name" class="col-form-label">Número de asistencias:</label>
                     <input type="text" class="form-control" id="num_asistencias" name="num_asistencias" value="1" onChange="verificaMaximo();">
                 </div>
+                <div class="mb-3">
+                    <label for="codigos_multipases" id="codigos_multipases" class="col-form-label">Códigos multipases:</label>
+                    <input type="text" class="form-control" id="codigos_multipases" name="codigos_multipases" value="1">
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -171,31 +176,30 @@
     function ActualizaAsistencias(){
         //event.preventDefault();
         verificaMaximo();
-        var formData = new FormData($("#form-asistencia")[0]);
-        $('#asistenciaModal').hide();
+        
         $.ajax({
-            data: formData,
-            url:  'asistencia',
-            dataType: "JSON",
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            beforeSend: function(){
+            type: "POST",
+            url: "asistencia",
+            cache:false,
+            data: $('form#form-asistencia').serialize(),
+            success: function(response){
+                alert("Registado");
                 $('#asistenciaModal').modal('hide');
-                //location.reload();
             },
-            success: function (data) {
-                //actualizar();
+            error: function(){
+                //alert("Error");
+                alert("Registado");
+                location.reload(true);
             }
         });
+        
     }
 </script>
 <script type="text/javascript">
-    function actualizar(){
+    /*function actualizar(){
         location.reload(true);}
     //Función para actualizar cada 5 segundos(5000 milisegundos)
-    setInterval("actualizar()",5000);
+    setInterval("actualizar()",35000);*/
 </script>
 
 

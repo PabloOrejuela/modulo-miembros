@@ -16,6 +16,7 @@ use App\Models\AsistenciaModel;
 use App\Models\UsuarioModel;
 use App\Models\AsistenciaInstructorModel;
 use App\Models\MovimientoModel;
+use App\Models\RolModel;
 
 /**
  * Class BaseController
@@ -64,6 +65,7 @@ class BaseController extends Controller {
         $this->usuarioModel = new UsuarioModel($this->db);
         $this->asistenciaInstructorModel = new AsistenciaInstructorModel($this->db); 
         $this->movimientoModel = new MovimientoModel($this->db);   
+        $this->rolModel = new RolModel($this->db);   
 
 
         // E.g.: $this->session = \Config\Services::session();
