@@ -11730,3 +11730,11 @@ body {
   color: #06357a;
   font-weight: bold;
 }
+
+#icon-red{
+  color: red;
+}
+
+#td-paquete{
+  font-size: 0.7em;
+}
