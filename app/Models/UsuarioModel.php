@@ -7,15 +7,15 @@ use CodeIgniter\Model;
 class UsuarioModel extends Model{
 
     protected $DBGroup          = 'default';
-    protected $table            = 'usuarios';
-    protected $primaryKey       = 'idusuarios';
+    protected $table            = 'usuario';
+    protected $primaryKey       = 'idusuario';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nombre', 'telefono', 'email', 'direccion', 'password', 'cedula', 'idroles','logged', 'user'
+        'nombre', 'telefono', 'email', 'direccion', 'password', 'num_documento', 'idroles','logged', 'user'
     ];
 
     // Dates
@@ -44,9 +44,9 @@ class UsuarioModel extends Model{
 
     function _getUsuario($usuario){
         $result = NULL;
-        $builder = $this->db->table('usuarios');
+        $builder = $this->db->table('usuario');
         $builder->select('*')->where('user', $usuario['user'])->where('password', md5($usuario['password']));
-        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $builder->join('rol', 'rol.idrol=usuario.idrol');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -59,10 +59,10 @@ class UsuarioModel extends Model{
 
     function _getUsuarioInstructor($result = NULL){
         $result = NULL;
-        $builder = $this->db->table('usuarios');
-        $builder->select('idusuarios, nombre, cedula, usuarios.idroles as rol');
-        $builder->where('usuarios.idroles', 2);
-        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $builder = $this->db->table('usuario');
+        $builder->select('idusuario, nombre, cedula, usuario.idrol as rol');
+        $builder->where('usuario.idrol', 2);
+        $builder->join('rol', 'rol.idrol=usuario.idrol');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -75,11 +75,11 @@ class UsuarioModel extends Model{
 
     function _getUsuarioCedula($cedula){
         $result = NULL;
-        $builder = $this->db->table('usuarios');
-        $builder->select('idusuarios');
-        $builder->where('cedula', $cedula);
-        $builder->where('usuarios.idroles', 2);
-        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $builder = $this->db->table('usuario');
+        $builder->select('idusuario');
+        $builder->where('num_documento', $cedula);
+        $builder->where('usuario.idrol', 2);
+        $builder->join('rol', 'rol.idrol=usuario.idrol');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -92,11 +92,11 @@ class UsuarioModel extends Model{
 
     function _getNameUserCedula($cedula){
         $result = NULL;
-        $builder = $this->db->table('usuarios');
+        $builder = $this->db->table('usuario');
         $builder->select('nombre');
-        $builder->where('cedula', $cedula);
+        $builder->where('num_documento', $cedula);
         //$builder->where('usuarios.idroles', 2);
-        $builder->join('roles', 'roles.idroles=usuarios.idroles');
+        $builder->join('rol', 'rol.idrol=usuario.idrol');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

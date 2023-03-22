@@ -48,12 +48,12 @@ class MovimientoModel extends Model {
         $builder = $this->db->table('movimientos');
         $builder->select(
             'idmovimientos, observacion, movimientos.created_at as fecha, paquete, miembros.nombre as Miembro, 
-            miembros.cedula as Identificacion, tipo_movimiento, usuarios.nombre as Usuario');
+            miembros.num_documento as Identificacion, tipo_movimiento, usuario.nombre as Usuario');
         $builder->join('membresias', 'membresias.idmembresias=movimientos.idmembresias');
         $builder->join('paquetes', 'paquetes.idpaquete=membresias.idpaquete');
         $builder->join('tipomovimiento', 'tipomovimiento.idtipomovimiento=movimientos.idtipomovimiento');
         $builder->join('miembros', 'miembros.idmiembros=movimientos.idmiembros');
-        $builder->join('usuarios', 'usuarios.idusuarios=movimientos.idusuarios');
+        $builder->join('usuario', 'usuario.idusuario=movimientos.idusuarios');
         $query = $builder->get();
         foreach ($query->getResult() as $row) {
             $result[] = $row;

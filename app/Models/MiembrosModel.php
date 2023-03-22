@@ -16,7 +16,7 @@ class MiembrosModel extends Model{
     protected $returnType     = 'object';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'cedula', 'telefono', 'email', 'fecha_nacimiento'];
+    protected $allowedFields = ['nombre', 'num_documento', 'telefono', 'email', 'fecha_nacimiento'];
 
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
@@ -47,7 +47,7 @@ class MiembrosModel extends Model{
         $result = NULL;
         $builder = $this->db->table('miembros');
         $builder->set('nombre', $array['nombre']);
-        $builder->set('cedula', $array['cedula']);
+        $builder->set('num_documento', $array['num_documento']);
         $builder->set('telefono', $array['telefono']);
         $builder->set('email', $array['email']);
         $builder->where('idmiembros', $array['idmiembros']);

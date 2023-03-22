@@ -6,14 +6,14 @@ use CodeIgniter\Model;
 
 class RolModel extends Model{
     protected $DBGroup          = 'default';
-    protected $table            = 'roles';
-    protected $primaryKey       = 'id';
+    protected $table            = 'rol';
+    protected $primaryKey       = 'idrol';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['idroles', 'rol', 'miembros', 'instructor'];
+    protected $allowedFields    = ['idrol', 'rol', 'descripcion', 'estado' , 'membresia', 'reportes', 'instructor', 'usuario'];
 
     // Dates
     protected $useTimestamps = true;

@@ -45,9 +45,9 @@ class AsistenciaInstructorModel extends Model {
     public function _getAsistenciasInstructor($idusuarios){
         $result = NULL;
         $builder = $this->db->table('asistenciainstructor');
-        $builder->select('idusuarios, nombre, cedula, usuarios.idroles as rol, fechaClase, observaciones');
+        $builder->select('idusuario, nombre, cedula, usuario.idrol as rol, fechaClase, observaciones');
         $builder->where('asistenciainstructor.idusuario', $idusuarios);
-        $builder->join('usuarios', 'usuarios.idusuarios=asistenciainstructor.idusuario');
+        $builder->join('usuario', 'usuario.idusuario=asistenciainstructor.idusuario');  
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
