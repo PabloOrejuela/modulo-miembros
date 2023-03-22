@@ -8,17 +8,13 @@ class Reportes extends BaseController{
 
 
     public function index(){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Reportes';
             $data['main_content']='reportes/reportes_view';
@@ -29,17 +25,13 @@ class Reportes extends BaseController{
     }
 
     public function lista_movimientos(){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['movimientos'] = $this->movimientoModel->_get_all_movements();
 
@@ -52,17 +44,14 @@ class Reportes extends BaseController{
     }
 
     public function frm_selecciona_instructor(){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
 
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['instructores'] = $this->usuarioModel->_getUsuarioInstructor();
             //echo '<pre>'.var_export($data['instructores'], true).'</pre>';exit;
@@ -132,7 +121,7 @@ class Reportes extends BaseController{
             $pdf->SetFont('helvetica', 'P', 9);
             $pdf->Cell(7, 0, $n, 'TLRB', 0, 'L', false);
             $pdf->Cell(55, 0, $value->nombre, 'TLRB', 0, 'L', false);
-            $pdf->Cell(30, 0, $value->cedula, 'TLRB', 0, 'L', false);
+            $pdf->Cell(30, 0, $value->num_documento, 'TLRB', 0, 'L', false);
             $pdf->Cell(30, 0, $value->telefono, 'TLRB', 0, 'L', false);
             $pdf->Cell(60, 0, $value->email, 'TLRB', 0, 'L', false);
             $n++;
@@ -240,7 +229,7 @@ class Reportes extends BaseController{
             $pdf->SetFont('helvetica', 'P', 9);
             $pdf->Cell(5, 0, $n, 'TLRB', 0, 'L', false);
             $pdf->Cell(45, 0, $value->nombre, 'TRB', 0, 'L', false);
-            $pdf->Cell(25, 0, $value->cedula, 'TRB', 0, 'L', false);
+            $pdf->Cell(25, 0, $value->num_documento, 'TRB', 0, 'L', false);
             $pdf->Cell(20, 0, $value->fecha_inicio, 'TRB', 0, 'L', false);
             $pdf->Cell(20, 0, $value->fecha_final, 'TRB', 0, 'L', false);
             $pdf->Cell(10, 0, $value->asistencias, 'TRB', 0, 'C', false);

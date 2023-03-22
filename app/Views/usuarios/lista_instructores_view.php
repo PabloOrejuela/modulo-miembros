@@ -36,15 +36,15 @@
                                     //$last = $miembrosModel->_get_last_attend($idmembresias);
                                     echo '<tr>
                                             <td>'.$value->nombre.'</td>
-                                            <td>'.$value->cedula.'</td>
+                                            <td>'.$value->num_documento.'</td>
                                             <td style="text-align:center;">
                                                 <input 
                                                     class="form-check-input mt-0" 
-                                                    type="radio" value="'.$value->idusuarios.'" 
+                                                    type="radio" value="'.$value->idusuario.'" 
                                                     aria-label="Checkbox" 
-                                                    name="idusuarios"
+                                                    name="idusuario"
                                                     target="_blank"
-                                                    value="'.old('idusuarios').'"
+                                                    value="'.old('idusuario').'"
                                                 >
                                             </td>
                                         </tr>';
@@ -57,7 +57,7 @@
                         ?>
                         </table>
                     <input type="submit" class="btn btn-outline-info" value="Ver reporte" formtarget="_blank">
-                    <p id="error-text"><?= session('errors.idusuarios');?> </p>
+                    <p id="error-text"><?= session('errors.idusuario');?> </p>
                     </div>
                 </form>
             </div>

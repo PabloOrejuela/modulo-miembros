@@ -47,7 +47,7 @@
                             }
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
-                                    <td>'.$value->cedula.'</td>
+                                    <td>'.$value->num_documento.'</td>
                                     <td>'.$value->fecha_inicio.'</td>
                                     <td>'.$value->fecha_final.'</td>
                                     <td>'.date("Y-m-d").'</td>';

@@ -24,20 +24,20 @@
                                     <input type="text" class="form-control" name="nombre" id="FormControlInput" value="'.$datos->nombre.'" required placeholder="nombre">
                                 </div>
                                 <div class="mb-3 col-md-8">
-                                    <label for="cedula" class="form-label">Cédula:</label>
-                                    <input type="text" class="form-control" name="cedula" id="FormControlInput" value="'.$datos->cedula.'" required placeholder="CI">
+                                    <label for="num_documento" class="form-label">Cédula:</label>
+                                    <input type="text" class="form-control" name="num_documento" id="num_documento" value="'.$datos->num_documento.'" required placeholder="CI">
                                 </div>
                                 <div class="mb-3 col-md-8">
-                                    <label for="cedula" class="form-label">Fecha Nacimiento:</label>
+                                    <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento:</label>
                                     <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="'.$datos->fecha_nacimiento.'" placeholder="Fecha de Nacimiento">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Teléfono:</label>
-                                    <input type="text" class="form-control" name="telefono" id="FormControlInput" value="'.$datos->telefono.'" required placeholder="teléfono">
+                                    <input type="text" class="form-control" name="telefono" id="telefono" value="'.$datos->telefono.'" required placeholder="teléfono">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" name="email" id="FormControlInput" value="'.$datos->email.'" required placeholder="jdoe@email.com">
+                                    <input type="email" class="form-control" name="email" id="email" value="'.$datos->email.'" required placeholder="jdoe@email.com">
                                 </div>';
                             }
                             echo form_hidden('idmiembros', $datos->idmiembros);

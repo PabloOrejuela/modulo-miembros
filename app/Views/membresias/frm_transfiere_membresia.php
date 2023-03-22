@@ -22,15 +22,15 @@
                         echo '<div class="input-group mb-3">
                                 <label for="nombre" class="form-label">Nombre: </label>
                                 <input type="text" class="form-control" aria-label="nombre" value="'.$membresia->nombre.'" readonly>
-                                <label for="cedula" class="form-label" style="margin-left: 20px;">Cedula: </label>
-                                <input type="text" class="form-control" value="'.$membresia->cedula.'" readonly>
+                                <label for="num_documento" class="form-label" style="margin-left: 20px;">No. de Documento: </label>
+                                <input type="text" class="form-control" value="'.$membresia->num_documento.'" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="paquete" class="form-label">Paquete</label>
-                                <input type="text" class="form-control" id="paquete" name="fecha_inicio" value="'.$membresia->paquete.'" readonly>
+                                <label for="fecha_inicio" class="form-label">Paquete</label>
+                                <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" value="'.$membresia->paquete.'" readonly>
                             </div>
                             <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Observaciones:</label>
+                                    <label for="observacion" class="form-label">Observaciones:</label>
                                     <textarea class="form-control" name="observacion" placeholder="Escriba una observación aquí" ></textarea>
                                 </div>
                             <br/>';
@@ -50,7 +50,7 @@
                                     //$last = $miembrosModel->_get_last_attend($idmembresias);
                                     echo '<tr>
                                             <td>'.$value->nombre.'</td>
-                                            <td>'.$value->cedula.'</td>
+                                            <td>'.$value->num_documento.'</td>
                                             <td style="text-align:center;">
                                                 <input class="form-check-input mt-0" type="radio" value="'.$value->idmiembros.'" aria-label="Checkbox" name="idmiembros">
                                             </td>

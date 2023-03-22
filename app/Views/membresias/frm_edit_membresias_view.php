@@ -18,23 +18,23 @@
                         <?php 
                             // echo '<pre>'.var_export($membresia, true).'</pre>';
                             echo '<div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" value="'.$membresia->nombre.'" readonly>
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" value="'.$membresia->nombre.'" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" value="'.$membresia->cedula.'" readonly>
+                                    <label for="num_documento" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="num_documento" value="'.$membresia->num_documento.'" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Fecha Inicio</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" name="fecha_inicio" value="'.$membresia->fecha_inicio.'" readonly>
+                                    <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                                    <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" value="'.$membresia->fecha_inicio.'" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Fecha Final</label>
-                                    <input type="date" class="form-control" id="exampleInputEmail1" name="fecha_final" value="'.$membresia->fecha_final.'">
+                                    <label for="fecha_final" class="form-label">Fecha Final</label>
+                                    <input type="date" class="form-control" id="fecha_final" name="fecha_final" value="'.$membresia->fecha_final.'">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Observaciones:</label>
+                                    <label for="observacion" class="form-label">Observaciones:</label>
                                     <textarea class="form-control" name="observacion" placeholder="Escriba una observación aquí" ></textarea>
                                 </div>';
                                 //echo form_hidden('idpaquete', $membresia->idpaquete);

@@ -11,11 +11,11 @@
                     <form action="<?php echo site_url().'registra_aistencia_instructor';?>" method="post" name="form_registro" >
                         <?= csrf_field() ?>
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Hora de inicio:</label>
+                            <label for="hora_inicio" class="form-label">Hora de inicio:</label>
                             <input type="text" class="form-control" name="hora_inicio" id="reloj" readonly  placeholder="<?= date('Y-m-d H:m:s'); ?>">
                         </div>
                         <div class="mb-3">
-                            <label for="cedula" class="form-label">Instructor:</label>
+                            <label for="nombre" class="form-label">Instructor:</label>
                             <input type="text" class="form-control" name="nombre" id="nombre"  autocomplete="false" disabled>
                             <select id="nombre" name="nombre" class="form-control" required="required"></select>
                         </div>
@@ -23,10 +23,10 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="cedula" class="form-label">Cedula:</label>
-                            <input type="text" class="form-control" name="cedula" id="cedula" value="<?= old('cedula'); ?>"  placeholder="cedula" autocomplete="false">
+                            <label for="num_documento" class="form-label">Cedula:</label>
+                            <input type="text" class="form-control" name="num_documento" id="num_documento" value="<?= old('num_documento'); ?>"  placeholder="cedula" autocomplete="false">
                         </div>
-                        <p><?= session('errors.cedula');?> </p>
+                        <p><?= session('errors.num_documento');?> </p>
                         <div class="mb-3">
                             <textarea name="observaciones" class="form-control" placeholder="Observaciones"></textarea>
                         </div>

@@ -18,12 +18,12 @@
                         </div>
                         <p><?= session('errors.nombre');?> </p>
                         <div class="mb-3 col-md-8">
-                            <label for="cedula" class="form-label">Cédula:</label>
-                            <input type="text" class="form-control" name="cedula" maxlength="10" id="cedula" value="<?= old('cedula'); ?>" placeholder="CI">
+                            <label for="num_documento" class="form-label">No. de documento:</label>
+                            <input type="text" class="form-control" name="num_documento" maxlength="10" id="num_documento" value="<?= old('num_documento'); ?>" placeholder="CI">
                         </div>
-                        <p><?= session('errors.cedula');?> </p>
+                        <p><?= session('errors.num_documento');?> </p>
                         <div class="mb-3 col-md-8">
-                            <label for="cedula" class="form-label">Fecha Nacimiento:</label>
+                            <label for="fecha_nacimiento" class="form-label">Fecha Nacimiento:</label>
                             <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="<?= old('fecha_nacimiento'); ?>" placeholder="Fecha de Nacimiento">
                         </div>
                         <p><?= session('errors.fecha_nacimiento');?> </p>

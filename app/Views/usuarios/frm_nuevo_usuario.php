@@ -18,37 +18,37 @@
                         </div>
                         <p><?= session('errors.nombre');?> </p>
                         <div class="mb-3 col-md-8">
-                            <label for="cedula" class="form-label">Cédula:</label>
-                            <input type="text" class="form-control" name="cedula" maxlength="10" id="cedula" value="<?= old('cedula'); ?>" placeholder="CI">
+                            <label for="num_documento" class="form-label">No. de documento:</label>
+                            <input type="text" class="form-control" name="num_documento" maxlength="10" id="num_documento" value="<?= old('num_documento'); ?>" placeholder="CI">
                         </div>
-                        <p><?= session('errors.cedula');?> </p>
+                        <p><?= session('errors.num_documento');?> </p>
                         <div class="mb-3 col-md-8">
                             <label for="telefono" class="form-label">Teléfono:</label>
                             <input type="text" class="form-control" name="telefono" maxlength="10" id="telefono" value="<?= old('telefono'); ?>" placeholder="teléfono">
                         </div>
                         <p><?= session('errors.telefono');?> </p>
                         <div class="mb-3 col-md-8">
-                            <label for="cedula" class="form-label">Usuario:</label>
+                            <label for="user" class="form-label">Usuario:</label>
                             <input type="text" class="form-control" name="user" id="user" value="<?= old('user'); ?>" placeholder="Usuario">
                         </div>
-                        <p><?= session('errors.cedula');?> </p>
+                        <p><?= session('errors.user');?> </p>
                         <div class="mb-3 col-md-8">
-                            <label for="telefono" class="form-label">Password:</label>
-                            <input type="text" class="form-control" name="password" id="user" value="<?= old('password'); ?>" placeholder="password">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="text" class="form-control" name="password" id="password" value="<?= old('password'); ?>" placeholder="password">
                         </div>
-                        <p><?= session('errors.telefono');?> </p>
+                        <p><?= session('errors.password');?> </p>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" name="email" id="email" value="<?= old('email'); ?>"  placeholder="jdoe@email.com">
                         </div>
                         <p><?= session('errors.email');?> </p>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Rol del usuario:</label>
-                            <select class="form-select" aria-label="Default select example" name="idroles">
+                            <label for="idroles" class="form-label">Rol del usuario:</label>
+                            <select class="form-select" aria-label="Default select example" name="idrol">
                                 <option value="0">Elija un rol</option>
                                 <?php 
                                     foreach ($roles as $key => $rol) {
-                                        echo '<option value="'.$rol->idroles.'">'.$rol->rol.'</option>';
+                                        echo '<option value="'.$rol->idrol.'">'.$rol->rol.'</option>';
                                     }
                                 ?>
                             </select>

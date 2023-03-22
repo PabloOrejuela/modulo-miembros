@@ -24,15 +24,15 @@
                                     <input type="text" class="form-control" name="nombre" id="FormControlInput" value="'.$usuario->nombre.'" required placeholder="nombre">
                                 </div>
                                 <div class="mb-3 col-md-8">
-                                    <label for="cedula" class="form-label">Cédula:</label>
-                                    <input type="text" class="form-control" name="cedula" id="FormControlInput" value="'.$usuario->cedula.'" required placeholder="CI">
+                                    <label for="num_documento" class="form-label">No. de Documento:</label>
+                                    <input type="text" class="form-control" name="num_documento" id="FormControlInput" value="'.$usuario->num_documento.'" required placeholder="CI">
                                 </div>
                                 <div class="mb-3 col-md-8">
-                                    <label for="cedula" class="form-label">Usuario:</label>
+                                    <label for="user" class="form-label">Usuario:</label>
                                     <input type="text" class="form-control" name="user" id="FormControlInput" value="'.$usuario->user.'" required placeholder="CI">
                                 </div>
                                 <div class="mb-3 col-md-8">
-                                    <label for="cedula" class="form-label">Password:</label>
+                                    <label for="password" class="form-label">Password:</label>
                                     <input type="password" class="form-control" name="password" id="FormControlInput" value="" autocomplete="off">
                                 </div>
                                 <div class="mb-3">
@@ -44,15 +44,15 @@
                                     <input type="email" class="form-control" name="email" id="FormControlInput" value="'.$usuario->email.'" required placeholder="jdoe@email.com">
                                 </div>';
                             echo '<div class="mb-3">
-                                <label for="email" class="form-label">Rol del usuario:</label>
-                                <select class="form-select" aria-label="Default select example" name="idroles">
+                                <label for="idroles" class="form-label">Rol del usuario:</label>
+                                <select class="form-select" aria-label="Default select example" name="idrol">
                                     <option value="0">Elija un rol</option>';
                                     
                                         foreach ($roles as $key => $rol) {
-                                            if ($rol->idroles == $usuario->idroles) {
-                                                echo '<option value="'.$rol->idroles.'" selected>'.$rol->rol.'</option>';
+                                            if ($rol->idrol == $usuario->idrol) {
+                                                echo '<option value="'.$rol->idrol.'" selected>'.$rol->rol.'</option>';
                                             }else{
-                                                echo '<option value="'.$rol->idroles.'">'.$rol->rol.'</option>';
+                                                echo '<option value="'.$rol->idrol.'">'.$rol->rol.'</option>';
                                             }
                                             
                                         }

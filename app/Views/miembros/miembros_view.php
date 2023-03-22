@@ -24,7 +24,7 @@
                             //$last = $miembrosModel->_get_last_attend($idmembresias);
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
-                                    <td>'.$value->cedula.'</td>
+                                    <td>'.$value->num_documento.'</td>
                                     <td>'.$value->telefono.'</td>
                                     <td style="text-align:center;">
                                         <a type="button" id="btn-register" href="edita_datos_miembro/'.$value->idmiembros.'">

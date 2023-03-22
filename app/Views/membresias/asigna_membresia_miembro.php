@@ -20,8 +20,8 @@
                                     <input type="text" class="form-control" name="nombre" id="FormControlInput" value="'.$datos->nombre.'" required placeholder="nombre" readonly>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="cedula" class="form-label">Cédula:</label>
-                                    <input type="text" class="form-control" name="cedula" id="FormControlInput" value="'.$datos->cedula.'" required placeholder="CI" readonly>
+                                    <label for="num_documento" class="form-label">Cédula:</label>
+                                    <input type="text" class="form-control" name="num_documento" id="FormControlInput" value="'.$datos->num_documento.'" required placeholder="CI" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Teléfono:</label>
