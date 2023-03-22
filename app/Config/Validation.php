@@ -2,16 +2,17 @@
 
 namespace Config;
 
-use CodeIgniter\Validation\CreditCardRules;
-use CodeIgniter\Validation\FileRules;
-use CodeIgniter\Validation\FormatRules;
-use CodeIgniter\Validation\Rules;
+use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Validation\StrictRules\CreditCardRules;
+use CodeIgniter\Validation\StrictRules\FileRules;
+use CodeIgniter\Validation\StrictRules\FormatRules;
+use CodeIgniter\Validation\StrictRules\Rules;
 
-class Validation
+class Validation extends BaseConfig
 {
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
     // Setup
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
     /**
      * Stores the classes that contain the
@@ -19,7 +20,7 @@ class Validation
      *
      * @var string[]
      */
-    public $ruleSets = [
+    public array $ruleSets = [
         Rules::class,
         FormatRules::class,
         FileRules::class,
@@ -32,16 +33,16 @@ class Validation
      *
      * @var array<string, string>
      */
-    public $templates = [
+    public array $templates = [
         'list'   => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
 
-    //--------------------------------------------------------------------
+    // --------------------------------------------------------------------
     // Rules
-    //--------------------------------------------------------------------
-
-    public $newMember = [
+    // --------------------------------------------------------------------
+	
+	public $newMember = [
         'nombre'  => 'required|min_length[5]',
         'email'   => 'required|valid_email|is_unique[miembros.email]',
         'cedula'  => 'required|is_unique[miembros.cedula]',
@@ -71,8 +72,8 @@ class Validation
 
     public $newUser = [
         'nombre'  => 'required|min_length[5]',
-        'email'   => 'required|valid_email|is_unique[miembros.email]',
-        'cedula'  => 'required|is_unique[miembros.cedula]',
+        'email'   => 'required|valid_email|is_unique[usuarios.email]',
+        'cedula'  => 'required|is_unique[usuarios.cedula]',
         'telefono'   => 'required',
         'idroles'   => 'required|greater_than[0]',
 
