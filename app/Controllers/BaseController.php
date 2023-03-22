@@ -76,6 +76,6 @@ abstract class BaseController extends Controller {
         $this->request = \Config\Services::request();
         $this->validation = \Config\Services::validation();
 
-        $this->version = '1.0.1';
+        $this->version = '1.0.2';
     }
 }

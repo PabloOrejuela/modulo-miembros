@@ -48,8 +48,8 @@ class Miembros extends BaseController{
     public function insert($data = NULL){
 
         $data = array(
-            'nombre' => $this->request->getPostGet('nombre'),
-            'cedula' => $this->request->getPostGet('cedula'),
+            'nombre' => $this->request->getPostGet('num_documento'),
+            'num_documento' => $this->request->getPostGet('cedula'),
             'telefono' => $this->request->getPostGet('telefono'),
             'email' => $this->request->getPostGet('email'),
             'idpaquete' => $this->request->getPostGet('idpaquete'),
