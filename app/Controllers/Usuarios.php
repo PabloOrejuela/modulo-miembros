@@ -36,20 +36,17 @@ class Usuarios extends BaseController {
                 //echo '<pre>'.var_export($usuario, true).'</pre>';
                 $sessiondata = [
                     'logged_in' => 1,
-                    'idusuario' => $usuario->idusuarios,
+                    'idusuario' => $usuario->idusuario,
                     'nombre' => $usuario->nombre,
-                    'idroles' => $usuario->idroles,
+                    'idrol' => $usuario->idrol,
                     'rol' => $usuario->rol,
-                    'admin' => $usuario->admin,
-                    'miembros' => $usuario->miembros,
-                    'instructor' => $usuario->instructor
                 ];
 
                 $user = [
                     'logged' => 1
                 ];
                 
-                $this->usuarioModel->update($usuario->idusuarios, $user);
+                $this->usuarioModel->update($usuario->idusuario, $user);
                 $this->session->set($sessiondata);
 
                 return redirect()->to('inicio');
@@ -63,19 +60,15 @@ class Usuarios extends BaseController {
 
     public function inicio(){
 
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
 
             //echo '<pre>'.var_export($data['idempresa'], true).'</pre>';
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
-
             $data['version'] = $this->version;
 
             $data['title']='Inicio';
@@ -89,18 +82,14 @@ class Usuarios extends BaseController {
     }
 
     public function showUsuarios($data = NULL){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             $data['usuarios'] = $this->usuarioModel->findAll();
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Lista de usuarios';
             $data['main_content']='usuarios/lista_usuarios';
@@ -110,22 +99,19 @@ class Usuarios extends BaseController {
         }
     }
 
-    public function editar($idusuarios){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+    public function editar($idusuario){
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             
             $data['roles'] = $this->rolModel->findAll();
-            $data['usuario'] = $this->usuarioModel->find($idusuarios);
+            $data['usuario'] = $this->usuarioModel->find($idusuario);
             //$data['lastQuery'] = $this->db->getLastQuery();
             //echo '<pre>'.var_export($data['usuario'], true).'</pre>';exit;
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Editar Usuario';
             $data['main_content']='usuarios/frm_edit_usuario';
@@ -142,20 +128,20 @@ class Usuarios extends BaseController {
         if ($password != '') {
             $data = [
                 'nombre' => $this->request->getPostGet('nombre'),
-                'cedula' => $this->request->getPostGet('cedula'),
+                'num_documento' => $this->request->getPostGet('num_documento'),
                 'telefono' => $this->request->getPostGet('telefono'),
                 'email' => $this->request->getPostGet('email'),
-                'idroles' => $this->request->getPostGet('idroles'),
+                'idrol' => $this->request->getPostGet('idrol'),
                 'user' => $this->request->getPostGet('user'),
                 'password' => md5($password)
             ];
         }else{
             $data = [
                 'nombre' => $this->request->getPostGet('nombre'),
-                'cedula' => $this->request->getPostGet('cedula'),
+                'num_documento' => $this->request->getPostGet('num_documento'),
                 'telefono' => $this->request->getPostGet('telefono'),
                 'email' => $this->request->getPostGet('email'),
-                'idroles' => $this->request->getPostGet('idroles'),
+                'idrol' => $this->request->getPostGet('idrol'),
                 'user' => $this->request->getPostGet('user'),
             ];
         }
@@ -177,18 +163,14 @@ class Usuarios extends BaseController {
     }
 
     public function nuevo($data = NULL){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             $data['roles'] = $this->rolModel->findAll();
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Registrar nuevo usuario';
             $data['main_content']='usuarios/frm_nuevo_usuario';
@@ -202,10 +184,10 @@ class Usuarios extends BaseController {
 
         $data = array(
             'nombre' => $this->request->getPostGet('nombre'),
-            'cedula' => $this->request->getPostGet('cedula'),
+            'num_documento' => $this->request->getPostGet('num_documento'),
             'telefono' => $this->request->getPostGet('telefono'),
             'email' => $this->request->getPostGet('email'),
-            'idroles' => $this->request->getPostGet('idroles'),
+            'idrol' => $this->request->getPostGet('idrol'),
             'user' => $this->request->getPostGet('user'),
             'password' => md5($this->request->getPostGet('password'))
         );
@@ -229,7 +211,7 @@ class Usuarios extends BaseController {
         
         //Insertar asistencia de la membresía en asistencia
         $data = [
-            'cedula' => $this->request->getPostGet('cedula'),
+            'num_documento' => $this->request->getPostGet('num_documento'),
         ];
 
         //echo '<pre>'.var_export($data, true).'</pre>';
@@ -243,7 +225,7 @@ class Usuarios extends BaseController {
     }
 
     function usuarios_select(){
-        $cedula = $this->request->getPostGet('cedula');
+        $cedula = $this->request->getPostGet('num_documento');
         $datos['nombre'] = $this->usuarioModel->_getNameUserCedula($cedula);
         //return $datos['nombre'];
         return view('usuarios/input_usuario',$datos);

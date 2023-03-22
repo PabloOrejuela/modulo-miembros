@@ -1,1 +1,3 @@
 - Nueva versión ligada a la mima base del sistema YouShop, MySQL
+    -modified:   app/Controllers/Usuarios.php
+    -modified:   app/Views/includes/header.php

@@ -50,7 +50,8 @@
                             <div class="sb-sidenav-menu-heading">Menú</div>
                             <!-- Menu Item -->
                             <?php 
-                                if (isset($admin) && $admin == 1) {
+                                //echo '<pre>'.var_export($permisos, true).'</pre>';
+                                if (isset($permisos) && $permisos->membresia == 1) {
                                 echo '
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthMembresias" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -69,7 +70,7 @@
                             ?>
                             <!-- Menu Item -->
                             <?php 
-                                if (isset($admin) && $admin == 1) {
+                                if (isset($permisos) && $permisos->usuarios == 1) {
                                 echo '
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthUsuarios" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -88,7 +89,7 @@
                                 <!-- END Menú Item -->
                                 <!-- Menu Item -->
                             <?php
-                                if (isset($miembros) && $miembros == 1) {
+                                if (isset($permisos) && $permisos->membresia == 1) {
                                 echo'    
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthMiembros" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -110,7 +111,7 @@
                             <!-- Menu Item -->
                             <?php 
                             
-                                if (isset($instructor) && $instructor == 1) {
+                            if (isset($permisos) && $permisos->instructor == 1) {
                                 echo '
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthInstructores" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -130,7 +131,7 @@
                             <!-- Menu Item -->
                             <?php 
                             
-                                if (isset($admin) && $admin == 1) {
+                            if (isset($permisos) && $permisos->reportes == 1) {
                                 echo '
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthReportes" aria-expanded="false" aria-controls="pagesCollapseAuth">
