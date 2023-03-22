@@ -1,2 +1,1 @@
-- Creada la vista del Form de nuevo miembro
-- Ya se puede registrar un miembro sin tener que elegir un paquete
+- Nueva versión ligada a la mima base del sistema YouShop, MySQL
