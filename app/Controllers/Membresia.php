@@ -7,17 +7,13 @@ class Membresia extends BaseController{
 
     public function index(){
 
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['membresias'] = $this->membresiasModel->_getMembresias();
 
@@ -39,18 +35,15 @@ class Membresia extends BaseController{
     }
 
     public function edit($idmembresias){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
             //echo '<pre>'.var_export($data['membresia'], true).'</pre>';
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Edición de membresías';
             $data['main_content']='membresias/frm_edit_membresias_view';
@@ -93,9 +86,11 @@ class Membresia extends BaseController{
       */
      public function frm_select_transfer(){
 
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
 
@@ -103,11 +98,6 @@ class Membresia extends BaseController{
             $this->membresiasModel->_update_status_all($data['membresias']);
 
             //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Tranferir membresías';
             $data['main_content']='membresias/frm_transfer_membresias_view';
@@ -121,21 +111,17 @@ class Membresia extends BaseController{
       * Frm para selecccionar el miembro al que se le desea transferir la membresía
       */
       public function fr_select_member_transfer_membership($idmembresias){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             
             $data['membresia'] = $this->membresiasModel->_getMembresia($idmembresias);
             $data['miembrosList'] = $this->miembrosModel->_getMiembros();
             //echo '<pre>'.var_export($data['miembros'], true).'</pre>';
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Transferir membresía';
             $data['main_content']='membresias/frm_transfiere_membresia';
@@ -157,7 +143,7 @@ class Membresia extends BaseController{
             'idmiembros' => $this->request->getPostGet('idmiembros'),
             'observacion' => $this->request->getPostGet('observacion'),
             'idtipomovimiento' => 1, //TRANSFERENCIA
-            'idusuarios' => $this->session->idusuario
+            'idusuario' => $this->session->idusuario
         ];
         $this->validation->setRuleGroup('transfiere_membresia');
         if (!$this->validation->withRequest($this->request)->run()) {
@@ -177,20 +163,16 @@ class Membresia extends BaseController{
     }
 
     public function frm_asigna_membresia_miembro(){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             
             $data['miembrosList'] = $this->miembrosModel->_getMiembros();
             //$data['lastQuery'] = $this->db->getLastQuery();
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Asignar una membresía a un miembro';
             $data['main_content']='membresias/frm_asigna_membresia_miembro';
@@ -201,21 +183,17 @@ class Membresia extends BaseController{
     }
 
     public function asigna_membresia_miembro($idmiembros){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             
             $data['paquetes'] = $this->paquetesModel->find();
             $data['datos'] = $this->miembrosModel->find($idmiembros);
             //$data['lastQuery'] = $this->db->getLastQuery();
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Asignar una membresía a un miembro';
             $data['main_content']='membresias/asigna_membresia_miembro';

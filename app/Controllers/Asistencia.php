@@ -31,16 +31,13 @@ class Asistencia extends BaseController{
     }
 
     public function exitoAsistencia(){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
-
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Registra asistencia';
             $data['main_content']='asistencias/exito_asistencia_view';
@@ -52,16 +49,13 @@ class Asistencia extends BaseController{
 
     public function FrmRegistraAsistenciaInstructor(){
 
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
-
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Registra asistencia Instructor';
             $data['main_content']='asistencias/registra_asistencia_instructor_view';
@@ -73,12 +67,12 @@ class Asistencia extends BaseController{
     }
 
     public function registraAsistenciaInstructor(){
-        $cedula = $this->request->getPostGet('cedula');
+        $num_documento = $this->request->getPostGet('num_documento');
 
-        $idusuario = $this->usuarioModel->_getUsuarioCedula($cedula);
+        $idusuario = $this->usuarioModel->_getUsuarioCedula($num_documento);
 
         $data = [
-            'cedula' => $cedula,
+            'num_documento' => $num_documento,
             'idusuario' => $idusuario,
             'fechaClase' => date('Y-m-d H:m:s'),
             'observaciones' => $this->request->getPostGet('observaciones')

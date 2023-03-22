@@ -6,9 +6,11 @@ class Miembros extends BaseController{
 
 
     public function index(){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             $data['miembrosList'] = $this->miembrosModel->_getMiembros();
@@ -16,11 +18,6 @@ class Miembros extends BaseController{
             //echo '<pre>'.var_export($data['membresias'], true).'</pre>';
             //$data['result'] = suma(3, 5);
             $data['version'] = $this->CI_VERSION;
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Lista de miembros';
             $data['main_content']='miembros/miembros_view';
@@ -31,18 +28,14 @@ class Miembros extends BaseController{
     }
     
     public function nuevo($data = NULL){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             $data['paquetes'] = $this->paquetesModel->find();
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Registrar nuevo miembro';
             $data['main_content']='miembros/frm_nuevo_miembro';
@@ -98,21 +91,17 @@ class Miembros extends BaseController{
     
 
     public function editar($idmiembros){
-        $data['idroles'] = $this->session->idroles;
-        $data['idusuarios'] = $this->session->idusuario;
+        $data['idrol'] = $this->session->idrol;
+        $data['idusuario'] = $this->session->idusuario;
         $data['logged_in'] = $this->session->logged_in;
+        $data['nombre'] = $this->session->nombre;
+        $data['permisos'] = $this->rolModel->find($data['idrol']);
         
         if ($data['logged_in'] == 1) {
             
             $data['paquetes'] = $this->paquetesModel->find();
             $data['datos'] = $this->miembrosModel->find($idmiembros);
             //$data['lastQuery'] = $this->db->getLastQuery();
-
-            //Permisos
-            $data['nombre'] = $this->session->nombre;
-            $data['instructor'] = $this->session->instructor;
-            $data['miembros'] = $this->session->miembros;
-            $data['admin'] = $this->session->admin;
 
             $data['title']='Editar miembro';
             $data['main_content']='miembros/frm_edit_miembro';

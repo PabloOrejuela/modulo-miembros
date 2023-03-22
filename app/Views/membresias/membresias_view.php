@@ -44,7 +44,7 @@
                             //$saldo = $value->total - $value->asistencias;
                             echo '<tr>
                                     <td>'.$value->nombre.'</td>
-                                    <td>'.$value->cedula.'</td>
+                                    <td>'.$value->num_documento.'</td>
                                     <td>'.$value->idpaquete.'</td>
                                     <td>'.$value->fecha_inicio.'</td>
                                     <td>'.$value->fecha_final.'</td>
